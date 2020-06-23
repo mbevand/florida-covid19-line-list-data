@@ -15,7 +15,7 @@ for all 100k+ cases! My script processes that data:
 
 Result:
 ```
-$ ./process
+$ ./process.py
 Number of COVID-19 cases per week in Florida, by age bracket.
 Source: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
 
