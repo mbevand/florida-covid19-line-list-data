@@ -87,6 +87,7 @@ def chart(b):
     a = np.zeros((len(b.buckets_ages), len(periods)))
     for (j, period) in enumerate(periods):
         for (i, bracket) in enumerate(b.buckets_ages):
+            # square root makes the heatmap brighter (by dampening the highest values)
             a[i, j] = math.sqrt(b.cases_per_bracket[period][bracket])
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.xaxis.set_major_locator(ticker.MultipleLocator(base=2))
