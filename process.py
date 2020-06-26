@@ -8,6 +8,7 @@ import sys, csv, datetime, statistics, math
 
 class Buckets():
     buckets_ages = [(0, 9), (10, 19), (20, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, 199)]
+    #buckets_ages = [(0, 4), (5, 14), (15, 24), (25, 34), (35, 44), (45, 54), (55, 64), (65, 74), (75, 84), (85, 199)]
     #buckets_ages = [(0, 4), (5, 9), (10, 14), (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79), (80, 84), (85, 89), (90, 199)]
     buckets_days = 7
     # cases_per_bracket[datetime.date(y,m,d)][(80,89)] is the number of cases for
@@ -56,12 +57,12 @@ def parse():
 
 def show_stats(b):
     print('Number of COVID-19 cases per {}-day time period in Florida by age bracket over time:'.format(b.buckets_days))
-    sys.stdout.write('{:11}'.format('period,'))
+    sys.stdout.write('{:>12},'.format('period_start'))
     for x in b.buckets_ages:
         sys.stdout.write(' {:02d}-{:02d},'.format(x[0], x[1]))
     sys.stdout.write(' median_age\n')
     for period in sorted(b.cases_per_bracket):
-        sys.stdout.write('{:10},'.format(str(period)))
+        sys.stdout.write('{:>12},'.format(str(period)))
         for x in b.buckets_ages:
             sys.stdout.write(' {:5d},'.format(b.cases_per_bracket[period][x]))
         sys.stdout.write('  {:.1f}\n'.format(statistics.median(b.ages[period])))
