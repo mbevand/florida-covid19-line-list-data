@@ -38,7 +38,7 @@ buckets_ages = [
 def print_stats(cases_per_bracket, ages, df):
     print(
         f"Number of COVID-19 cases per {buckets_days}-day time period in Florida by age "
-        f"bracket over time:"
+        "bracket over time:"
     )
     print(f"{'period_start':>12}", end="")
     for (low_age, high_age) in buckets_ages:
@@ -97,9 +97,9 @@ def gen_heatmap(cases_per_bracket, filename, sqrt):
         -0.1,
         -0.2,
         f"Pixel intensity represents number of cases reported per {buckets_days}-day time"
-        f"period.\n"
-        f"Source: https://github.com/mbevand/florida-covid19-line-list-data\n"
-        f"Created by: Marc Bevand — @zorinaq",
+        "period.\n"
+        "Source: https://github.com/mbevand/florida-covid19-line-list-data\n"
+        "Created by: Marc Bevand — @zorinaq",
         transform=ax.transAxes,
         verticalalignment="top",
     )
