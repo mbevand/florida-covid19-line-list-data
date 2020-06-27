@@ -23,7 +23,10 @@ class Buckets():
     cases_age_unknown = 0
 
     def store(self, age, date):
-        reference = datetime.date(2020, 1, 4) # arbitrary point in time to align the time periods
+        # pick an arbitrary point in time to align the time periods. today's date is usually
+        # the best choice assuming the CSV file contains current data (ie. data up to yesterday)
+        # so it makes the last period end on yesterday
+        reference = datetime.datetime.now().date()
         delta = (date - reference).days
         period = reference + datetime.timedelta(days=delta - delta % self.buckets_days)
         if period not in self.cases_per_bracket:
@@ -38,10 +41,10 @@ def parse():
     b = Buckets()
     first = True
     for l in csv.reader(open('Florida_COVID19_Case_Line_Data.csv')):
-        (County,Age,Age_group,Gender,Jurisdiction,Travel_related,Origin,EDvisit,Hospitalized,Died,Case_,Contact,Case1,EventDate,ChartDate,ObjectId) = l
+        (ObjectId,County,Age,Age_group,Gender,Jurisdiction,Travel_related,Origin,EDvisit,Hospitalized,Died,Case_,Contact,Case1,EventDate,ChartDate) = l
         if first:
-            assert ','.join((County,Age,Age_group,Gender,Jurisdiction,Travel_related,Origin,EDvisit,Hospitalized,Died,Case_,Contact,Case1,EventDate,ChartDate,ObjectId)) == \
-                 '\ufeff' + 'County,Age,Age_group,Gender,Jurisdiction,Travel_related,Origin,EDvisit,Hospitalized,Died,Case_,Contact,Case1,EventDate,ChartDate,ObjectId'
+            assert ','.join((ObjectId,County,Age,Age_group,Gender,Jurisdiction,Travel_related,Origin,EDvisit,Hospitalized,Died,Case_,Contact,Case1,EventDate,ChartDate)) == \
+                 '\ufeff' + 'ObjectId,County,Age,Age_group,Gender,Jurisdiction,Travel_related,Origin,EDvisit,Hospitalized,Died,Case_,Contact,Case1,EventDate,ChartDate'
             first = False
             continue
         b.cases_total += 1
@@ -66,7 +69,7 @@ def show_stats(b):
         for x in b.buckets_ages:
             sys.stdout.write(' {:5d},'.format(b.cases_per_bracket[period][x]))
         sys.stdout.write('  {:.1f}\n'.format(statistics.median(b.ages[period])))
-    print("(Last period's data is incomplete. Age unknown for {} out of {} cases)".format(
+    print("(Last period's data may be incomplete. Age unknown for {} out of {} cases)".format(
         b.cases_age_unknown, b.cases_total))
 
 def chart(b):
@@ -83,8 +86,6 @@ def chart(b):
             return periods[int(x)]
     fig, ax = plt.subplots(dpi=300)
     periods = sorted(b.cases_per_bracket.keys())
-    # exclude last period because its data is incomplete
-    periods = periods[:-1]
     a = np.zeros((len(b.buckets_ages), len(periods)))
     for (j, period) in enumerate(periods):
         for (i, bracket) in enumerate(b.buckets_ages):
