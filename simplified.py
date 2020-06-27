@@ -135,14 +135,14 @@ def main():
         ages[period] = []
 
     non_null = df[~df["Age"].isnull()]
-    for bucket in buckets_ages:
-        (low_age, high_age) = bucket
-        in_age_bucket = (low_age <= non_null["Age"]) & (non_null["Age"] <= high_age)
-        for period in periods:
-            in_period = non_null["Period"] == period
-            in_age_and_period = in_age_bucket & in_period
-            cases_per_bracket[period][bucket] = in_age_and_period.sum()
-            ages[period].extend(list(non_null[in_age_and_period]["Age"]))
+    for period in periods:
+        in_period = non_null["Period"] == period
+        for bucket in buckets_ages:
+            (low_age, high_age) = bucket
+            in_age_bucket = (low_age <= non_null["Age"]) & (non_null["Age"] <= high_age)
+            in_period_and_age = in_period & in_age_bucket
+            cases_per_bracket[period][bucket] = in_period_and_age.sum()
+            ages[period].extend(list(non_null[in_period_and_age]["Age"]))
 
     per_positive = {}
     for (period, cases_data) in cases_per_bracket.items():
