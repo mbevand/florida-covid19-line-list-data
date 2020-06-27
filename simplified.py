@@ -37,7 +37,7 @@ buckets_ages = [
 ]
 
 
-def print_stats(cases_per_bracket, df):
+def print_stats(cases_per_bracket, ages, df):
     print(
         f"Number of COVID-19 cases per {buckets_days}-day time period in Florida by age "
         f"bracket over time:"
@@ -148,6 +148,10 @@ def main():
         for (bucket, cases) in cases_data.items():
             per_positive[period][bucket] = cases / total_cases
 
-    print_stats(cases_per_bracket, df)
+    print_stats(cases_per_bracket, ages, df)
     gen_heatmap(cases_per_bracket, "absolute")
     gen_heatmap(per_positive, "percent_over_time")
+
+
+if __name__ == "__main__":
+    main()
