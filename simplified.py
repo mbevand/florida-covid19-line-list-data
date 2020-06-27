@@ -42,18 +42,24 @@ def print_stats(cases_per_bracket, ages, df):
         f"Number of COVID-19 cases per {buckets_days}-day time period in Florida by age "
         f"bracket over time:"
     )
-    for period in sorted(cases_per_bracket):
-        print(period)
-        for bucket in buckets_ages:
-            print(f"{bucket}: {cases_per_bracket[period][bucket]:5d},")
+    print(f"{'period_start':>12}", end="")
+    for (low_age, high_age) in buckets_ages:
+        print(f" {low_age:02d}-{high_age:02d}", end="")
 
-        print(f"Median: {np.median(ages[period]):.1f}\n")
+    print(" median_age")
+
+    for period in sorted(cases_per_bracket):
+        print(f"{str(period):>12}", end="")
+        for bucket in buckets_ages:
+            print(f" {cases_per_bracket[period][bucket]:5d}", end="")
+
+        print(f"  {np.median(ages[period]):.1f}")
 
     cases_total = len(df)
     cases_age_unknown = df["Age"].isnull().sum()
     print(
-        f"Last period's data is incomplete. Age unknown for {cases_age_unknown} out of "
-        f"{cases_total} cases."
+        f"(Last period's data is incomplete. Age unknown for {cases_age_unknown} out of "
+        f"{cases_total} cases.)"
     )
 
 
