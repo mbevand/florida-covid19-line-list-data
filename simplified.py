@@ -1,11 +1,8 @@
 #!/usr/bin/python3
 #
 # Analyzes Florida COVID-19 line list data by age bracket over time.
-# Source (click Download → Spreadsheet): https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
-# Direct link: https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv
 
 import datetime
-import math
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
@@ -13,6 +10,7 @@ import pandas as pd
 
 from matplotlib import rcParams
 
+csv_url = "https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv"
 buckets_days = 7
 buckets_ages = [
     (0, 4),
@@ -63,7 +61,7 @@ def print_stats(cases_per_bracket, ages, df):
     )
 
 
-def gen_heatmap(cases_per_bracket, filename):
+def gen_heatmap(cases_per_bracket, filename, sqrt):
     rcParams["figure.titlesize"] = "x-large"
     (fig, ax) = plt.subplots(dpi=300)
     periods = sorted(cases_per_bracket.keys())
@@ -83,7 +81,8 @@ def gen_heatmap(cases_per_bracket, filename):
     for (j, period) in enumerate(periods):
         for (i, bracket) in enumerate(buckets_ages):
             # Square root makes the heat map brighter (by dampening the highest values).
-            a[i, j] = math.sqrt(cases_per_bracket[period][bracket])
+            val = cases_per_bracket[period][bracket]
+            a[i, j] = np.sqrt(val) if sqrt else val
 
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.xaxis.set_major_locator(ticker.MultipleLocator(base=2))
@@ -110,9 +109,6 @@ def gen_heatmap(cases_per_bracket, filename):
 
 
 def main():
-    csv_url = (
-        "https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv"
-    )
     df = pd.read_csv(csv_url)
 
     # ChartDate is the date the case was counted according the header of table
@@ -126,26 +122,26 @@ def main():
         lambda delta: reference + datetime.timedelta(days=delta - delta % buckets_days)
     )
 
+    non_null = df[~df["Age"].isnull()]
+    periods = set(df["Period"])
     # cases_per_bracket[datetime.date(y, m, d)][(80, 89)] is the number of cases for
     # the period of time starting on datetime.date(y,m,d) in the age bracket 80-89.
     cases_per_bracket = {}
     # ages[datetime.date(y, m, d)]] is the list of case ages for the period of time
     # starting on datetime.date(y, m, d).
     ages = {}
-    for (index, row) in df[~df["Age"].isnull()].iterrows():
-        period = row["Period"]
-        if period not in cases_per_bracket:
-            cases_per_bracket[period] = {bucket: 0 for bucket in buckets_ages}
-            ages[period] = []
+    for period in periods:
+        cases_per_bracket[period] = {bucket: 0 for bucket in buckets_ages}
+        ages[period] = []
 
-        age = row["Age"]
-        for bucket in buckets_ages:
-            (low_age, high_age) = bucket
-            if low_age <= age <= high_age:
-                cases_per_bracket[period][bucket] += 1
-                break
-
-        ages[period].append(age)
+    for bucket in buckets_ages:
+        (low_age, high_age) = bucket
+        in_age_bucket = (low_age <= non_null["Age"]) & (non_null["Age"] <= high_age)
+        for period in periods:
+            in_period = non_null["Period"] == period
+            in_age_and_period = in_age_bucket & in_period
+            cases_per_bracket[period][bucket] = in_age_and_period.sum()
+            ages[period].extend(list(non_null[in_age_and_period]["Age"]))
 
     per_positive = {}
     for (period, cases_data) in cases_per_bracket.items():
@@ -155,8 +151,8 @@ def main():
             per_positive[period][bucket] = cases / total_cases
 
     print_stats(cases_per_bracket, ages, df)
-    gen_heatmap(cases_per_bracket, "absolute")
-    gen_heatmap(per_positive, "percent_over_time")
+    gen_heatmap(cases_per_bracket, "absolute", True)
+    gen_heatmap(per_positive, "percent_over_time", True)
 
 
 if __name__ == "__main__":
