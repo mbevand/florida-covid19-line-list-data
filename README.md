@@ -13,7 +13,15 @@ for all 100k+ cases! My script processes that data:
 1. Place the CSV file in this directory and name it `Florida_COVID19_Case_Line_Data.csv`
 1. Run `./process.py`
 
-Result:
+This creates a heatmap (`heatmap.png`) representing the number of cases by age bracket over time:
+
+![Heatmap of COVID-19 cases in Florida](heatmap_published.png)
+
+By default the size of each pixel, or *bucket*, is 10-year age brackets and 7-day
+time periods. This can be changed by editing the variables `buckets_ages` and `buckets_days`.
+
+The script also produces a numerical summary:
+
 ```
 $ ./process.py
 Number of COVID-19 cases per 7-day time period in Florida by age bracket over time:
@@ -37,14 +45,6 @@ period,     00-09, 10-19, 20-29, 30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90-19
 2020-06-20,   730,  1790,  6294,  4283,  3114,  2634,  1499,   858,   437,   173,  34.0
 (Last period's data is incomplete. Age unknown for 139 out of 114018 cases)
 ```
-
-The script also creates a heatmap (`heatmap.png`) of this data. Here it is over
-smaller 5-year age brackets and 4-day time periods:
-
-![Heatmap of COVID-19 cases in Florida](heatmap_published.png)
-
-Edit `buckets_ages` and `buckets_days` in the script to control the size of the *buckets*
-(age brackets and time periods.)
 
 [dataset]: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
 
