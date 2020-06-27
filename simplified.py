@@ -123,7 +123,7 @@ def main():
     )
 
     # cases_per_bracket[datetime.date(y, m, d)][(low_age, high_age)] is the number of
-    # cases for the period of time starting on datetime.date(y,m,d) in the age bracket
+    # cases for the period of time starting on datetime.date(y, m, d) in the age bracket
     # low_age to high_age.
     cases_per_bracket = {}
     # ages[datetime.date(y, m, d)]] is the list of case ages for the period of time
