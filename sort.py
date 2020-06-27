@@ -8,13 +8,16 @@
 import sys, csv
 
 def sort(fname):
-    offset_objectid = 15
     arr = []
     first = True
     for l in csv.reader(open(fname)):
         if first:
-            assert l[offset_objectid] == 'ObjectId'
+            l[0] = l[0].replace('\ufeff', '')
+            offset_objectid = l.index('ObjectId')
             first = False
+        for (i, _) in enumerate(l):
+            if l[i].endswith('+00'):
+                l[i] = l[i][:-3]
         del(l[offset_objectid])
         arr.append(l)
     arr = sorted(arr)
