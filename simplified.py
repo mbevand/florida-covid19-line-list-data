@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
 import pandas as pd
+import sys
 
 from matplotlib import rcParams
 
@@ -109,7 +110,11 @@ def gen_heatmap(cases_per_bracket, filename, sqrt):
 
 
 def main():
-    df = pd.read_csv(csv_url)
+    try:
+        df = pd.read_csv(sys.argv[1])
+    except IndexError:
+        print(f"CSV not found. Downloading from {csv_url}...")
+        df = pd.read_csv(csv_url)
 
     # ChartDate is the date the case was counted according the header of table
     # "Coronavirus: line list of cases" in:
@@ -129,13 +134,10 @@ def main():
     # ages[datetime.date(y, m, d)]] is the list of case ages for the period of time
     # starting on datetime.date(y, m, d).
     ages = {}
-    periods = set(df["Period"])
-    for period in periods:
+    non_null = df[~df["Age"].isnull()]
+    for period in set(df["Period"]):
         cases_per_bracket[period] = {bucket: 0 for bucket in buckets_ages}
         ages[period] = []
-
-    non_null = df[~df["Age"].isnull()]
-    for period in periods:
         in_period = non_null["Period"] == period
         for bucket in buckets_ages:
             (low_age, high_age) = bucket
