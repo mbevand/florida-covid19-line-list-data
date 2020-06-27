@@ -122,8 +122,6 @@ def main():
         lambda delta: reference + datetime.timedelta(days=delta - delta % buckets_days)
     )
 
-    non_null = df[~df["Age"].isnull()]
-    periods = set(df["Period"])
     # cases_per_bracket[datetime.date(y, m, d)][(low_age, high_age)] is the number of
     # cases for the period of time starting on datetime.date(y,m,d) in the age bracket
     # low_age to high_age.
@@ -131,10 +129,12 @@ def main():
     # ages[datetime.date(y, m, d)]] is the list of case ages for the period of time
     # starting on datetime.date(y, m, d).
     ages = {}
+    periods = set(df["Period"])
     for period in periods:
         cases_per_bracket[period] = {bucket: 0 for bucket in buckets_ages}
         ages[period] = []
 
+    non_null = df[~df["Age"].isnull()]
     for bucket in buckets_ages:
         (low_age, high_age) = bucket
         in_age_bucket = (low_age <= non_null["Age"]) & (non_null["Age"] <= high_age)
