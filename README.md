@@ -6,7 +6,7 @@ Authors: Marc Bevand, Michael A. Alcorn
 
 The Florida Department of Health has an **amazing** dataset here: [complete line
 list data of the state's COVID-19 cases][dataset], including age information
-for all 150k+ cases! Our script processes this data to create a heatmap
+for all 150k+ cases! Our script `process.py` analyzes this data to create a heatmap
 representing the number of cases by age bracket over time:
 
 ![Heatmap of COVID-19 cases in Florida](heatmap_published.png)
@@ -71,6 +71,10 @@ cases is declining because younger people appear to be driving increased transmi
 especially the 20-24 age bracket.
 
 # Miscellaneous
+
+`process.py` also creates `heatmap_age_share.png`: the pixel intensity represents
+not the number of cases, but the share of cases in this age bracket among all
+cases reported in this time period.
 
 `sort.py` is a tool that strips the `ObjectId` column from the CSV file and sorts the
 rows. This is helpful to compare 2 CSV files published on 2 different days, because

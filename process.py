@@ -37,7 +37,7 @@ def print_stats(cases_per_bracket, ages, df):
         f"{cases_total} cases.)"
     )
 
-def gen_heatmap(cases_per_bracket, filename, sqrt):
+def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     rcParams["figure.titlesize"] = "x-large"
     (fig, ax) = plt.subplots(dpi=300)
     periods = sorted(cases_per_bracket.keys())
@@ -65,8 +65,7 @@ def gen_heatmap(cases_per_bracket, filename, sqrt):
     ax.text(
         -0.1,
         -0.2,
-        f"Pixel intensity represents number of cases reported per {buckets_days}-day time"
-        "period.\n"
+        f"Pixel intensity represents {comment}.\n"
         "Source: https://github.com/mbevand/florida-covid19-line-list-data\n"
         "Created by: Marc Bevand — @zorinaq",
         transform=ax.transAxes,
@@ -125,8 +124,11 @@ def main():
         for (bucket, cases) in cases_data.items():
             share_positive[period][bucket] = cases / total_cases
     print_stats(cases_per_bracket, ages, df)
-    gen_heatmap(cases_per_bracket, "heatmap", True)
-    gen_heatmap(share_positive, "heatmap_age_share", True)
+    gen_heatmap(cases_per_bracket, "heatmap",
+            f"number of cases reported per {buckets_days}-day time period", True)
+    gen_heatmap(share_positive, "heatmap_age_share",
+            "share of cases in the age bracket among all cases in the\n"
+            f"{buckets_days}-day time period", True)
 
 if __name__ == "__main__":
     main()
