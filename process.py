@@ -78,9 +78,11 @@ def gen_heatmap(cases_per_bracket, filename, sqrt):
 
 def main():
     try:
+        fname = sys.argv[1]
+        print(f"Opening {fname}...")
         df = pd.read_csv(sys.argv[1])
     except IndexError:
-        print(f"CSV not found. Downloading from {csv_url}...")
+        print(f"Downloading from {csv_url}...")
         df = pd.read_csv(csv_url)
     # ChartDate is the date the case was counted according the header of table
     # "Coronavirus: line list of cases" in:
