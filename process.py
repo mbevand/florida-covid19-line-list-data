@@ -60,19 +60,23 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins=20, integer=True))
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(fmt_age))
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
     fig.autofmt_xdate()
     ax.set_ylabel("Age range")
     ax.tick_params(axis="x", which="both", labelsize="small")
+    years = 1 + buckets_ages[0][1] - buckets_ages[0][0]
     ax.text(
         -0.1,
         -0.2,
-        f"Pixel intensity represents {comment}.\n"
+        f"Each pixel represents a {buckets_days}-day time period and {years}-year age bracket.\n"
+        f"Pixel intensity represents the {comment}.\n"
         "Source: https://github.com/mbevand/florida-covid19-line-list-data\n"
         "Created by: Marc Bevand — @zorinaq",
         transform=ax.transAxes,
         verticalalignment="top",
     )
-    fig.suptitle("Heatmap Of COVID-19 Cases In Florida By Age Bracket Over Time")
+    fig.suptitle("Heatmap Of COVID-19 Cases In Florida By Age Over Time")
     ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest", aspect="auto")
     plt.savefig(f"{filename}.png", bbox_inches="tight")
 
@@ -126,10 +130,9 @@ def main():
             share_positive[period][bucket] = cases / total_cases
     print_stats(cases_per_bracket, ages, df)
     gen_heatmap(cases_per_bracket, "heatmap",
-            f"number of cases reported per {buckets_days}-day time period", True)
+            "number of cases reported", True)
     gen_heatmap(share_positive, "heatmap_age_share",
-            "share of cases in the age bracket among all cases in the\n"
-            f"{buckets_days}-day time period", True)
+            "share of cases in the age bracket among\nall cases in the time period", True)
 
 if __name__ == "__main__":
     main()
