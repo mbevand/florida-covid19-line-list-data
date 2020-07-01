@@ -55,9 +55,10 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
             val = cases_per_bracket[period][bracket]
             a[i, j] = np.sqrt(val) if sqrt else val
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
-    ax.xaxis.set_major_locator(ticker.MultipleLocator(base=2))
+    ax.xaxis.set_major_locator(ticker.MaxNLocator(nbins=15, integer=True))
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(fmt_dates))
-    ax.yaxis.set_major_locator(ticker.MultipleLocator())
+    ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=1))
+    ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins=20, integer=True))
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(fmt_age))
     fig.autofmt_xdate()
     ax.set_ylabel("Age range")
@@ -72,7 +73,7 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
         verticalalignment="top",
     )
     fig.suptitle("Heatmap Of COVID-19 Cases In Florida By Age Bracket Over Time")
-    ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest")
+    ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest", aspect="auto")
     plt.savefig(f"{filename}.png", bbox_inches="tight")
 
 def main():
