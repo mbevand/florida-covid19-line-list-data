@@ -76,7 +76,7 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
         transform=ax.transAxes,
         verticalalignment="top",
     )
-    fig.suptitle("Heatmap Of COVID-19 Cases In Florida By Age Over Time")
+    fig.suptitle("Heatmap Of COVID-19 Cases In Florida\nBy Age Over Time")
     ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest", aspect="auto")
     plt.savefig(f"{filename}.png", bbox_inches="tight")
 
