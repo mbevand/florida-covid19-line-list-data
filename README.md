@@ -92,6 +92,10 @@ period_start, 00-04, 05-09, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-
 (Last period's data may be incomplete. Age unknown for 225 out of 152434 cases.)
 ```
 
+The number of cases is increasing among *all* age brackets. However the median age of
+cases is declining because younger people appear to be driving increased transmission,
+especially the 20-24 age bracket.
+
 By default the size of each pixel, or *bucket*, is 5-year age brackets and 4-day
 time periods. This can be changed by editing the variables `buckets_ages` and `buckets_days`.
 
@@ -102,13 +106,7 @@ to the script:
 1. Click `Download → Spreadsheet` to download the CSV file
 1. Run `./heatmap.py <path-to-csv-file>`
 
-# Analysis
-
-The number of cases is increasing among *all* age brackets. However the median age of
-cases is declining because younger people appear to be driving increased transmission,
-especially the 20-24 age bracket.
-
-# Miscellaneous
+## Miscellaneous
 
 `heatmap.py` also creates `heatmap_age_share.png`: the pixel intensity represents
 not the number of cases, but the share of cases in this age bracket among all
