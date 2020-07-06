@@ -1,21 +1,61 @@
-# Analyzing age trends of COVID-19 cases in Florida
+# Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 30 June 2020*
+*Updated: 05 July 2020*
 
 Authors: Marc Bevand, Michael A. Alcorn
 
 The Florida Department of Health has an **amazing** dataset here: [complete line
 list data of the state's COVID-19 cases][dataset], including age information
-for all 150k+ cases! Our script `process.py` analyzes this data to create a heatmap
-representing the number of cases by age bracket over time:
+for all 150k+ cases! We provide two scripts:
+* `forecast_deaths.py` forecasts deaths based on age-stratified Case Fatality Ratios (CFR)
+* `heatmap.py` creates a heatmap representing the number of cases by age bracket over time
+
+## Forecasting deaths
+
+![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
+
+`forecast_deaths.py` downloads the [line list dataset][dataset] of cases. This
+gives us the age of every case diagnosed with COVID-19, and the date of first
+symptoms (`EventDate` CSV column.)
+
+We assume the mean time from onset of symptoms to death is 17.8 days, as reported in
+[Estimating the effects of nonpharmaceutical interventions on COVID-19 in Europe, Supplementary information, page 4][o2d].
+
+We use 4 models estimating the age-stratified Case Fatality Ratios:
+
+1. [The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020][m1] (table 1, Case fatality rate)
+1. [Estimates of the severity of coronavirus disease 2019: a model-based analysis][m2] (table 1, CFR, Adjusted for censoring, demography, and under-ascertainment)
+1. [https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf][m3] (table 1, Casi totali, % Letalità)
+1. [Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020][m4] (table 2, Latest estimate)
+
+This produces a surprisingly accurate forecast, up to ~18 days ahead of time,
+because the mean time from onset of symptoms to death is 17.8 days.
+
+Keep in mind that the forecast does not rely on death data, but relies
+**solely** on the age of cases, date of first symptoms, and published CFR
+estimates.
+
+We assume that infected persons who are asymptomatic typically do not get
+tested, so they are typically absent from the Florida Department of Health line list
+case data. Therefore, for the forecast to be accurate, we must feed the script
+CFR estimates, not IFR (Infection Fatality Ratio) estimates. The IFR would take
+into account undetected (asymptomatic) cases, and would thus not be
+consistent with the line list dataset.
+
+`forecast_deaths.py` also downloads reported deaths from the [New York Times
+Covid-19 data repository][nyt] to chart actual deaths alongside the forecast.
+
+The forecast curves and actual death curve are smoothed with a 7-day centered moving average.
+
+## Heatmap of age over time
+
+`heatmap.py` downloads the dataset automatically, creates the heatmap
+(`heatmap.png`) and also produces a numerical summary:
 
 ![Heatmap of COVID-19 cases in Florida](heatmap_published.png)
 
-The script downloads the dataset automatically, creates the heatmap
-(`heatmap.png`) and also produces a numerical summary like this:
-
 ```
-$ ./process.py
+$ ./heatmap.py
 Downloading from https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv...
 Number of COVID-19 cases per 4-day time period in Florida by age bracket over time:
 period_start, 00-04, 05-09, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90-199, median_age
@@ -60,9 +100,7 @@ to the script:
 
 1. Browse the [line list data][dataset] page
 1. Click `Download → Spreadsheet` to download the CSV file
-1. Run `./process.py <path-to-csv-file>`
-
-[dataset]: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
+1. Run `./heatmap.py <path-to-csv-file>`
 
 # Analysis
 
@@ -72,10 +110,18 @@ especially the 20-24 age bracket.
 
 # Miscellaneous
 
-`process.py` also creates `heatmap_age_share.png`: the pixel intensity represents
+`heatmap.py` also creates `heatmap_age_share.png`: the pixel intensity represents
 not the number of cases, but the share of cases in this age bracket among all
 cases reported in this time period.
 
 `sort.py` is a tool that strips the `ObjectId` column from the CSV file and sorts the
 rows. This is helpful to compare 2 CSV files published on 2 different days, because
 the `ObjectId` value and the order of rows are not stable from one file to another.
+
+[dataset]: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
+[nyt]: https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv
+[o2d]: https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-020-2405-7/MediaObjects/41586_2020_2405_MOESM1_ESM.pdf
+[m1]: http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032
+[m2]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
+[m3]: https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf
+[m4]: https://www.medrxiv.org/content/10.1101/2020.05.25.20112904v1
