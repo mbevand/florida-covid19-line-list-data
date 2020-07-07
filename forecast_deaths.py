@@ -129,7 +129,7 @@ def init_chart():
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.xaxis.set_major_locator(ticker.MultipleLocator(base=7)) # tick every 7 days
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=10))
+    ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=2))
     ax.yaxis.set_major_locator(ticker.MultipleLocator(base=20))
     ax.spines['top'].set_visible(False)
     fig.autofmt_xdate()
