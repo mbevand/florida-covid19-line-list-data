@@ -49,8 +49,8 @@ list data.
 
 ## Heatmap of age over time
 
-`heatmap.py` downloads the dataset automatically, creates the heatmap
-(`heatmap.png`) and also produces a numerical summary:
+`heatmap.py` downloads the [FDOH line list dataset][dataset], creates the heatmap
+(`heatmap.png`) and also produces a numerical summary of age trends over time:
 
 ![Heatmap of COVID-19 cases in Florida](heatmap_published.png)
 
