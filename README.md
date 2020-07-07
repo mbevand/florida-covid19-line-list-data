@@ -38,13 +38,13 @@ deaths: notice how the colored curves produced by the model follow closely the
 black curve (actual deaths.)
 
 Actual deaths are fetched from the [New York Times Covid-19 data repository][nyt] and
-are only used to draw the black curve. They are used as part of the forecast.
+are only used to draw the black curve. They are *not* used as part of the forecast.
 
 The forecast curves and actual death curve are smoothed with a 7-day centered moving average.
 
-Since the model uses line list data, ie. *detected* cases, it is important that
+Since the forecast uses line list data, ie. *detected* cases, it is important that
 we feed it CFR estimates, not IFR estimates. Infection Fatality Ratios take
-into account undetected cases and thus would not be consistent with line
+into account *undetected* cases and thus would not be consistent with line
 list data.
 
 ## Heatmap of age over time
