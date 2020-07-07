@@ -170,7 +170,7 @@ def gen_chart(fig, ax, deaths, deaths_actual):
 def main():
     try:
         fname = sys.argv[1]
-        print(f'Opening {fname}...')
+        print(f'Opening {fname}')
         df = pd.read_csv(sys.argv[1])
     except IndexError:
         print(f'Downloading {csv_cases}')

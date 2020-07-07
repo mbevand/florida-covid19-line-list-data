@@ -15,40 +15,37 @@ for all 150k+ cases! We provide two scripts:
 ![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
 
 `forecast_deaths.py` does not rely on death data, but relies
-**solely** on case ages, date of first symptoms, and published CFR
+**solely** on case ages, date of first symptoms, and published age-stratified CFR
 estimates.
 
-It starts by downloading the [FDOH line list dataset][dataset]. This gives us the
-age of every case diagnosed with COVID-19, and the date of first symptoms
+The script starts by downloading the [FDOH line list dataset][dataset]. This gives us
+(1) the age of every case diagnosed with COVID-19, and (2) the date of first symptoms
 (`EventDate` CSV column.)
 
-Then it uses 4 models estimating the age-stratified Case Fatality Ratios:
+Then it multiplies the number of cases by age bracket with age-stratified Case Fatality Ratios issued from 4 independent models:
 
 1. [The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020][m1] (table 1, Case fatality rate)
 1. [Estimates of the severity of coronavirus disease 2019: a model-based analysis][m2] (table 1, CFR, Adjusted for censoring, demography, and under-ascertainment)
 1. [https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf][m3] (table 1, Casi totali, % Letalità)
 1. [Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020][m4] (table 2, Latest estimate)
 
-Then it assumes the mean time from onset of symptoms to death is 17.8 days, as reported in
+Then it assumes death occurs on average 17.8 days after infection, which is the mean onset-to-death time reported in
 [Estimating the effects of nonpharmaceutical interventions on COVID-19 in Europe, Supplementary information, page 4][o2d].
 
-Finally, combining all this information together produces a surprisingly
-accurate forecast of deaths up to ~18 days ahead of time, because the mean
-time from onset of symptoms to death is 17.8 days.
+The end result is a simple and accurate forecast that can not only
+estimate deaths up to ~18 days ahead of time, but can also estimate *past*
+deaths: notice how the colored curves produced by the model follow closely the
+black curve (actual deaths.)
 
-Even more surprisingly, it estimates past deaths very accurately: notice
-how the colored curves produced by the model follow closely the black curve
-(actual deaths.)
+Actual deaths are fetched from the [New York Times Covid-19 data repository][nyt] and
+are only used to draw the black curve. They are used as part of the forecast.
+
+The forecast curves and actual death curve are smoothed with a 7-day centered moving average.
 
 Since the model uses line list data, ie. *detected* cases, it is important that
 we feed it CFR estimates, not IFR estimates. Infection Fatality Ratios take
 into account undetected cases and thus would not be consistent with line
 list data.
-
-`forecast_deaths.py` also downloads reported deaths from the [New York Times
-Covid-19 data repository][nyt] to chart actual deaths alongside the forecast.
-
-The forecast curves and actual death curve are smoothed with a 7-day centered moving average.
 
 ## Heatmap of age over time
 
