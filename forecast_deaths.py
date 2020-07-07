@@ -179,6 +179,7 @@ def main():
     #   http://ww11.doh.state.fl.us/comm/_partners/action/report_archive/state/state_reports_latest.pdf
     # EventDate is when the patient first reported symptoms according to:
     #   https://www.tampabay.com/news/health/2020/05/19/florida-health-department-officials-told-manager-to-delete-coronavirus-data-before-reassigning-her-emails-show/
+    # Other sources say more specifically EventDate is the earlier of "onset date, diagnosis date, or test date".
     # We estimate deaths based on the mean onset-to-death time, so we must work from EventDate.
     df['date_parsed'] = pd.to_datetime(
             # Timestamps are formatted as "2020/06/28 05:00:00+00". We truncate after the whitespace
