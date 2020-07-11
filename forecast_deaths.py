@@ -142,6 +142,10 @@ def cma(arr, n=cma_days):
         i += 1
     return arr2
 
+# ignore. author's custom switch to make redline charts updating my first forecast
+# https://twitter.com/zorinaq/status/1279934357323386880
+redline = False
+
 def init_chart():
     rcParams['figure.titlesize'] = 'x-large'
     (fig, ax) = plt.subplots(dpi=300)#, figsize=(6.4, 6.4)) # default is 6.4 × 4.8
@@ -155,6 +159,8 @@ def init_chart():
     ax.tick_params(axis='x', which='both', labelsize='small')
     ax.grid(True, which='major', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='both', linewidth=0.1)
+    if redline:
+        del(cfr_models[-1])
     ax.text(
         -0.025, -0.19,
         'Forecast based on the age of every individual COVID-19 case reported by the Florida Department of\n'
@@ -164,6 +170,8 @@ def init_chart():
         transform=ax.transAxes, fontsize='x-small', verticalalignment='top',
     )
     today = str(datetime.datetime.now().date())
+    if redline:
+        today = '2020-07-05'
     fig.suptitle(f'Forecast of daily COVID-19 deaths in Florida\n(as of {today})')
     return (fig, ax)
 
@@ -177,6 +185,12 @@ def gen_chart(fig, ax, deaths, deaths_actual):
                 label=f'Model {i + 1}: {cfr_models[i].source}')
     # plot actual deaths
     d = cma(deaths_actual)
+    if redline:
+        split = list(filter(lambda x: x[1][0] == datetime.date(2020, 7, 1), enumerate(d)))[0][0]
+        d2 = d[split:]
+        d = d[:split + 1]
+        ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(1, 0, 0, 1.0))
+        ax.fill_between([x[0] for x in d2], [x[1] for x in d2], color=(1, 0, 0, 0.15))
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0, 0, 0, 0.7),
             label=f'Actual deaths ({cma_days}-day centered moving average)')
     ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.15))
