@@ -18,9 +18,9 @@ repository provides tools to analyze the data:
 
 ## FDOH line list
 
-We made daily archives of the FDOH line list in directory `data_fdoh`. To
-download it, browse the [line list page][dataset] and click `Download →
-Spreadsheet`.
+To download the FDOH line list, browse the [data page][dataset] and click
+`Download → Spreadsheet`. We made daily archives of the line list in directory
+`data_fdoh`.
 
 The line list is in CSV format and the columns are self-explanatory: `Age`,
 `Gender`, `County`, boolean `Died`, etc. The columns are documented on page 12 of this
