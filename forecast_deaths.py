@@ -2,7 +2,7 @@
 #
 # Forecasts Florida COVID-19 deaths from line list case data and CFR stratified by age.
 
-import sys, math, datetime
+import sys, os, math, datetime
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,9 +10,10 @@ import matplotlib.dates as mdates
 import matplotlib.ticker as ticker
 from matplotlib import rcParams
 
-# Florida COVID-19 line list data.
-# CSV found at https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data (click Download → Spreadsheet)
-csv_cases = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
+# Florida COVID-19 line list data. CSV found at:
+# https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
+# (click Download → Spreadsheet)
+csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
 
 # Actual deaths
 csv_actual_deaths = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv'
@@ -24,6 +25,8 @@ o2d = np.round(17.8)
 
 # Number of days to calculate the centered moving average of the chart curves
 cma_days = 7
+
+datadir = 'data_fdoh'
 
 # Each instance represents one model of age-stratified Case Fatality Ratios
 class CFRModel():
@@ -91,6 +94,22 @@ cfr_models = [
                 (60, 69): 3.79 / 100,
                 (70, 79): 12.22 / 100,
                 (80, 199): 26.27 / 100,
+                }
+            ),
+        CFRModel(
+            'Our model (age_stratified_cfr.py) based on the FDOH line list',
+            # TODO: age_stratified_cfr.py should calculate the average CFR. For now assume it is zero.
+            # This does not affect the forecast much because the average CFR is only used with cases
+            # of unknown age.
+            0.0 / 100, {
+                (0, 29):  0.035 / 100,
+                (30, 39): 0.125 / 100,
+                (40, 49): 0.270 / 100,
+                (50, 59): 0.556 / 100,
+                (60, 69): 2.123 / 100,
+                (70, 79): 6.303 / 100,
+                (80, 89): 16.062 / 100,
+                (90, 199): 25.720 / 100,
                 }
             ),
         ]
@@ -168,22 +187,23 @@ def gen_chart(fig, ax, deaths, deaths_actual):
     fig.savefig('forecast_deaths.png', bbox_inches='tight')
 
 def main():
-    try:
+    if len(sys.argv) > 1:
         fname = sys.argv[1]
-        print(f'Opening {fname}')
-        df = pd.read_csv(sys.argv[1])
-    except IndexError:
-        print(f'Downloading {csv_cases}')
-        df = pd.read_csv(csv_cases)
-    # ChartDate is the date the case was counted according the header of table # "Coronavirus: line list of cases" in:
-    #   http://ww11.doh.state.fl.us/comm/_partners/action/report_archive/state/state_reports_latest.pdf
-    # EventDate is when the patient first reported symptoms according to:
-    #   https://www.tampabay.com/news/health/2020/05/19/florida-health-department-officials-told-manager-to-delete-coronavirus-data-before-reassigning-her-emails-show/
-    # Other sources say more specifically EventDate is the earlier of "onset date, diagnosis date, or test date".
+    else:
+        try:
+            files = list(filter(lambda x: x.endswith('.csv'), sorted(os.listdir(datadir))))
+        except FileNotFoundError:
+            files = []
+        if files:
+            fname = datadir + os.sep + files[-1]
+        else:
+            fname = csv_url
+    print(f'Opening {fname}')
+    df = pd.read_csv(fname)
     # We estimate deaths based on the mean onset-to-death time, so we must work from EventDate.
     df['date_parsed'] = pd.to_datetime(
-            # Timestamps are formatted as "2020/06/28 05:00:00+00". We truncate after the whitespace
-            # to ignore the time.
+            # Timestamps are formatted as "2020/06/28 05:00:00+00". We truncate
+            # after the whitespace to ignore the time.
             df['EventDate'].apply(lambda x: x.split(' ')[0]), format='%Y/%m/%d'
     )
     # ignore the last day ([-2] instead of [-1]) because case data from the last day may be incomplete

@@ -3,6 +3,7 @@
 # Analyzes Florida COVID-19 line list data by age bracket over time.
 
 import sys
+import os
 import datetime
 import numpy as np
 import pandas as pd
@@ -16,6 +17,7 @@ buckets_days = 4
 buckets_ages = [(0, 4), (5, 9), (10, 14), (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79), (80, 84), (85, 89), (90, 199), ]
 #buckets_ages = [(0, 9), (10, 19), (20, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, 199), ]
 #buckets_ages = [(i, i) for i in range(100)] + [(100,199)]
+datadir = 'data_fdoh'
 
 def print_stats(cases_per_bracket, ages, df):
     print(
@@ -82,26 +84,30 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     plt.savefig(f"{filename}.png", bbox_inches="tight")
 
 def main():
-    try:
+    if len(sys.argv) > 1:
         fname = sys.argv[1]
-        print(f"Opening {fname}...")
-        df = pd.read_csv(sys.argv[1])
-    except IndexError:
-        print(f"Downloading from {csv_url}...")
-        df = pd.read_csv(csv_url)
-    # ChartDate is the date the case was counted according the header of table
-    # "Coronavirus: line list of cases" in:
-    # http://ww11.doh.state.fl.us/comm/_partners/action/report_archive/state/state_reports_latest.pdf
-    # The timestamp is formatted as "2020/06/28 05:00:00+00". We truncate after the whitespace
-    # to ignore the time.
-    df["ChartDate_parsed"] = pd.to_datetime(
+    else:
+        try:
+            files = list(filter(lambda x: x.endswith('.csv'), sorted(os.listdir(datadir))))
+        except FileNotFoundError:
+            files = []
+        if files:
+            fname = datadir + os.sep + files[-1]
+        else:
+            fname = csv_url
+    print(f'Opening {fname}')
+    df = pd.read_csv(fname)
+    # We show cases by date reported (ChartDate)
+    # The timestamp is formatted as "2020/06/28 05:00:00+00". We truncate
+    # after the whitespace to ignore the time.
+    df["date_parsed"] = pd.to_datetime(
             df["ChartDate"].apply(lambda x: x.split(' ')[0]), format="%Y/%m/%d"
     )
     # Pick an arbitrary point in time to align the time periods. Today's date is usually
     # the best choice assuming the CSV file contains current data (ie. data up to yesterday)
     # because this ensures the last period ends on yesterday
     reference = datetime.datetime.now().date()
-    df["Delta"] = df["ChartDate_parsed"].apply(lambda date: (date.date() - reference).days)
+    df["Delta"] = df["date_parsed"].apply(lambda date: (date.date() - reference).days)
     df["Period"] = df["Delta"].apply(
         lambda delta: reference + datetime.timedelta(days=delta - delta % buckets_days)
     )

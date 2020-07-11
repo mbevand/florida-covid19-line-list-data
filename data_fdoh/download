@@ -1,0 +1,16 @@
+#!/bin/bash
+
+size() {
+    # print the file size in bytes
+    stat -c %s "$1"
+}
+
+prev=$(ls *.csv | tail -1)
+new=$(date +%F-%H-%M-%S).csv
+wget --quiet --compression=auto -O "$new" https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv
+if [ $(size "$prev") -eq $(size "$new") ]; then
+    echo "No new CSV"
+    rm "$new"
+    exit 1
+fi
+echo "New CSV downloaded"
