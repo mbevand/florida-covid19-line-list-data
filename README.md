@@ -191,9 +191,9 @@ alive for a longer time.
 
 Limitations: it is likely our technique does not always accurately identify the
 date of death. For example FDOH could be updating the line list many days after
-the death occured. Furthermore, there are data quality issues in the
-`EventDate` column of the FDOH line list, meaning this date does not always
-accurately reflect the date of onset.
+the death occured (contributing to the long tail.) Furthermore, there are data
+quality issues in the `EventDate` column of the FDOH line list, meaning this
+date does not always accurately reflect the date of onset.
 
 ## Heatmap of age over time
 
