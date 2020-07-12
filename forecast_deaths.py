@@ -18,10 +18,8 @@ csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9
 # Actual deaths
 csv_actual_deaths = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv'
 
-# Mean time (in days) from onset of symptoms to death
-# Source: Estimating the effects of nonpharmaceutical interventions on COVID-19 in Europe, Supplementary information, page 4:
-# https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-020-2405-7/MediaObjects/41586_2020_2405_MOESM1_ESM.pdf
-o2d = np.round(17.8)
+# Mean time (in days) from onset of symptoms to death, calculated by gamma.py
+o2d = np.round(18.7)
 
 # Number of days to calculate the centered moving average of the chart curves
 cma_days = 7
