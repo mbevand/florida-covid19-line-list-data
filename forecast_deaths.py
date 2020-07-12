@@ -238,7 +238,12 @@ def main():
     df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
     cumulative_deaths = 0
     for (_, row) in df[df['state'] == 'Florida'].iterrows():
-        deaths_actual.append((row['date'].date(), row['deaths'] - cumulative_deaths))
+        # gamma.py assumes that the line list CSV file (updated every morning Eastern time)
+        # contains data for the day prior: new deaths detected in the file actually
+        # occured the day before the CSV file was updated. It is the same thing for
+        # the NYT CSV file, so in order to be perfectly consistent, we subtract 1 day here.
+        deaths_actual.append((row['date'].date() - datetime.timedelta(days=1),
+            row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
     # generate chart
     gen_chart(fig, ax, deaths, deaths_actual)

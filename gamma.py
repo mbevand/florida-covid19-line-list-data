@@ -46,7 +46,7 @@ def parse(fname):
 
 def calc_o2d(fname, characteristics):
     # Filename must start with "YYYY-MM-DD" which represents the date the
-    # FDOH line list was downloaded, and contains data for the day before
+    # FDOH line list was downloaded, and contains data for the day prior
     death_reported = parse_date(os.path.basename(fname)[:10]) - datetime.timedelta(days=1)
     # Parse EventDate (last element of the characteristics tuple)
     onset = parse_date(characteristics[-1][:10], fmt='%Y/%m/%d')
