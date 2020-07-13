@@ -23,13 +23,13 @@ avg_days = 7
 avg_days_long = 4 * 7
 # Start the chart on this date
 first_date = datetime.date(2020, 3, 15)
-# "Tableau 20" colors
+# "Tableau 20" colors re-ordered so the pastel colors are at the end
 t20 = [(x[0] / 255., x[1] / 255., x[2] / 255.) for x in
-             [(31, 119, 180), (174, 199, 232), (255, 127, 14), (255, 187, 120),
-              (44, 160, 44), (152, 223, 138), (214, 39, 40), (255, 152, 150),
-              (148, 103, 189), (197, 176, 213), (140, 86, 75), (196, 156, 148),
-              (227, 119, 194), (247, 182, 210), (127, 127, 127), (199, 199, 199),
-              (188, 189, 34), (219, 219, 141), (23, 190, 207), (158, 218, 229)]]
+             [(31, 119, 180), (255, 127, 14), (44, 160, 44), (214, 39, 40),
+              (148, 103, 189), (140, 86, 75), (227, 119, 194), (127, 127, 127),
+              (188, 189, 34), (23, 190, 207), (174, 199, 232), (255, 187, 120),
+               (152, 223, 138), (255, 152, 150), (197, 176, 213), (196, 156, 148),
+               (247, 182, 210), (199, 199, 199), (219, 219, 141), (158, 218, 229)]]
 datadir = 'data_fdoh'
 censoring_rv = None
 
@@ -127,9 +127,9 @@ def gen_chart(data, mean, shape):
         ax.plot(dates3, cfrs3, linewidth=1.0, color=t20[col_i], linestyle='--')
         last_day, last_cfr = dates3[-1], cfrs3[-1]
         # label the last long-term adjusted CFR
-        ax.annotate(f'{last_cfr:.3f}%', (last_day, last_cfr),
+        ax.annotate(f'{bracket[0]}-{bracket[1]}: {last_cfr:.3f}%', (last_day, last_cfr),
                 xytext=(15, 0), textcoords='offset points',
-                verticalalignment='center', fontsize='small', arrowprops={'arrowstyle':'-'},
+                verticalalignment='center', fontsize='x-small', arrowprops={'arrowstyle':'-'},
                 )
         col_i += 1
     ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=mdates.MO))
@@ -137,14 +137,14 @@ def gen_chart(data, mean, shape):
     ax.semilogy()
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%g%%"))
     ax.set_ylabel("Case Fatality Ratio")
-    ax.set_xlim(left=first_date, right=datetime.date(2020, 8, 1))
+    ax.set_xlim(left=first_date, right=last_day + datetime.timedelta(days=32))
     ax.set_ylim(bottom=.006, top=100)
     ax.grid(True, which='both', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='y', linewidth=0.1)
     ax.legend(bbox_to_anchor=(1,1), loc='upper left')
     fig.autofmt_xdate()
     ax.tick_params(axis='x', labelsize='x-small')
-    fig.suptitle('CFR of Florida COVID-19 cases by age bracket')
+    fig.suptitle('CFR of Florida COVID-19 cases\nby age bracket')
     ax.text(
         -0.1,
         -0.14,
