@@ -63,18 +63,19 @@ with line list data.
 Then the script assumes death occurs on average 18.7 days after infection,
 which is the mean onset-to-death time calculated by `gamma.py`.
 
+Finally, it charts the forecast (`forecast_deaths.png`). The curves are all
+smoothed with a 7-day centered moving average.
+
 The end result is a simple tool that can not only predict deaths up to ~18.7
 days ahead of time, but can also estimate *past* deaths accurately: notice how
 the colored curves in the generated chart follow closely the black curve
 (actual deaths.)
 
-The curves are all smoothed with a 7-day centered moving average.
-
 Actual deaths are fetched from the [New York Times Covid-19 data repository][nyt] and
 are only used to draw the black curve. They are *not* used in the forecasts
 based on CFR models #1 through #4. Actual deaths are only used indirectly in
-the forecast based on model #5 as its age-stratified CFR is calculated by
-`age_stratified_cfr.py` which analyzes Florida deaths.
+the forecast based on model #5, because model #5 uses the age-stratified CFR
+calculated from Florida deaths.
 
 ## Age-stratified CFR
 
@@ -104,7 +105,8 @@ represents our best guess of the age-stratified CFR of COVID-19.
 ![Onset-to-death distribution of Florida COVID-19 deaths](gamma_published.png)
 
 `gamma.py` calculates the times between onset of symptoms and death
-(onset-to-death) and fits them in a Gamma distribution.
+(onset-to-death) and fits them in a Gamma distribution. It creates
+a chart (`gamma.png`) and outputs a numerical summary.
 
 The date of onset is known (`EventDate`). However FDOH does not publish the
 date of death, so `gamma.py` infers it from updates made to the line list. We
