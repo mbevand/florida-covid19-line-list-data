@@ -13,4 +13,4 @@ if [ $(size "$prev") -eq $(size "$new") ]; then
     rm "$new"
     exit 1
 fi
-echo "New CSV downloaded"
+echo "Found new CSV"
