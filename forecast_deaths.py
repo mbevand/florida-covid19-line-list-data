@@ -163,7 +163,7 @@ def init_chart():
         -0.025, -0.19,
         'Forecast based on the age of every individual COVID-19 case reported by the Florida Department of\n'
         f'Health combined with {len(cfr_models)} models of age-stratified Case Fatality Ratios.\n'
-        'Source: https://github.com/mbevand/florida-covid19-line-list-data / '
+        'Source: https://github.com/mbevand/florida-covid19-line-list-data    '
         'Created by: Marc Bevand — @zorinaq',
         transform=ax.transAxes, fontsize='x-small', verticalalignment='top',
     )
