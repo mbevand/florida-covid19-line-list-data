@@ -60,22 +60,32 @@ important that we feed it CFR estimates, not IFR estimates. Infection Fatality
 Ratios take into account *undetected* cases and thus would not be consistent
 with line list data.
 
-Then the script assumes death occurs on average 18.7 days after infection,
+Then the script assumes death occurs on average 18.1 days after infection,
 which is the mean onset-to-death time calculated by `gamma.py`.
 
 Finally, it charts the forecast (`forecast_deaths.png`). The curves are all
 smoothed with a 7-day centered moving average.
 
-The end result is a simple tool that can not only predict deaths up to ~18.7
+The end result is a simple tool that can not only predict deaths up to ~18.1
 days ahead of time, but can also estimate *past* deaths accurately: notice how
 the colored curves in the generated chart follow closely the black curve
 (actual deaths.)
 
-Actual deaths are fetched from the [New York Times Covid-19 data repository][nyt] and
-are only used to draw the black curve. They are *not* used in the forecasts
-based on CFR models #1 through #4. Actual deaths are only used indirectly in
-the forecast based on model #5, because model #5 uses the age-stratified CFR
-calculated from Florida deaths.
+Historical data for actual deaths was fetched from the [New York Times Covid-19
+data repository][nyt] and was saved in the file `data_deaths/fl_resident_deaths.csv`.
+Death data is only used to draw the black curve. It is *not* used in the
+forecasts based on CFR models #1 through #4. Actual deaths are only used
+indirectly in the forecast based on model #5, because model #5 uses the
+age-stratified CFR calculated from Florida deaths.
+
+Note: since 2020-07-14 the file `data_deaths/fl_resident_deaths.csv` is now
+updated by the script `data_fdoh/download` that obtains deaths directly from
+the FDOH line list. The number of deaths calculated by the script is off by one
+from the "Florida Resident Deaths" figure shown on the [state's
+dashboard][dashboard] because my script only accounts for deaths whose `Jurisdiction`
+is `FL resident` (consistent with the way NYT does it in their
+[repository][nyt],) whereas the state's dashboard includes 1 additional death
+whose `Jurisdiction` is `Not diagnosed/isolated in FL`.
 
 ## Age-stratified CFR
 
@@ -133,6 +143,9 @@ Parsing data_fdoh/2020-07-08-10-21-00.csv
 Parsing data_fdoh/2020-07-09-11-09-00.csv
 Parsing data_fdoh/2020-07-10-09-46-54.csv
 Parsing data_fdoh/2020-07-11-11-04-49.csv
+Parsing data_fdoh/2020-07-12-09-53-27.csv
+Parsing data_fdoh/2020-07-13-07-57-16.csv
+Parsing data_fdoh/2020-07-14-12-14-55.csv
 Onset-to-death times (in days): [16, 7, 27, 20, 29, 32, 22, 15, 26, 31, 15, 20,
 30, 5, 8, 3, 5, 5, 15, 3, 15, 32, 16, 78, 26, 23, 35, 17, 9, 10, 8, 16, 8, 25,
 22, 27, 15, 15, 9, 2, 12, 6, 8, 12, 10, 8, 9, 1, 4, 7, 24, 23, 84, 24, 74, 24,
@@ -173,15 +186,26 @@ Onset-to-death times (in days): [16, 7, 27, 20, 29, 32, 22, 15, 26, 31, 15, 20,
 30, 50, 34, 24, 31, 27, 21, 26, 63, 26, 28, 29, 31, 23, 27, 32, 20, 21, 30, 21,
 21, 19, 19, 22, 22, 15, 17, 16, 17, 17, 19, 14, 27, 17, 27, 14, 14, 11, 15, 14,
 13, 18, 23, 16, 13, 10, 11, 12, 8, 12, 18, 10, 21, 12, 12, 8, 9, 5, 4, 6, 13,
-11, 7, 5, 4, 9, 6, 2, 12, 2, 2, 1, 5, 9, 14, 13, 3, 1, 1, 10]
-Number of deaths: 864
+11, 7, 5, 4, 9, 6, 2, 12, 2, 2, 1, 5, 9, 14, 13, 3, 1, 1, 10, 42, 57, 15, 21,
+47, 48, 15, 21, 27, 37, 24, 22, 28, 5, 25, 22, 21, 27, 19, 15, 18, 23, 16, 13,
+12, 11, 14, 16, 12, 13, 11, 12, 12, 7, 9, 5, 7, 7, 7, 3, 6, 5, 5, 1, 2, 30, 5,
+22, 4, 4, 30, 30, 14, 41, 35, 27, 24, 21, 23, 18, 19, 18, 19, 16, 30, 18, 20,
+18, 14, 17, 12, 10, 12, 10, 7, 14, 2, 10, 9, 7, 10, 9, 18, 5, 93, 23, 14, 24,
+81, 6, 11, 16, 2, 41, 5, 10, 21, 21, 40, 37, 36, 55, 27, 38, 41, 28, 32, 26,
+25, 25, 27, 25, 21, 23, 21, 20, 23, 19, 18, 26, 17, 19, 20, 18, 32, 19, 18, 19,
+24, 19, 17, 20, 23, 16, 17, 18, 24, 16, 24, 15, 21, 12, 15, 19, 16, 14, 17, 13,
+12, 15, 13, 13, 11, 21, 13, 19, 15, 19, 12, 52, 12, 15, 17, 13, 11, 9, 12, 17,
+9, 10, 10, 7, 11, 8, 8, 9, 6, 9, 10, 7, 9, 7, 7, 9, 9, 8, 8, 6, 6, 5, 5, 6, 6,
+6, 6, 12, 7, 4, 5, 9, 12, 5, 13, 5, 4, 4, 7, 3, 3, 8, 7, 3, 3, 12, 4, 4, 3, 4,
+4, 3, 3, 3, 3, 5, 1, 5, 4]
+Number of deaths: 1091
 Gamma distribution params:
-mean = 18.7
-shape = 1.56
+mean = 18.1
+shape = 1.63
 ```
 
-A mean of 18.7 days is comparable to other published estimates, however our
-distribution is wider (ie. smaller shape parameter of 1.56) because many deaths
+A mean of 18.1 days is comparable to other published estimates, however our
+distribution is wider (ie. smaller shape parameter of 1.63) because many deaths
 occur in the long tail:
 * mean 17.8 days, shape 4.94 = 0.45<sup>-2</sup>, based on sample of 24 deaths: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][verity]
 * mean 15.1 days, shape 5.1, based on sample of 3 deaths: [Estimating case fatality ratio of COVID-19 from observed cases outside China][althaus]
@@ -273,5 +297,6 @@ stable from one file to another.
 [m3]: https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf
 [m4]: https://www.medrxiv.org/content/10.1101/2020.05.25.20112904v1
 [nyt]: https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv
+[dashboard]: https://experience.arcgis.com/experience/96dd742462124fa0b38ddedb9b25e429
 [verity]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
 [althaus]: https://github.com/calthaus/ncov-cfr/

@@ -16,10 +16,10 @@ from matplotlib import rcParams
 csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
 
 # Actual deaths
-csv_actual_deaths = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv'
+csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
-o2d = np.round(18.7)
+o2d = 18.1
 
 # Number of days to calculate the centered moving average of the chart curves
 cma_days = 7
@@ -100,14 +100,14 @@ cfr_models = [
             # This does not affect the forecast much because the average CFR is only used with cases
             # of unknown age.
             0.0 / 100, {
-                (0, 29):  0.035 / 100,
-                (30, 39): 0.125 / 100,
-                (40, 49): 0.270 / 100,
-                (50, 59): 0.556 / 100,
-                (60, 69): 2.123 / 100,
-                (70, 79): 6.303 / 100,
-                (80, 89): 16.062 / 100,
-                (90, 199): 25.720 / 100,
+                (0, 29):  0.042 / 100,
+                (30, 39): 0.108 / 100,
+                (40, 49): 0.282 / 100,
+                (50, 59): 0.634 / 100,
+                (60, 69): 2.027 / 100,
+                (70, 79): 5.902 / 100,
+                (80, 89): 14.513 / 100,
+                (90, 199): 25.479 / 100,
                 }
             ),
         ]
@@ -227,13 +227,13 @@ def main():
     day = first_day
     while day <= last_day:
         ages = list(df[df['date_parsed'] == pd.Timestamp(day)]['Age'])
-        future_day = day + datetime.timedelta(days=o2d)
+        future_day = day + datetime.timedelta(days=np.round(o2d))
         for (i, model) in enumerate(cfr_models):
             deaths[i].append((future_day, forecast_deaths(model, ages)))
         day += datetime.timedelta(days=1)
     # get actual deaths
     deaths_actual = []
-    print(f'Downloading {csv_actual_deaths}')
+    print(f'Opening {csv_actual_deaths}')
     df = pd.read_csv(csv_actual_deaths)
     df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
     cumulative_deaths = 0

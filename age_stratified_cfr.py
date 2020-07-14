@@ -16,7 +16,7 @@ from matplotlib import rcParams
 # (click Download → Spreadsheet)
 csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
 # Calculate the CFR on these age brackets
-age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, 199))
+age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, math.inf))
 # Averaging period to calculate the raw and short-term adjusted CFR
 avg_days = 7
 # Averaging period to calculate the long-term adjusted CFR
@@ -104,9 +104,14 @@ def print_stats(data):
                 print(f' {counters[bracket].cfr_raw:6.2f}%', end='')
         print('')
 
+def bracket2str(bracket):
+    if bracket[1] == math.inf:
+        return f'{bracket[0]}+'
+    return f'{bracket[0]}-{bracket[1]}'
+
 def gen_chart(data, mean, shape):
     rcParams["figure.titlesize"] = "x-large"
-    (fig, ax) = plt.subplots(dpi=300, figsize=(6.4, 6.4)) # default is 6.4 × 4.8
+    (fig, ax) = plt.subplots(dpi=300, figsize=(7.5, 6.0)) # default is 6.4 × 4.8
     col_i = 0
     for bracket in reversed(age_brackets):
         dates, dates2, dates3, cfrs, cfrs2, cfrs3 = [], [], [], [], [], []
@@ -121,13 +126,12 @@ def gen_chart(data, mean, shape):
                 if counters[bracket].cfr_adjusted_long is not None:
                     dates3.append(date)
                     cfrs3.append(counters[bracket].cfr_adjusted_long)
-        ax.plot(dates, cfrs, linewidth=1.0, color=t20[col_i], linestyle='-',
-                label=f'{bracket[0]}-{bracket[1]}')
-        ax.plot(dates2, cfrs2, linewidth=1.0, color=t20[col_i], linestyle=':')
-        ax.plot(dates3, cfrs3, linewidth=1.0, color=t20[col_i], linestyle='--')
+        ax.plot(dates, cfrs, linewidth=1.0, color=t20[col_i], linestyle=':')
+        ax.plot(dates2, cfrs2, linewidth=1.0, color=t20[col_i], linestyle='--')
+        ax.plot(dates3, cfrs3, linewidth=1.0, color=t20[col_i], linestyle='-')
         last_day, last_cfr = dates3[-1], cfrs3[-1]
         # label the last long-term adjusted CFR
-        ax.annotate(f'{bracket[0]}-{bracket[1]}: {last_cfr:.3f}%', (last_day, last_cfr),
+        ax.annotate(f'Age {bracket2str(bracket)}: {last_cfr:.3f}%', (last_day, last_cfr),
                 xytext=(15, 0), textcoords='offset points',
                 verticalalignment='center', fontsize='x-small', arrowprops={'arrowstyle':'-'},
                 )
@@ -141,16 +145,15 @@ def gen_chart(data, mean, shape):
     ax.set_ylim(bottom=.006, top=100)
     ax.grid(True, which='both', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='y', linewidth=0.1)
-    ax.legend(bbox_to_anchor=(1,1), loc='upper left')
     fig.autofmt_xdate()
     ax.tick_params(axis='x', labelsize='x-small')
     fig.suptitle('CFR of Florida COVID-19 cases\nby age bracket')
     ax.text(
         -0.1,
         -0.14,
-f'Solid lines: {avg_days}-day moving average of the raw CFR calculated on cases ordered by date of onset of symptoms.\n'
-f'Dotted & dashed lines: respectively {avg_days}-day & {avg_days_long}-day moving average of the CFR adjusted for right censoring,\n'
-f'assuming onset-to-death is Gamma distributed with a mean of {mean} days and a shape parameter of {shape}.\n'
+f'Solid & dashed lines: {avg_days_long}-day & {avg_days}-day moving average of the CFR of cases ordered by date of onset of symptoms,\n'
+f'adjusted for right censoring assuming onset-to-death is Gamma distributed with a mean of {mean} days and\n'
+f'a shape parameter of {shape}. Dotted lines: {avg_days}-day moving average of the raw CFR not adjusted for censoring.\n'
 'Source: https://github.com/mbevand/florida-covid19-line-list-data          '
 'Created by: Marc Bevand — @zorinaq',
         transform=ax.transAxes, verticalalignment='top', fontsize='small',
@@ -191,7 +194,7 @@ def main():
         data[date][b].deaths += 1 if died else 0
         data[date][b].cases += 1
     # Parameters of the Gamma distribution of onset-to-death, calculated by gamma.py
-    mean, shape = 18.7, 1.56
+    mean, shape = 18.1, 1.63
     calc_cfr(data, mean, shape)
     #print_stats(data)
     gen_chart(data, mean, shape)
