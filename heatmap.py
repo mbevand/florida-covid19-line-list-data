@@ -3,6 +3,7 @@
 # Analyzes Florida COVID-19 line list data by age bracket over time.
 
 import sys
+import math
 import os
 import datetime
 import numpy as np
@@ -14,10 +15,15 @@ from matplotlib import rcParams
 # This CSV is found at https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data (click Download → Spreadsheet)
 csv_url = "https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv"
 buckets_days = 4
-buckets_ages = [(0, 4), (5, 9), (10, 14), (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79), (80, 84), (85, 89), (90, 199), ]
-#buckets_ages = [(0, 9), (10, 19), (20, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, 199), ]
-#buckets_ages = [(i, i) for i in range(100)] + [(100,199)]
+buckets_ages = [(0, 4), (5, 9), (10, 14), (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79), (80, 84), (85, 89), (90, math.inf), ]
+#buckets_ages = [(0, 9), (10, 19), (20, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, math.inf), ]
+#buckets_ages = [(i, i) for i in range(100)] + [(100,math.inf)]
 datadir = 'data_fdoh'
+
+def bracket2str(bracket):
+    if bracket[1] == math.inf:
+        return f'{bracket[0]}+'
+    return f'{bracket[0]:02d}-{bracket[1]:02d}'
 
 def print_stats(cases_per_bracket, ages, df):
     print(
@@ -25,8 +31,8 @@ def print_stats(cases_per_bracket, ages, df):
         "bracket over time:"
     )
     print(f"{'period_start':>12},", end="")
-    for (low_age, high_age) in buckets_ages:
-        print(f" {low_age:02d}-{high_age:02d},", end="")
+    for bracket in buckets_ages:
+        print(f" {bracket2str(bracket)},", end="")
     print(" median_age")
     for period in sorted(cases_per_bracket):
         print(f"{str(period):>12},", end="")
@@ -49,8 +55,7 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
             return periods[int(x)]
     def fmt_age(x, pos=None):
         if 0 <= x < len(buckets_ages):
-            (low_age, high_age) = buckets_ages[int(x)]
-            return f"{low_age}-{high_age}"
+            return bracket2str(buckets_ages[int(x)])
     a = np.zeros((len(buckets_ages), len(periods)))
     for (j, period) in enumerate(periods):
         for (i, bracket) in enumerate(buckets_ages):
@@ -67,11 +72,12 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     ax.spines['right'].set_visible(False)
     fig.autofmt_xdate()
     ax.set_ylabel("Age range")
+    ax.set_xlabel(f"Start date of {buckets_days}-day period")
     ax.tick_params(axis="x", which="both", labelsize="small")
     years = 1 + buckets_ages[0][1] - buckets_ages[0][0]
     ax.text(
         -0.1,
-        -0.2,
+        -0.25,
         f"Each pixel represents a {buckets_days}-day time period and {years}-year age bracket.\n"
         f"Pixel intensity represents the {comment}.\n"
         "Source: https://github.com/mbevand/florida-covid19-line-list-data\n"
