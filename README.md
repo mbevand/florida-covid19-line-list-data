@@ -280,6 +280,10 @@ By default the size of each pixel, or *bucket*, is 5-year age brackets and 4-day
 time periods. This can be changed by editing the variables `buckets_ages` and `buckets_days`
 in `heatmap.py`.
 
+Here is a version with each pixel representing 1 year of age and 7-day time periods:
+
+![Heatmap of COVID-19 cases in Florida with each pixel = 1 year of age](heatmap_1yr_published.png)
+
 `heatmap.py` also creates `heatmap_age_share.png`: the pixel intensity represents
 not the number of cases, but the share of cases in this age bracket among all
 cases reported in this time period.
