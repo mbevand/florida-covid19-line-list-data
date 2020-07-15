@@ -184,7 +184,7 @@ def gen_chart(fig, ax, deaths, deaths_actual):
     # plot actual deaths
     d = cma(deaths_actual)
     if redline:
-        split = list(filter(lambda x: x[1][0] == datetime.date(2020, 7, 1), enumerate(d)))[0][0]
+        split = list(filter(lambda x: x[1][0] == datetime.date(2020, 6, 30), enumerate(d)))[0][0]
         d2 = d[split:]
         d = d[:split + 1]
         ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(1, 0, 0, 1.0))
