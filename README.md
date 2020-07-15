@@ -2,7 +2,7 @@
 
 *Updated: 14 July 2020*
 
-Authors: Marc Bevand, Michael A. Alcorn
+Authors: Marc Bevand
 
 The Florida Department of Health (FDOH) has an **amazing** dataset here:
 [complete line list of the state's COVID-19 cases and deaths][dataset]. To our
