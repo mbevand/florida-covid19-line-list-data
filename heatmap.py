@@ -10,7 +10,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import seaborn as sns
 from matplotlib import rcParams
+from PIL import Image
 
 # This CSV is found at https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data (click Download → Spreadsheet)
 csv_url = "https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv"
@@ -89,6 +91,42 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest", aspect="auto")
     plt.savefig(f"{filename}.png", bbox_inches="tight")
 
+def gen_gif(df):
+    non_null = df[~df["Age"].isnull()]
+    periods = list(set(non_null["Period"]))
+    periods.sort()
+    max_cases = 0
+    for period in periods:
+        most_cases = non_null[non_null["Period"] == period]["Age"].value_counts().max()
+        max_cases = most_cases if most_cases > max_cases else max_cases
+    ages = list(set(non_null["Age"].astype("int")))
+    ages.sort()
+    max_age = max(ages)
+    images = []
+    for period in periods:
+        cp = sns.countplot(
+            non_null[non_null["Period"] == period]["Age"].values.astype("int"),
+            order=ages,
+        )
+        for (ind, label) in enumerate(cp.get_xticklabels()):
+            if ind % 5 == 0:
+                label.set_visible(True)
+            else:
+                label.set_visible(False)
+        plt.ylim(0, max_cases)
+        plt.xlim(0, max_age)
+        plt.title(str(period))
+        canvas = plt.get_current_fig_manager().canvas
+        canvas.draw()
+        pil_image = Image.frombytes(
+            "RGB", canvas.get_width_height(), canvas.tostring_rgb()
+        )
+        plt.close("all")
+        images.append(pil_image)
+    images[0].save(
+        "cases_ages.gif", save_all=True, append_images=images[1:], duration=350, loop=0
+    )
+
 def main():
     if len(sys.argv) > 1:
         fname = sys.argv[1]
@@ -142,6 +180,7 @@ def main():
         for (bucket, cases) in cases_data.items():
             share_positive[period][bucket] = cases / total_cases
     print_stats(cases_per_bracket, ages, df)
+    gen_gif(df)
     gen_heatmap(cases_per_bracket, "heatmap",
             "number of cases reported", True)
     gen_heatmap(share_positive, "heatmap_age_share",
