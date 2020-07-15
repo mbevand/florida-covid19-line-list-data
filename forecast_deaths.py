@@ -160,8 +160,6 @@ def init_chart(date_of_data):
     ax.tick_params(axis='x', which='both', labelsize='small')
     ax.grid(True, which='major', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='both', linewidth=0.1)
-    if redline:
-        del(cfr_models[-1])
     ax.text(
         -0.025, -0.19,
         'Forecast based on the age of every individual COVID-19 case reported by the Florida Department of\n'
