@@ -112,6 +112,9 @@ cfr_models = [
             ),
         ]
 
+def parse_date(s):
+    return datetime.datetime.strptime(s, '%Y-%m-%d').date()
+
 def cfr_for_age(model, age):
     # Given a patient age, return the Case Fatality Ratio for their age
     if math.isnan(age):
@@ -144,7 +147,7 @@ def cma(arr, n=cma_days):
 # https://twitter.com/zorinaq/status/1279934357323386880
 redline = False
 
-def init_chart():
+def init_chart(date_of_data):
     rcParams['figure.titlesize'] = 'x-large'
     (fig, ax) = plt.subplots(dpi=300)#, figsize=(6.4, 6.4)) # default is 6.4 × 4.8
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
@@ -167,13 +170,10 @@ def init_chart():
         'Created by: Marc Bevand — @zorinaq',
         transform=ax.transAxes, fontsize='x-small', verticalalignment='top',
     )
-    today = str(datetime.datetime.now().date())
-    if redline:
-        today = '2020-07-05'
-    fig.suptitle(f'Forecast of daily COVID-19 deaths in Florida\n(as of {today})')
+    fig.suptitle(f'Forecast of daily COVID-19 deaths in Florida\n(as of {date_of_data})')
     return (fig, ax)
 
-def gen_chart(fig, ax, deaths, deaths_actual):
+def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # plot forecast
     for (i, d) in enumerate(deaths):
         d = cma(d)
@@ -184,7 +184,8 @@ def gen_chart(fig, ax, deaths, deaths_actual):
     # plot actual deaths
     d = cma(deaths_actual)
     if redline:
-        split = list(filter(lambda x: x[1][0] == datetime.date(2020, 6, 30), enumerate(d)))[0][0]
+        truncate = date_of_data - datetime.timedelta(days=round(cma_days / 2))
+        split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
         d = d[:split + 1]
         ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(1, 0, 0, 1.0))
@@ -221,7 +222,9 @@ def main():
     # ignore the last day ([-2] instead of [-1]) because case data from the last day may be incomplete
     last_day = sorted(set(df['date_parsed']))[-2].date()
     first_day = sorted(set(df['date_parsed']))[0].date()
-    (fig, ax) = init_chart()
+    # assume the filename starts with YYYY-MM-DD
+    date_of_data = parse_date(os.path.basename(fname)[:10])
+    (fig, ax) = init_chart(date_of_data)
     # deaths[N] is an array of daily deaths forecasted by model "N"
     deaths = [[] for i in range(len(cfr_models))]
     day = first_day
@@ -246,7 +249,7 @@ def main():
             row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
     # generate chart
-    gen_chart(fig, ax, deaths, deaths_actual)
+    gen_chart(date_of_data, fig, ax, deaths, deaths_actual)
 
 if __name__ == '__main__':
     main()
