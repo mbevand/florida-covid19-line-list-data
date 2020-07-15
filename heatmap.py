@@ -23,7 +23,9 @@ datadir = 'data_fdoh'
 def bracket2str(bracket):
     if bracket[1] == math.inf:
         return f'{bracket[0]}+'
-    return f'{bracket[0]:02d}-{bracket[1]:02d}'
+    if bracket[0] != bracket[1]:
+        return f'{bracket[0]:02d}-{bracket[1]:02d}'
+    return f'{bracket[0]}'
 
 def print_stats(cases_per_bracket, ages, df):
     print(
@@ -46,7 +48,10 @@ def print_stats(cases_per_bracket, ages, df):
         f"{cases_total} cases.)"
     )
 
-def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
+def gen_heatmap(cases_per_bracket, filename, comment):
+    def conv(val):
+        # Square root makes the heat map brighter (by dampening the highest values).
+        return np.sqrt(val)
     rcParams["figure.titlesize"] = "x-large"
     (fig, ax) = plt.subplots(dpi=300)
     periods = sorted(cases_per_bracket.keys())
@@ -59,9 +64,8 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     a = np.zeros((len(buckets_ages), len(periods)))
     for (j, period) in enumerate(periods):
         for (i, bracket) in enumerate(buckets_ages):
-            # Square root makes the heat map brighter (by dampening the highest values).
             val = cases_per_bracket[period][bracket]
-            a[i, j] = np.sqrt(val) if sqrt else val
+            a[i, j] = conv(val)
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.xaxis.set_major_locator(ticker.MaxNLocator(nbins=15, integer=True))
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(fmt_dates))
@@ -71,7 +75,7 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     fig.autofmt_xdate()
-    ax.set_ylabel("Age range")
+    ax.set_ylabel("Age range" if buckets_ages[0][0] != buckets_ages[0][1] else "Age")
     ax.set_xlabel(f"Start date of {buckets_days}-day period")
     ax.tick_params(axis="x", which="both", labelsize="small")
     years = 1 + buckets_ages[0][1] - buckets_ages[0][0]
@@ -86,7 +90,11 @@ def gen_heatmap(cases_per_bracket, filename, comment, sqrt):
         verticalalignment="top",
     )
     fig.suptitle("Heatmap Of COVID-19 Cases In Florida\nBy Age Over Time")
-    ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest", aspect="auto")
+    img = ax.imshow(a, cmap="inferno", origin="lower", interpolation="nearest", aspect="auto")
+    ticks = [i * 10**e for e in range(1, 5) for i in (1, 2, 5)]
+    del ticks[0]
+    cbar = fig.colorbar(img, ticks=[conv(x) for x in ticks])
+    cbar.ax.set_yticklabels(ticks)
     plt.savefig(f"{filename}.png", bbox_inches="tight")
 
 def main():
@@ -143,9 +151,9 @@ def main():
             share_positive[period][bucket] = cases / total_cases
     print_stats(cases_per_bracket, ages, df)
     gen_heatmap(cases_per_bracket, "heatmap",
-            "number of cases reported", True)
+            "number of cases reported")
     gen_heatmap(share_positive, "heatmap_age_share",
-            "share of cases in the age bracket among\nall cases in the time period", True)
+            "share of cases in the age bracket among\nall cases in the time period")
 
 if __name__ == "__main__":
     main()
