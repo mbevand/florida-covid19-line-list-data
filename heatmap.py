@@ -16,7 +16,7 @@ from PIL import Image
 
 # This CSV is found at https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data (click Download → Spreadsheet)
 csv_url = "https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv"
-buckets_days = 4
+buckets_days = 7
 buckets_ages = [(0, 4), (5, 9), (10, 14), (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79), (80, 84), (85, 89), (90, math.inf), ]
 #buckets_ages = [(0, 9), (10, 19), (20, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, math.inf), ]
 #buckets_ages = [(i, i) for i in range(100)] + [(100,math.inf)]
