@@ -111,7 +111,7 @@ def bracket2str(bracket):
 
 def gen_chart(data, mean, shape):
     rcParams["figure.titlesize"] = "x-large"
-    (fig, ax) = plt.subplots(dpi=300, figsize=(7.5, 6.0)) # default is 6.4 × 4.8
+    (fig, ax) = plt.subplots(dpi=300, figsize=(6.0, 6.0)) # default is 6.4 × 4.8
     col_i = 0
     for bracket in reversed(age_brackets):
         dates, dates2, dates3, cfrs, cfrs2, cfrs3 = [], [], [], [], [], []
@@ -141,10 +141,12 @@ def gen_chart(data, mean, shape):
     ax.semilogy()
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%g%%"))
     ax.set_ylabel("Case Fatality Ratio")
-    ax.set_xlim(left=first_date, right=last_day + datetime.timedelta(days=32))
+    ax.set_xlim(left=first_date, right=last_day)
     ax.set_ylim(bottom=.006, top=100)
     ax.grid(True, which='both', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='y', linewidth=0.1)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
     fig.autofmt_xdate()
     ax.tick_params(axis='x', labelsize='x-small')
     fig.suptitle('CFR of Florida COVID-19 cases\nby age bracket')
