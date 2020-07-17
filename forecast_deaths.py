@@ -171,6 +171,15 @@ def init_chart(date_of_data):
     fig.suptitle(f'Forecast of daily COVID-19 deaths in Florida\n(as of {date_of_data})')
     return (fig, ax)
 
+def plot_yyg(ax):
+    fname = list(filter(lambda x: x.endswith('.csv'), sorted(os.listdir('utils'))))[-1]
+    df = pd.read_csv('utils' + os.sep + fname)
+    dates = [parse_date(x) for x in df['date']]
+    ax.plot(dates, df['projected'], linewidth=1.0, linestyle=':', color='firebrick', alpha=0.5,
+            label='For comparison only: YYG forecast as of ' + fname.split('.')[0].split('_')[-1] +
+            ' (shade shows confidence interval)\nhttps://covid19-projections.com/us-fl')
+    ax.fill_between(dates, df['lower'], df['upper'], color='pink', alpha=0.3)
+
 def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # plot forecast
     for (i, d) in enumerate(deaths):
@@ -179,6 +188,8 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
             last_forecast = d[-1][0]
         ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0,
                 label=f'Model {i + 1}: {cfr_models[i].source}')
+    # plot YYG's forecast
+    plot_yyg(ax)
     # plot actual deaths
     d = cma(deaths_actual)
     if redline:
