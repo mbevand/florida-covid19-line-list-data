@@ -11,16 +11,16 @@ of thousands of cases. This gives us great insights because age is a very
 important factor affecting the Case Fatality Ratio (CFR) of COVID-19. This
 repository provides tools to analyze the data:
 
-* `forecast_deaths.py` forecasts deaths in the state, based on various age-stratified CFR estimates
-* `age_stratified_cfr.py` calculates the age-stratified CFR, based on recent deaths in the state
-* `gamma.py` calculates the times between onset of symptoms and death (onset-to-death) and fits them in a Gamma distribution
-* `heatmap.py` creates a heatmap representing the number of cases by age bracket evolving over time
+* [forecast_deaths.py](forecast_deaths.py) forecasts deaths in the state, based on various age-stratified CFR estimates
+* [age_stratified_cfr.py](age_stratified_cfr.py) calculates the age-stratified CFR, based on recent deaths in the state
+* [gamma.py](gamma.py) calculates the times between onset of symptoms and death (onset-to-death) and fits them in a Gamma distribution
+* [heatmap.py](heatmap.py) creates a heatmap representing the number of cases by age bracket evolving over time
 
 ## FDOH line list
 
 To download the FDOH line list, browse the [data page][dataset] and click
 `Download → Spreadsheet`. We made daily archives of the line list in directory
-`data_fdoh`.
+[data_fdoh](data_fdoh).
 
 The line list is in CSV format and the columns are self-explanatory: `Age`,
 `Gender`, `County`, boolean `Died`, etc. The columns are documented on page 12 of this
@@ -40,7 +40,7 @@ but we are aware this column may have data quality issues.
 
 `forecast_deaths.py` does not rely on death data, but relies *solely* on case
 ages, date of onset of symptoms, and various estimates of the age-stratified CFR.
-The script starts by opening the latest line list CSV file (in directory `data_fdoh`)
+The script starts by opening the latest line list CSV file (in directory [data_fdoh](data_fdoh))
 or if no such file exists it downloads it from the [FDOH line list page][dataset].
 This gives us (1) the age of every case diagnosed with COVID-19, and (2) the
 date of onset of symptoms (`EventDate` CSV column.)
@@ -72,14 +72,14 @@ the colored curves in the generated chart follow closely the black curve
 (actual deaths.)
 
 Historical data for actual deaths was fetched from the [New York Times Covid-19
-data repository][nyt] and was saved in the file `data_deaths/fl_resident_deaths.csv`.
+data repository][nyt] and was saved in the file [data_deaths/fl_resident_deaths.csv](data_deaths/fl_resident_deaths.csv).
 Death data is only used to draw the black curve. It is *not* used in the
 forecasts based on CFR models #1 through #4. Actual deaths are only used
 indirectly in the forecast based on model #5, because model #5 uses the
 age-stratified CFR calculated from Florida deaths.
 
 Note: since 2020-07-14 the file `data_deaths/fl_resident_deaths.csv` is now
-updated by the script `data_fdoh/download` that obtains deaths directly from
+updated by the script [data_fdoh/download](data_fdoh/download) that obtains deaths directly from
 the FDOH line list. The number of deaths calculated by the script is off by one
 from the "Florida Resident Deaths" figure shown on the [state's
 dashboard][dashboard] because my script only accounts for deaths whose `Jurisdiction`
@@ -91,7 +91,7 @@ whose `Jurisdiction` is `Not diagnosed/isolated in FL`.
 
 ![CFR of Florida COVID-19 cases by age bracket](age_stratified_cfr_published.png)
 
-`age_stratified_cfr.py` opens the latest line list CSV file (in directory `data_fdoh`)
+`age_stratified_cfr.py` opens the latest line list CSV file (in directory [data_fdoh](data_fdoh))
 or if no such file exists it downloads it from the [FDOH line list page][dataset].
 It calculates the 7-day moving average of the raw CFR of various age brackets,
 with cases ordered by date of onset of symptoms.
@@ -120,7 +120,7 @@ a chart (`gamma.png`) and outputs a numerical summary.
 
 The date of onset is known (`EventDate`). However FDOH does not publish the
 date of death, so `gamma.py` infers it from updates made to the line list. We
-made daily archives of the line list in directory `data_fdoh`. Pass these files
+made daily archives of the line list in directory [data_fdoh](data_fdoh). Pass these files
 as arguments to `gamma.py`, it will parse them, and when it detects a new death
 (`Died` changed to `Yes`), it infers the date of death was one day before the
 line list was updated, because FDOH updates the line list with data as of the
@@ -211,7 +211,7 @@ occur in the long tail:
 * mean 15.1 days, shape 5.1, based on sample of 3 deaths: [Estimating case fatality ratio of COVID-19 from observed cases outside China][althaus]
 
 We believe our distribution parameters are more accurate because
-they are based on a much larger sample of 864 deaths. The long tail
+they are based on a much larger sample of 1091 deaths. The long tail
 may be the result of improved treatments that can maintain patients
 alive for a longer time.
 
@@ -225,7 +225,7 @@ date does not always accurately reflect the date of onset.
 
 ![Heatmap of COVID-19 cases in Florida](heatmap_published.png)
 
-`heatmap.py` opens the latest line list CSV file (in directory `data_fdoh`)
+`heatmap.py` opens the latest line list CSV file (in directory [data_fdoh](data_fdoh))
 or if no such file exists it downloads it from the [FDOH line list page][dataset].
 It creates the heatmap (`heatmap.png`) of cases by date reported, by age
 bracket. The pixel intensity is proportional to the square root of the number
