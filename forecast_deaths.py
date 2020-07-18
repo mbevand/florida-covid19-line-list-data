@@ -19,7 +19,7 @@ csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9
 csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
-o2d = 18.1
+o2d = 17.5
 
 # Number of days to calculate the centered moving average of the chart curves
 cma_days = 7
@@ -100,14 +100,14 @@ cfr_models = [
             # This does not affect the forecast much because the average CFR is only used with cases
             # of unknown age.
             0.0 / 100, {
-                (0, 29):  0.042 / 100,
-                (30, 39): 0.108 / 100,
-                (40, 49): 0.282 / 100,
-                (50, 59): 0.634 / 100,
-                (60, 69): 2.027 / 100,
-                (70, 79): 5.902 / 100,
-                (80, 89): 14.513 / 100,
-                (90, 199): 25.479 / 100,
+                (0, 29):  0.047 / 100,
+                (30, 39): 0.128 / 100,
+                (40, 49): 0.199 / 100,
+                (50, 59): 0.553 / 100,
+                (60, 69): 2.007 / 100,
+                (70, 79): 5.699 / 100,
+                (80, 89): 14.678 / 100,
+                (90, 199): 24.648 / 100,
                 }
             ),
         ]
