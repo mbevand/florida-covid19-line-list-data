@@ -112,11 +112,32 @@ represents our best guess of the age-stratified CFR of COVID-19.
 
 ## Gamma distribution of onset-to-death
 
-![Onset-to-death distribution of Florida COVID-19 deaths](gamma_published.png)
+Overall distribution (all ages):
+
+![Onset-to-death distribution of Florida COVID-19 deaths, all ages](gamma_0-inf_published.png)
+
+Distribution by age bracket:
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 0-29](gamma_0-29_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 30-39](gamma_30-39_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 40-49](gamma_40-49_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 50-59](gamma_50-59_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 60-69](gamma_60-69_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 70-79](gamma_70-79_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 80-89](gamma_80-89_published.png)
+
+![Onset-to-death distribution of Florida COVID-19 deaths, ages 90+](gamma_90-inf_published.png)
 
 `gamma.py` calculates the times between onset of symptoms and death
 (onset-to-death) and fits them in a Gamma distribution. It creates
-a chart (`gamma.png`) and outputs a numerical summary.
+multiple charts for different age brackets (`gamma*.png`) and outputs a
+numerical summary.
 
 The date of onset is known (`EventDate`). However FDOH does not publish the
 date of death, so `gamma.py` infers it from updates made to the line list. We
@@ -150,66 +171,63 @@ Parsing data_fdoh/2020-07-15-09-09-26.csv
 Parsing data_fdoh/2020-07-16-07-58-41.csv
 Parsing data_fdoh/2020-07-17-09-17-34.csv
 Parsing data_fdoh/2020-07-18-08-58-55.csv
-Onset-to-death times (in days): [16, 7, 27, 20, 29, 32, 22, 15, 26, 31 , 15,
-20, 30, 5, 8, 3, 5, 5, 15, 3, 15, 32, 16, 78, 26, 23, 35, 17, 9, 10, 8, 16, 8,
-25, 22, 27, 15, 15, 9, 2, 12, 6, 8, 12, 10, 8, 9, 1, 4, 7, 24, 23, 84, 24, 74,
-24, 100, 62, 3, 4, 85, 9, 81, 14, 6, 67, 67, 5 4, 19, 20, 54, 17, 5, 64, 4, 2,
-35, 28, 8, 39, 31, 22, 28, 23, 16, 28, 16, 32, 8, 8, 19, 21, 9, 16, 12, 7, 10,
-7, 6, 16, 5, 11, 6, 6, 7, 6, 4, 8, 12, 3, 3, 7, 2, 7, 4, 2, 10, 24, 7, 1, 81,
-88, 24, 61, 29, 59, 5 1, 18, 49, 38, 18, 10, 33, 46, 49, 40, 5, 39, 37, 33, 30,
-30, 35, 26, 16, 3, 36, 20, 23, 19, 21, 6, 15, 10, 7, 8, 11, 20, 9, 14, 7, 14,
-8, 2 9, 4, 8, 5, 12, 5, 2, 9, 2, 8, 1, 9, 94, 28, 78, 18, 47, 76, 66, 63, 1 0,
-42, 21, 10, 58, 10, 19, 55, 7, 55, 47, 66, 19, 21, 40, 9, 40, 30, 2 7, 32, 23,
-29, 31, 25, 16, 17, 11, 15, 15, 13, 15, 15, 11, 14, 10, 12, 10, 9, 10, 11, 9,
-9, 6, 9, 9, 9, 18, 12, 11, 7, 6, 13, 2, 42, 3, 5, 4 , 1, 12, 2, 5, 33, 11, 9,
-9, 5, 53, 11, 9, 5, 12, 35, 23, 9, 1, 5, 13, 6, 53, 10, 49, 49, 27, 19, 53, 41,
-31, 26, 23, 23, 28, 15, 35, 41, 46 , 19, 16, 13, 18, 27, 15, 10, 14, 12, 15,
-14, 12, 7, 8, 6, 6, 6, 3, 8, 3, 25, 20, 101, 9, 8, 22, 18, 9, 11, 1, 6, 6, 17,
-9, 2, 25, 17, 4, 5, 5, 24, 13, 29, 24, 26, 13, 30, 16, 11, 12, 12, 10, 15, 14,
-11, 3, 3, 6, 28, 8, 8, 15, 23, 46, 1, 3, 34, 22, 19, 10, 10, 25, 12, 29, 22,
-10, 19, 12, 6, 6, 9, 18, 8, 12, 4, 11, 5, 1, 13, 6, 25, 11, 17, 10, 8, 5, 53,
-5, 9, 18, 40, 40, 40, 21, 19, 25, 21, 18, 18, 19, 17, 18, 14, 15, 25, 12, 8,
-20, 10, 10, 9, 15, 15, 11, 14, 14, 17, 6, 17, 8, 8, 7, 6, 9, 6, 8, 17, 3, 4, 6,
-2, 1, 42, 26, 48, 23, 20, 22, 18, 22, 23, 20, 18 , 26, 16, 17, 24, 14, 13, 19,
-16, 24, 22, 10, 11, 11, 9, 13, 16, 11, 8 , 13, 10, 17, 15, 30, 10, 87, 73, 12,
-61, 42, 15, 3, 10, 9, 8, 15, 8, 8, 15, 11, 11, 6, 5, 9, 4, 4, 8, 13, 10, 10, 9,
-3, 3, 7, 2, 9, 8, 12, 52, 16, 29, 27, 29, 31, 26, 20, 16, 18, 15, 14, 13, 24,
-12, 4, 2, 9, 1 0, 7, 4, 5, 15, 8, 1, 13, 36, 11, 5, 4, 20, 4, 6, 3, 1, 6, 40,
-43, 7, 8, 6, 1, 48, 67, 3, 51, 15, 33, 54, 4, 12, 23, 29, 11, 11, 33, 40, 34,
-28, 35, 36, 31, 31, 24, 21, 23, 29, 30, 30, 25, 27, 20, 16, 54, 110, 13, 101,
-17, 29, 19, 7, 82, 34, 19, 11, 10, 5, 7, 63, 26, 88, 52, 23, 11, 30, 17, 20,
-26, 19, 27, 20, 18, 15, 17, 18, 17, 21, 22, 16, 15, 12 , 13, 15, 14, 18, 13,
-14, 14, 12, 17, 17, 18, 13, 14, 14, 19, 10, 9, 1 1, 14, 12, 10, 12, 8, 8, 12,
-9, 7, 7, 8, 8, 7, 7, 10, 8, 8, 8, 13, 12, 11, 5, 10, 6, 12, 2, 6, 12, 1, 2, 12,
-6, 3, 2, 12, 2, 3, 1, 2, 1, 8, 1, 5, 11, 19, 8, 85, 12, 28, 16, 7, 7, 7, 22, 6,
-22, 7, 2, 45, 16, 35, 35, 29, 25, 31, 24, 24, 29, 33, 30, 32, 82, 27, 24, 25,
-18, 31, 16, 2 2, 19, 19, 15, 15, 20, 18, 15, 14, 26, 15, 22, 15, 13, 14, 12,
-27, 13, 15, 14, 13, 9, 11, 12, 9, 12, 12, 11, 9, 10, 8, 9, 9, 7, 14, 23, 7, 7 ,
-10, 14, 11, 5, 9, 15, 6, 6, 5, 18, 5, 3, 4, 6, 9, 4, 3, 2, 8, 8, 20, 3, 10, 10,
-11, 20, 1, 19, 16, 2, 20, 91, 54, 55, 6, 30, 6, 10, 9, 62, 13, 40, 9, 21, 3,
-50, 44, 34, 37, 35, 25, 30, 50, 34, 24, 31, 27, 21, 26, 63, 26, 28, 29, 31, 23,
-27, 32, 20, 21, 30, 21, 21, 19, 19, 22, 2 2, 15, 17, 16, 17, 17, 19, 14, 27,
-17, 27, 14, 14, 11, 15, 14, 13, 18, 23, 16, 13, 10, 11, 12, 8, 12, 18, 10, 21,
-12, 12, 8, 9, 5, 4, 6, 13, 11, 7, 5, 4, 9, 6, 2, 12, 2, 2, 1, 5, 9, 14, 13, 3,
-1, 1, 10, 42, 57, 15, 21, 47, 48, 15, 21, 27, 37, 24, 22, 28, 5, 25, 22, 21,
-27, 19, 15 , 18, 23, 16, 13, 12, 11, 14, 16, 12, 13, 11, 12, 12, 7, 9, 5, 7, 7,
-7 , 3, 6, 5, 5, 1, 2, 30, 5, 22, 4, 4, 30, 30, 14, 41, 35, 27, 24, 21, 2 3, 18,
-19, 18, 19, 16, 30, 18, 20, 18, 14, 17, 12, 10, 12, 10, 7, 14, 2, 10, 9, 7, 10,
-9, 18, 5, 93, 23, 14, 24, 81, 6, 11, 16, 2, 41, 5, 10 , 21, 21, 40, 37, 36, 55,
-27, 38, 41, 28, 32, 26, 25, 25, 27, 25, 21, 23, 21, 20, 23, 19, 18, 26, 17, 19,
-20, 18, 32, 19, 18, 19, 24, 19, 17 , 20, 23, 16, 17, 18, 24, 16, 24, 15, 21,
-12, 15, 19, 16, 14, 17, 13, 12, 15, 13, 13, 11, 21, 13, 19, 15, 19, 12, 52, 12,
-15, 17, 13, 11, 9, 12, 17, 9, 10, 10, 7, 11, 8, 8, 9, 6, 9, 10, 7, 9, 7, 7, 9,
-9, 8, 8, 6, 6, 5, 5, 6, 6, 6, 6, 12, 7, 4, 5, 9, 12, 5, 13, 5, 4, 4, 7, 3, 3,
-8, 7, 3, 3, 12, 4, 4, 3, 4, 4, 3, 3, 3, 3, 5, 1, 5, 4, 14, 26, 23, 41, 18, 24,
-90, 18, 90, 11, 84, 4, 7, 3
+
+Ages 0-29:
+Number of deaths: 17
+Gamma distribution params:
+mean = 12.9
+shape = 2.84
+
+Ages 30-39:
+Number of deaths: 37
+Gamma distribution params:
+mean = 17.0
+shape = 1.26
+
+Ages 40-49:
+Number of deaths: 57
+Gamma distribution params:
+mean = 20.3
+shape = 1.94
+
+Ages 50-59:
+Number of deaths: 118
+Gamma distribution params:
+mean = 19.8
+shape = 1.54
+
+Ages 60-69:
+Number of deaths: 250
+Gamma distribution params:
+mean = 18.5
+shape = 1.82
+
+Ages 70-79:
+Number of deaths: 397
+Gamma distribution params:
+mean = 18.8
+shape = 1.63
+
+Ages 80-89:
+Number of deaths: 462
+Gamma distribution params:
+mean = 16.7
+shape = 1.86
+
+Ages 90+:
+Number of deaths: 277
+Gamma distribution params:
+mean = 15.1
+shape = 1.75
+
+All ages:
 Number of deaths: 1615
 Gamma distribution params:
 mean = 17.5
 shape = 1.72
 ```
 
-A mean of 17.5 days is comparable to other published estimates, however our
+The overall (all ages) mean of 17.5 days is comparable to other published estimates, however our
 distribution is wider (ie. smaller shape parameter of 1.72) because many deaths
 occur in the long tail:
 * mean 17.8 days, shape 4.94 = 0.45<sup>-2</sup>, based on sample of 24 deaths: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][verity]
@@ -219,6 +237,13 @@ We believe our distribution parameters are more accurate because
 they are based on a much larger sample of 1615 deaths. The long tail
 may be the result of improved treatments that can maintain patients
 alive for a longer time.
+
+We notice differences between age brackets. For example patients aged 0-29
+years have the shortest onset-to-death time (mean of 12.9 days.) However
+for the purpose of calculating the age-stratified CFR (`age_stratified_cfr.py`)
+and forecasting deaths (`forecast_deaths.py`) we do not use age-specific
+Gamma parameters. Instead we simply use the parameters of the overall distribution
+(all ages.)
 
 Limitations: it is likely our technique does not always accurately identify the
 date of death. For example FDOH could be updating the line list many days after

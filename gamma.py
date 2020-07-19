@@ -10,9 +10,18 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 debug = False
+age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, np.inf), (0, np.inf))
 
 def parse_date(s, fmt='%Y-%m-%d'):
     return datetime.datetime.strptime(s, fmt).date()
+
+def bracket2str(bracket):
+    if bracket == (0, np.inf):
+        return 'All ages'
+    elif bracket[1] == np.inf:
+        return f'Ages {bracket[0]}+'
+    else:
+        return f'Ages {bracket[0]}-{bracket[1]}'
 
 def parse(fname):
     print(f'Parsing {fname}')
@@ -23,8 +32,9 @@ def parse(fname):
         if row['Died'] != 'Yes':
             continue
         characteristics = (
-                row['County'],
+                # Age MUST be first becuase main() accesses it at a fixed index
                 row['Age'],
+                row['County'],
                 row['Gender'],
                 row['Jurisdiction'],
                 # Dates are sometimes formatted with a timezone ("2020/04/21 05:00:00+00"),
@@ -55,7 +65,7 @@ def calc_o2d(fname, characteristics):
     assert o2d >= 0
     return o2d
 
-def gen_chart(o2d, shape, loc, scale):
+def gen_chart(o2d, bracket, shape, loc, scale):
     fig, ax = plt.subplots(dpi=300)
     y, _ = np.histogram(o2d, bins=max(o2d) - min(o2d) + 1)
     x = range(min(o2d), max(o2d) + 1)
@@ -71,7 +81,8 @@ def gen_chart(o2d, shape, loc, scale):
     ax.xaxis.set_major_locator(ticker.MultipleLocator(base=10))
     ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.set_xlim(left=-1, right=right)
-    fig.suptitle(f'Onset-to-death distribution of Florida COVID-19 deaths\n(N = {len(o2d)})')
+    fig.suptitle('Onset-to-death distribution of Florida COVID-19 deaths\n'
+            f'{bracket2str(bracket)} (N = {len(o2d)})')
     ax.text(.5, .5, f'Gamma parameters:\nmean = {shape * scale:.1f} days\nshape = {shape:.2f}',
             transform=ax.transAxes)
     ax.text(
@@ -80,7 +91,8 @@ def gen_chart(o2d, shape, loc, scale):
         'Created by: Marc Bevand — @zorinaq',
         transform=ax.transAxes, fontsize='x-small', verticalalignment='top',
     )
-    fig.savefig('gamma.png', bbox_inches='tight')
+    fig.savefig(f'gamma_{bracket[0]}-{bracket[1]}.png', bbox_inches='tight')
+    plt.close()
 
 def main():
     fnames = sys.argv[1:]
@@ -89,25 +101,30 @@ def main():
     counters = []
     for fname in fnames:
         counters.append(parse(fname))
-    o2d = []
+    o2d_all = []
     for (i, _) in enumerate(counters):
         if i == 0:
             continue
         for characteristics in counters[i].keys():
+            age = characteristics[0]
             # Count the number of new deaths reported on this day
             new_deaths = counters[i][characteristics] - \
                      counters[i - 1].get(characteristics, 0)
             o = calc_o2d(fnames[i], characteristics)
-            o2d.extend([o] * new_deaths)
+            o2d_all.extend([(o, age)] * new_deaths)
     # Ignore onset-to-death times of 0 days, because these are likely cases where
     # the date of onset was not known and filled out with the date of death
-    o2d = list(filter(lambda x: x > 0, o2d))
-    print(f'Onset-to-death times (in days): {o2d}')
-    print(f'Number of deaths: {len(o2d)}')
-    # Fit in a Gamma distribution. Note that we fix the location to 0.
-    shape, loc, scale = stats.gamma.fit(o2d, floc=0)
-    print(f'Gamma distribution params:\nmean = {shape * scale:.1f}\nshape = {shape:.2f}')
-    gen_chart(o2d, shape, loc, scale)
+    o2d_all = list(filter(lambda x: x[0] > 0, o2d_all))
+    for bracket in age_brackets:
+        print(f'\n{bracket2str(bracket)}:')
+        # get the onset-to-death times only for the specific age bracket
+        o2d = [x[0] for x in list(filter(lambda x: x[1] >= bracket[0] and x[1] <= bracket[1], o2d_all))]
+        #print(f'Onset-to-death times (in days): {o2d}')
+        print(f'Number of deaths: {len(o2d)}')
+        # Fit in a Gamma distribution. Note that we fix the location to 0.
+        shape, loc, scale = stats.gamma.fit(o2d, floc=0)
+        print(f'Gamma distribution params:\nmean = {shape * scale:.1f}\nshape = {shape:.2f}')
+        gen_chart(o2d, bracket, shape, loc, scale)
 
 if __name__ == "__main__":
     main()
