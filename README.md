@@ -36,7 +36,16 @@ but we are aware this column may have data quality issues.
 
 ## Forecasting deaths
 
+Current (latest) forecast:
+
 ![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
+
+See the [historical](historical) directory for our previous forecasts. They
+have been accurate, for example our first forecast [published on
+2020-07-05][f1] accurately predicted the increase of deaths in July (red curve
+shows actual deaths that occurred after publication of the chart):
+
+![Forecast of daily COVID-19 deaths in Florida](historical/forecast_deaths_2020-07-05.png)
 
 `forecast_deaths.py` does not rely on death data, but relies *solely* on case
 ages, date of onset of symptoms, and various estimates of the age-stratified CFR.
@@ -82,7 +91,7 @@ Note: since 2020-07-14 the file `data_deaths/fl_resident_deaths.csv` is now
 updated by the script [data_fdoh/download](data_fdoh/download) that obtains deaths directly from
 the FDOH line list. The number of deaths calculated by the script is off by one
 from the "Florida Resident Deaths" figure shown on the [state's
-dashboard][dashboard] because my script only accounts for deaths whose `Jurisdiction`
+dashboard][dashboard] because our script only accounts for deaths whose `Jurisdiction`
 is `FL resident` (consistent with the way NYT does it in their
 [repository][nyt],) whereas the state's dashboard includes 1 additional death
 whose `Jurisdiction` is `Not diagnosed/isolated in FL`.
@@ -310,6 +319,7 @@ stable from one file to another.
 
 [dataset]: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
 [def]: https://justthenews.com/sites/default/files/2020-07/Data_Definitions_05182020-2.pdf
+[f1]: https://twitter.com/zorinaq/status/1279934357323386880
 [m1]: http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032
 [m2]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
 [m3]: https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf
