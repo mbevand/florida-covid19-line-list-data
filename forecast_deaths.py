@@ -201,8 +201,11 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
         d = d[:split + 1]
-        ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(1, 0, 0, 1.0))
-        ax.fill_between([x[0] for x in d2], [x[1] for x in d2], color=(1, 0, 0, 0.15))
+        hndl, = ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(0, .6, .6, 1.0))
+        ax.fill_between([x[0] for x in d2], [x[1] for x in d2], color=(0, .6, .6, 0.15))
+        first_legend = ax.legend(handles=[hndl], loc='center', fontsize='small',
+                labels=['Actual deaths that occurred\nafter forecast was made'])
+        fig.gca().add_artist(first_legend)
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0, 0, 0, 0.7),
             label=f'Actual deaths ({cma_days}-day centered moving average)')
     ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.15))
