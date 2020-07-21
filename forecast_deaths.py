@@ -176,10 +176,12 @@ def plot_yyg(ax, last_forecast):
     df = pd.read_csv(fname)
     df = df[df['date'] <= str(last_forecast)]
     dates = [parse_date(x) for x in df['date']]
-    ax.plot(dates, df['projected'], linewidth=1.0, linestyle='--', color=(0, .6, .6), alpha=0.7,
-            label=f'For comparison only: YYG forecast as of {fnamedate}'
-            ' (shade shows confidence interval)\nhttps://covid19-projections.com/us-fl')
-    ax.fill_between(dates, df['lower'], df['upper'], color=(0, .6, .6), alpha=0.2)
+    styles = {'linewidth': 1.0, 'linestyle': ':', 'color': (0, .6, .6), 'alpha': 0.7}
+    ax.plot(dates, df['projected'], **styles,
+            label=f'For comparison only: YYG forecast as of {fnamedate} (3 dashed lines show '
+            'projected deaths, lower bound, upper bound)\nhttps://covid19-projections.com/us-fl')
+    ax.plot(dates, df['lower'], **styles, label='_nolegend_')
+    ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
 def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # plot forecast
