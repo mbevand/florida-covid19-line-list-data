@@ -25,6 +25,7 @@ o2d = 17.5
 cma_days = 7
 
 datadir = 'data_fdoh'
+opts = {}
 
 # Each instance represents one model of age-stratified Case Fatality Ratios
 class CFRModel():
@@ -143,10 +144,6 @@ def cma(arr, n=cma_days):
         i += 1
     return arr2
 
-# ignore. author's custom switch to make redline charts updating my first forecast
-# https://twitter.com/zorinaq/status/1279934357323386880
-redline = False
-
 def init_chart(date_of_data):
     rcParams['figure.titlesize'] = 'x-large'
     (fig, ax) = plt.subplots(dpi=300)#, figsize=(6.4, 6.4)) # default is 6.4 × 4.8
@@ -196,7 +193,7 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     plot_yyg(ax, last_forecast)
     # plot actual deaths
     d = cma(deaths_actual)
-    if redline:
+    if 'redline' in opts:
         truncate = date_of_data - datetime.timedelta(days=round(cma_days / 2))
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
@@ -216,6 +213,11 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     fig.savefig('forecast_deaths.png', bbox_inches='tight')
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '-redline':
+        # ignore. author's custom switch to make redline charts updating my first forecast
+        # https://twitter.com/zorinaq/status/1279934357323386880
+        opts['redline'] = True
+        sys.argv.pop(0)
     if len(sys.argv) > 1:
         fname = sys.argv[1]
     else:
