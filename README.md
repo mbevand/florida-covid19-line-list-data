@@ -1,6 +1,6 @@
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 18 July 2020*
+*Updated: 21 July 2020*
 
 Authors: Marc Bevand
 
@@ -36,14 +36,13 @@ but we are aware this column may have data quality issues.
 
 ## Forecasting deaths
 
-Current (latest) forecast:
+Most recent forecast:
 
 ![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
 
-See the [historical](historical) directory for our previous forecasts. They
+Previous forecasts: see [historical](historical) directory. They
 have been accurate, for example our first forecast [published on
-2020-07-05][f1] accurately predicted the increase of deaths in July (red curve
-shows actual deaths that occurred after publication of the chart):
+2020-07-05][f1] accurately predicted the increase of deaths in July:
 
 ![Forecast of daily COVID-19 deaths in Florida](historical/forecast_deaths_2020-07-05.png)
 
