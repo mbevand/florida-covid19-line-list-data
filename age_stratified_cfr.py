@@ -55,10 +55,10 @@ def censoring_factor(mean, shape, days_since_onset):
     # the CDF of the Gamma distribution of onset-to-death. For example if
     # the CDF tells us only 0.25 (25%) of deaths are expected to have occured
     # on or before a given day, we will multiply deaths by 4. Exception: on
-    # day 0 we can't multiply (inverse of CDF is Infinity), so we don't adjust
-    # (factor set to 1.)
+    # day 0 we can't multiply (inverse of CDF is Infinity), so we adjust day 0
+    # as if it was day 1.
     if days_since_onset == 0:
-        return 1
+        days_since_onset = 1
     return 1 / censoring_rv.cdf(days_since_onset)
 
 def calc_cfr(data, mean, shape):
