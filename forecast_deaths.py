@@ -179,10 +179,10 @@ def plot_yyg(ax, last_forecast):
     df = pd.read_csv(fname)
     df = df[df['date'] <= str(last_forecast)]
     dates = [parse_date(x) for x in df['date']]
-    ax.plot(dates, df['projected'], linewidth=1.0, linestyle=':', color='firebrick', alpha=0.5,
+    ax.plot(dates, df['projected'], linewidth=1.0, linestyle='--', color=(0, .6, .6), alpha=0.7,
             label=f'For comparison only: YYG forecast as of {fnamedate}'
             ' (shade shows confidence interval)\nhttps://covid19-projections.com/us-fl')
-    ax.fill_between(dates, df['lower'], df['upper'], color='pink', alpha=0.3)
+    ax.fill_between(dates, df['lower'], df['upper'], color=(0, .6, .6), alpha=0.2)
 
 def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # plot forecast
@@ -201,8 +201,8 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
         d = d[:split + 1]
-        hndl, = ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(0, .6, .6, 1.0))
-        ax.fill_between([x[0] for x in d2], [x[1] for x in d2], color=(0, .6, .6, 0.15))
+        hndl, = ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(1, 0, 0, 1.0))
+        ax.fill_between([x[0] for x in d2], [x[1] for x in d2], color=(1, 0, 0, 0.15))
         first_legend = ax.legend(handles=[hndl], loc='center', fontsize='small',
                 labels=['Actual deaths that occurred\nafter forecast was made'])
         fig.gca().add_artist(first_legend)
