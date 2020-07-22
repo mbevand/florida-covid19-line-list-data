@@ -61,7 +61,7 @@ from 5 independent models:
 * Model 2: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][m2] (table 1, CFR, Adjusted for censoring, demography, and under-ascertainment)
 * Model 3: [https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf][m3] (table 1, Casi totali, % Letalità)
 * Model 4: [Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020][m4] (table 2, Latest estimate)
-* Model 5: CFR calculated by the script `age_stratified_cfr.py`
+* Model 5: CFR calculated on the Florida line list by the script `age_stratified_cfr.py`
 
 Since the forecast is based on line list case data, ie. *detected* cases, it is
 important that we feed it CFR estimates, not IFR estimates. Infection Fatality

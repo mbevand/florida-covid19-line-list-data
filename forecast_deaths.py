@@ -96,19 +96,16 @@ cfr_models = [
                 }
             ),
         CFRModel(
-            'Our model (age_stratified_cfr.py) based on the FDOH line list',
-            # TODO: age_stratified_cfr.py should calculate the average CFR. For now assume it is zero.
-            # This does not affect the forecast much because the average CFR is only used with cases
-            # of unknown age.
-            0.0 / 100, {
-                (0, 29):  0.047 / 100,
-                (30, 39): 0.128 / 100,
-                (40, 49): 0.199 / 100,
-                (50, 59): 0.553 / 100,
-                (60, 69): 2.007 / 100,
-                (70, 79): 5.699 / 100,
-                (80, 89): 14.678 / 100,
-                (90, 199): 24.648 / 100,
+            'Our CFR calculated on the Florida line list (age_stratified_cfr.py)',
+            1.244 / 100, {
+                (0, 29):  0.042 / 100,
+                (30, 39): 0.156 / 100,
+                (40, 49): 0.215 / 100,
+                (50, 59): 0.568 / 100,
+                (60, 69): 1.948 / 100,
+                (70, 79): 6.250 / 100,
+                (80, 89): 16.000 / 100,
+                (90, 199): 27.221 / 100,
                 }
             ),
         ]

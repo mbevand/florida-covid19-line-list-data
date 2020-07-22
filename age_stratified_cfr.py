@@ -32,6 +32,7 @@ t20 = [(x[0] / 255., x[1] / 255., x[2] / 255.) for x in
                (247, 182, 210), (199, 199, 199), (219, 219, 141), (158, 218, 229)]]
 datadir = 'data_fdoh'
 censoring_rv = None
+OVERALL = '_overall_'
 
 class Counters():
     deaths = 0
@@ -92,6 +93,20 @@ def calc_cfr(data, mean, shape):
                 data[date][bracket].cfr_adjusted_short = 100 * np.mean(list_cfr_adj_short)
             if list_cfr_adj_long:
                 data[date][bracket].cfr_adjusted_long = 100 * np.mean(list_cfr_adj_long)
+        # Calculate overall CFR
+        data[date][OVERALL] = Counters()
+        for bracket in age_brackets:
+            data[date][OVERALL].deaths_adjusted += data[date][bracket].deaths_adjusted
+            data[date][OVERALL].cases += data[date][bracket].cases
+        list_cfr = []
+        for delta in range(avg_days_long):
+            date2 = date - datetime.timedelta(days=delta + avg_days)
+            if date2 in data:
+                p = data[date2][OVERALL]
+                if p.cases:
+                    list_cfr.append(p.deaths_adjusted / p.cases)
+        if list_cfr:
+            data[date][OVERALL].cfr_adjusted_long = 100 * np.mean(list_cfr)
 
 def print_stats(data):
     print(f'{"period":>10}', end='')
@@ -109,15 +124,17 @@ def print_stats(data):
         print('')
 
 def bracket2str(bracket):
+    if bracket == OVERALL:
+        return 'Overall'
     if bracket[1] == math.inf:
-        return f'{bracket[0]}+'
-    return f'{bracket[0]}-{bracket[1]}'
+        return f'Age {bracket[0]}+'
+    return f'Age {bracket[0]}-{bracket[1]}'
 
 def gen_chart(data, mean, shape):
     rcParams["figure.titlesize"] = "x-large"
     (fig, ax) = plt.subplots(dpi=300, figsize=(6.0, 6.0)) # default is 6.4 × 4.8
     col_i = 0
-    for bracket in reversed(age_brackets):
+    for bracket in list(reversed(age_brackets)) + [OVERALL]:
         dates, dates2, dates3, cfrs, cfrs2, cfrs3 = [], [], [], [], [], []
         for date, counters in sorted(data.items()):
             if date >= first_date:
@@ -130,12 +147,13 @@ def gen_chart(data, mean, shape):
                 if counters[bracket].cfr_adjusted_long is not None:
                     dates3.append(date)
                     cfrs3.append(counters[bracket].cfr_adjusted_long)
-        ax.plot(dates, cfrs, linewidth=1.0, color=t20[col_i], linestyle=':')
-        ax.plot(dates2, cfrs2, linewidth=1.0, color=t20[col_i], linestyle='--')
+        if bracket != OVERALL:
+            ax.plot(dates, cfrs, linewidth=1.0, color=t20[col_i], linestyle=':')
+            ax.plot(dates2, cfrs2, linewidth=1.0, color=t20[col_i], linestyle='--')
         ax.plot(dates3, cfrs3, linewidth=1.0, color=t20[col_i], linestyle='-')
         last_day, last_cfr = dates3[-1], cfrs3[-1]
         # label the last long-term adjusted CFR
-        ax.annotate(f'Age {bracket2str(bracket)}: {last_cfr:.3f}%', (last_day, last_cfr),
+        ax.annotate(f'{bracket2str(bracket)}: {last_cfr:.3f}%', (last_day, last_cfr),
                 xytext=(15, 0), textcoords='offset points',
                 verticalalignment='center', fontsize='x-small', arrowprops={'arrowstyle':'-'},
                 )
