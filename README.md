@@ -1,6 +1,6 @@
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 21 July 2020*
+*Updated: 22 July 2020*
 
 Authors: Marc Bevand
 
@@ -68,13 +68,13 @@ important that we feed it CFR estimates, not IFR estimates. Infection Fatality
 Ratios take into account *undetected* cases and thus would not be consistent
 with line list data.
 
-Then the script assumes death occurs on average 17.5 days after infection,
+Then the script assumes death occurs on average 17.7 days after infection,
 which is the mean onset-to-death time calculated by `gamma.py`.
 
 Finally, it charts the forecast (`forecast_deaths.png`). The curves are all
 smoothed with a 7-day centered moving average.
 
-The end result is a simple tool that can not only predict deaths up to ~17.5
+The end result is a simple tool that can not only predict deaths up to ~17.7
 days ahead of time, but can also estimate *past* deaths accurately: notice how
 the colored curves in the generated chart follow closely the black curve
 (actual deaths.)
@@ -104,12 +104,21 @@ or if no such file exists it downloads it from the [FDOH line list page][dataset
 It calculates the 7-day moving average of the raw CFR of various age brackets,
 with cases ordered by date of onset of symptoms.
 
-The script also calculates the 7-day (short-term) and 28-day (long-term) moving
+The script also calculates the 7-day (short-term) and 21-day (long-term) moving
 average of the CFR ajusted for right censoring. The adjustment is performed by
 using the parameters of the Gamma distribution of onset-to-death calculated by
-`gamma.py`.
+`gamma.py`. The long-term average is calculated over 21 days shifted by 7 days
+(days D-7 through D-27) because despite best efforts to adjust for censoring,
+the number of deaths in the last 7 days still remains too incomplete to make the
+adjustment accurate (garbage in, garbage out.)
 
-The results of these calculations are charted in `age_stratified_cfr.png`.
+All the moving averages are calculated by assigning equal *weight* to each
+day's CFR value. If they were calculated by summing all cases and deaths across
+the entire 7-day or 21-day period, this would give too much weight to days
+with more cases and would not be representative of the overall average over
+the entire 7 or 21 days.
+
+The results of these CFR calculations are charted in `age_stratified_cfr.png`.
 
 The short-term adjusted CFR curve helps visualize the magnitude of right censoring:
 the curve follows the same peaks and valleys as the raw CFR, but deviates
@@ -179,70 +188,74 @@ Parsing data_fdoh/2020-07-15-09-09-26.csv
 Parsing data_fdoh/2020-07-16-07-58-41.csv
 Parsing data_fdoh/2020-07-17-09-17-34.csv
 Parsing data_fdoh/2020-07-18-08-58-55.csv
+Parsing data_fdoh/2020-07-19-10-12-32.csv
+Parsing data_fdoh/2020-07-20-08-30-29.csv
+Parsing data_fdoh/2020-07-21-09-22-37.csv
+Parsing data_fdoh/2020-07-22-08-26-38.csv
 
 Ages 0-29:
-Number of deaths: 17
+Number of deaths: 20
 Gamma distribution params:
-mean = 12.9
-shape = 2.84
+mean = 12.3
+shape = 2.99
 
 Ages 30-39:
-Number of deaths: 37
+Number of deaths: 43
 Gamma distribution params:
-mean = 17.0
-shape = 1.26
+mean = 16.8
+shape = 1.33
 
 Ages 40-49:
-Number of deaths: 57
+Number of deaths: 73
 Gamma distribution params:
-mean = 20.3
-shape = 1.94
+mean = 21.9
+shape = 1.64
 
 Ages 50-59:
-Number of deaths: 118
+Number of deaths: 152
 Gamma distribution params:
-mean = 19.8
-shape = 1.54
+mean = 20.2
+shape = 1.67
 
 Ages 60-69:
-Number of deaths: 250
+Number of deaths: 306
 Gamma distribution params:
-mean = 18.5
-shape = 1.82
+mean = 18.4
+shape = 1.87
 
 Ages 70-79:
-Number of deaths: 397
+Number of deaths: 526
 Gamma distribution params:
-mean = 18.8
-shape = 1.63
+mean = 18.5
+shape = 1.72
 
 Ages 80-89:
-Number of deaths: 462
+Number of deaths: 615
 Gamma distribution params:
-mean = 16.7
-shape = 1.86
+mean = 17.0
+shape = 1.95
 
 Ages 90+:
-Number of deaths: 277
+Number of deaths: 363
 Gamma distribution params:
-mean = 15.1
-shape = 1.75
+mean = 15.7
+shape = 1.73
 
 All ages:
-Number of deaths: 1615
+Number of deaths: 2098
 Gamma distribution params:
-mean = 17.5
-shape = 1.72
+mean = 17.7
+shape = 1.77
 ```
 
-The overall (all ages) mean of 17.5 days is comparable to other published estimates, however our
-distribution is wider (ie. smaller shape parameter of 1.72) because many deaths
+The overall (all ages) mean of 17.7 days is comparable to other published estimates, however our
+distribution is wider (ie. smaller shape parameter of 1.77) because many deaths
 occur in the long tail:
 * mean 17.8 days, shape 4.94 = 0.45<sup>-2</sup>, based on sample of 24 deaths: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][verity]
 * mean 15.1 days, shape 5.1, based on sample of 3 deaths: [Estimating case fatality ratio of COVID-19 from observed cases outside China][althaus]
 
 We believe our distribution parameters are more accurate because
-they are based on a much larger sample of 1615 deaths. The long tail
+they are based on a much larger sample of 2098 deaths. The long tail
 may be the result of improved treatments that can maintain patients
 alive for a longer time.
 

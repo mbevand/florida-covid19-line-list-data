@@ -19,7 +19,7 @@ csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9
 csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
-o2d = 17.5
+o2d = 17.7
 
 # Number of days to calculate the centered moving average of the chart curves
 cma_days = 7

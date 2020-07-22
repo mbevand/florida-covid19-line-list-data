@@ -20,7 +20,7 @@ age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 
 # Averaging period to calculate the raw and short-term adjusted CFR
 avg_days = 7
 # Averaging period to calculate the long-term adjusted CFR
-avg_days_long = 4 * 7
+avg_days_long = 3 * 7
 # Start the chart on this date
 first_date = datetime.date(2020, 3, 15)
 # "Tableau 20" colors re-ordered so the pastel colors are at the end
@@ -38,7 +38,7 @@ class Counters():
     deaths_adjusted = 0
     cases = 0
     cfr_raw = None
-    cfr_adjusted = None
+    cfr_adjusted_short = None
     cfr_adjusted_long = None
 
 def age_to_bracket(age):
@@ -69,25 +69,29 @@ def calc_cfr(data, mean, shape):
             days_since_onset = (last_date - date).days
             data[date][bracket].deaths_adjusted = \
                     data[date][bracket].deaths * censoring_factor(mean, shape, days_since_onset)
-            total_deaths_raw = total_deaths_adj = total_cases = 0
-            total_long_deaths = total_long_cases = 0
-            assert avg_days_long >= avg_days
-            for delta in range(avg_days_long):
+            list_cfr_raw = []
+            list_cfr_adj_short = []
+            list_cfr_adj_long = []
+            for delta in range(avg_days + avg_days_long):
                 date2 = date - datetime.timedelta(delta)
                 if date2 in data:
                     p = data[date2][bracket]
-                    if delta < avg_days:
-                        total_deaths_raw += p.deaths
-                        total_deaths_adj += p.deaths_adjusted
-                        total_cases += p.cases
-                    else:
-                        total_long_deaths += p.deaths_adjusted
-                        total_long_cases += p.cases
-            if total_cases:
-                data[date][bracket].cfr_raw = 100 * total_deaths_raw / total_cases
-                data[date][bracket].cfr_adjusted = 100 * total_deaths_adj / total_cases
-            if total_long_cases:
-                data[date][bracket].cfr_adjusted_long = 100 * total_long_deaths / total_long_cases
+                    if p.cases:
+                        if delta < avg_days:
+                            # Accumulate CFR data over the last avg_days days
+                            list_cfr_raw.append(p.deaths / p.cases)
+                            list_cfr_adj_short.append(p.deaths_adjusted / p.cases)
+                        else:
+                            # Accumulate CFR data over the avg_days_long days that
+                            # are immediately trailing the last avg_days days
+                            list_cfr_adj_long.append(p.deaths_adjusted / p.cases)
+            # The average CFR is calculated by assigning equal *weight* to each day's CFR value
+            if list_cfr_raw:
+                data[date][bracket].cfr_raw = 100 * np.mean(list_cfr_raw)
+            if list_cfr_adj_short:
+                data[date][bracket].cfr_adjusted_short = 100 * np.mean(list_cfr_adj_short)
+            if list_cfr_adj_long:
+                data[date][bracket].cfr_adjusted_long = 100 * np.mean(list_cfr_adj_long)
 
 def print_stats(data):
     print(f'{"period":>10}', end='')
@@ -120,9 +124,9 @@ def gen_chart(data, mean, shape):
                 if counters[bracket].cfr_raw is not None:
                     dates.append(date)
                     cfrs.append(counters[bracket].cfr_raw)
-                if counters[bracket].cfr_adjusted is not None:
+                if counters[bracket].cfr_adjusted_short is not None:
                     dates2.append(date)
-                    cfrs2.append(counters[bracket].cfr_adjusted)
+                    cfrs2.append(counters[bracket].cfr_adjusted_short)
                 if counters[bracket].cfr_adjusted_long is not None:
                     dates3.append(date)
                     cfrs3.append(counters[bracket].cfr_adjusted_long)
@@ -196,7 +200,7 @@ def main():
         data[date][b].deaths += 1 if died else 0
         data[date][b].cases += 1
     # Parameters of the Gamma distribution of onset-to-death, calculated by gamma.py
-    mean, shape = 17.5, 1.72
+    mean, shape = 17.7, 1.77
     calc_cfr(data, mean, shape)
     #print_stats(data)
     gen_chart(data, mean, shape)
