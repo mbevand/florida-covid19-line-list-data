@@ -2,7 +2,7 @@
 #
 # Forecasts Florida COVID-19 deaths from line list case data and CFR stratified by age.
 
-import sys, os, math, datetime
+import sys, os, math, datetime, requests
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,6 +14,7 @@ from matplotlib import rcParams
 # https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
 # (click Download → Spreadsheet)
 csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
+date_of_death_url = url = "https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/ArcGIS/rest/services/Florida_COVID_19_Deaths_by_Day/FeatureServer/0/query?where=ObjectId>0&objectIds=&time=&resultType=standard&outFields=*&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&sqlFormat=none&f=pjson&token="
 
 # Actual deaths
 csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
@@ -183,7 +184,7 @@ def plot_yyg(ax, last_forecast):
     ax.plot(dates, df['lower'], **styles, label='_nolegend_')
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
-def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
+def gen_chart(date_of_data, fig, ax, deaths, deaths_reported_date, deaths_actual_date):
     # plot forecast
     for (i, d) in enumerate(deaths):
         d = cma(d)
@@ -194,7 +195,7 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # plot YYG's forecast
     plot_yyg(ax, last_forecast)
     # plot actual deaths
-    d = cma(deaths_actual)
+    d = cma(deaths_reported_date)
     if 'redline' in opts:
         truncate = date_of_data - datetime.timedelta(days=round(cma_days / 2))
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
@@ -206,8 +207,13 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
                 labels=['Actual deaths that occurred\nafter forecast was made'])
         fig.gca().add_artist(first_legend)
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0, 0, 0, 0.7),
-            label=f'Actual deaths ({cma_days}-day centered moving average)')
-    ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.15))
+            label=f'Actual deaths by reported date ({cma_days}-day centered moving average)')
+    d = deaths_actual_date
+    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0.5, 0, 0.5, 0.7),
+            label=f'Actual deaths by date of death (note: recent days [in red] may be revised considerably upwards)\nhttps://covid19-usflibrary.hub.arcgis.com/')
+    lag = 10
+    ax.fill_between([x[0] for x in d[:-lag]], [x[1] for x in d[:-lag]], color=(0, 0, 0, 0.15))
+    ax.fill_between([x[0] for x in d[-lag:]], [x[1] for x in d[-lag:]], color=(1.0, 0, 0, 0.15))
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
@@ -255,7 +261,7 @@ def main():
             deaths[i].append((future_day, forecast_deaths(model, ages)))
         day += datetime.timedelta(days=1)
     # get actual deaths
-    deaths_actual = []
+    deaths_reported_date = []
     print(f'Opening {csv_actual_deaths}')
     df = pd.read_csv(csv_actual_deaths)
     df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
@@ -265,11 +271,17 @@ def main():
         # contains data for the day prior: new deaths detected in the file actually
         # occured the day before the CSV file was updated. It is the same thing for
         # the NYT CSV file, so in order to be perfectly consistent, we subtract 1 day here.
-        deaths_actual.append((row['date'].date() - datetime.timedelta(days=1),
+        deaths_reported_date.append((row['date'].date() - datetime.timedelta(days=1),
             row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
+    deaths_actual_date = []
+    JSONContent = requests.get(date_of_death_url).json()
+    df = pd.DataFrame([row['attributes'] for row in JSONContent['features']])
+    df['Date'] = pd.to_datetime(df.Date, unit='ms')
+    for (_, row) in df.iterrows():
+        deaths_actual_date.append((row['Date'].date(), row["Deaths"]))
     # generate chart
-    gen_chart(date_of_data, fig, ax, deaths, deaths_actual)
+    gen_chart(date_of_data, fig, ax, deaths, deaths_reported_date, deaths_actual_date)
 
 if __name__ == '__main__':
     main()
