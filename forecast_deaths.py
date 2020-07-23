@@ -208,12 +208,13 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_reported_date, deaths_actual
         fig.gca().add_artist(first_legend)
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0, 0, 0, 0.7),
             label=f'Actual deaths by reported date ({cma_days}-day centered moving average)')
-    d = deaths_actual_date
-    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0.5, 0, 0.5, 0.7),
-            label=f'Actual deaths by date of death (note: recent days [in red] may be revised considerably upwards)\nhttps://covid19-usflibrary.hub.arcgis.com/')
+    ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.15))
     lag = 10
-    ax.fill_between([x[0] for x in d[:-lag]], [x[1] for x in d[:-lag]], color=(0, 0, 0, 0.15))
-    ax.fill_between([x[0] for x in d[-lag:]], [x[1] for x in d[-lag:]], color=(1.0, 0, 0, 0.15))
+    d = cma(deaths_actual_date[:-lag])
+    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0.5, 0, 0.5, 0.7),
+            label=f'Actual deaths by date of death ({cma_days}-day centered moving average).'
+                  f' Note: the {lag} most recent days are not shown due to reporting lags.'
+                  f'\nhttps://covid19-usflibrary.hub.arcgis.com/')
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
