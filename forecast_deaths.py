@@ -70,22 +70,22 @@ cfr_models = [
                 (80, 199): 13.4 / 100,
                 }
             ),
-        CFRModel(
-            '3',
-            'Report from Istituto Superiore di Sanità (ISS) based on 73 780 cases\n'
-            'https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf',
-            # from table 1, Casi totali, % Letalità
-            9.2 / 100, {
-                (0, 29):  0 / 100,
-                (30, 39): 0.3 / 100,
-                (40, 49): 0.7 / 100,
-                (50, 59): 1.7 / 100,
-                (60, 69): 5.7 / 100,
-                (70, 79): 16.9 / 100,
-                (80, 89): 24.6 / 100,
-                (90, 199): 24.0 / 100,
-                }
-            ),
+        #CFRModel(
+        #    '3',
+        #    'Report from Istituto Superiore di Sanità (ISS) based on 73 780 cases\n'
+        #    'https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf',
+        #    # from table 1, Casi totali, % Letalità
+        #    9.2 / 100, {
+        #        (0, 29):  0 / 100,
+        #        (30, 39): 0.3 / 100,
+        #        (40, 49): 0.7 / 100,
+        #        (50, 59): 1.7 / 100,
+        #        (60, 69): 5.7 / 100,
+        #        (70, 79): 16.9 / 100,
+        #        (80, 89): 24.6 / 100,
+        #        (90, 199): 24.0 / 100,
+        #        }
+        #    ),
         CFRModel(
             '4',
             'Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020\n'
