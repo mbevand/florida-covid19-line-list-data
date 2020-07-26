@@ -29,13 +29,15 @@ opts = {}
 
 # Each instance represents one model of age-stratified Case Fatality Ratios
 class CFRModel():
-    def __init__(self, source, cfr_average, cfr_by_age):
+    def __init__(self, model_no, source, cfr_average, cfr_by_age):
+        self.model_no = model_no
         self.source = source
         self.cfr_average = cfr_average
         self.cfr_by_age = cfr_by_age
 
 cfr_models = [
         CFRModel(
+            '1',
             'The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020\n'
             'http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032',
             # from table 1, Case fatality rate
@@ -52,6 +54,7 @@ cfr_models = [
                 }
             ),
         CFRModel(
+            '2',
             'Estimates of the severity of coronavirus disease 2019: a model-based analysis\n'
             'https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext',
             # from table 1, CFR, Adjusted for censoring, demography, and under-ascertainment
@@ -68,6 +71,7 @@ cfr_models = [
                 }
             ),
         CFRModel(
+            '3',
             'Report from Istituto Superiore di Sanità (ISS) based on 73 780 cases\n'
             'https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf',
             # from table 1, Casi totali, % Letalità
@@ -83,6 +87,7 @@ cfr_models = [
                 }
             ),
         CFRModel(
+            '4',
             'Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020\n'
             'https://www.medrxiv.org/content/10.1101/2020.05.25.20112904v1',
             # from table 2, Latest estimate
@@ -96,6 +101,7 @@ cfr_models = [
                 }
             ),
         CFRModel(
+            '5',
             'Our CFR calculated on the Florida line list (age_stratified_cfr.py)',
             1.244 / 100, {
                 (0, 29):  0.042 / 100,
@@ -187,7 +193,7 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
         if i == 0:
             last_forecast = d[-1][0]
         ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0,
-                label=f'Model {i + 1}: {cfr_models[i].source}')
+                label=f'Model {cfr_models[i].model_no}: {cfr_models[i].source}')
     # plot YYG's forecast
     plot_yyg(ax, last_forecast)
     # plot actual deaths
