@@ -153,7 +153,7 @@ def init_chart(date_of_data):
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.xaxis.set_major_locator(ticker.MultipleLocator(base=7)) # tick every 7 days
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=2))
+    ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=5))
     ax.yaxis.set_major_locator(ticker.MultipleLocator(base=20))
     ax.spines['top'].set_visible(False)
     fig.autofmt_xdate()
@@ -187,12 +187,13 @@ def plot_yyg(ax, last_forecast):
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
 def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
+    lstyles = ('solid', 'dashed', 'dashdot', 'dotted')
     # plot forecast
     for (i, d) in enumerate(deaths):
         d = cma(d)
         if i == 0:
             last_forecast = d[-1][0]
-        ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0,
+        ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0, ls=lstyles[i % len(lstyles)],
                 label=f'Model {cfr_models[i].model_no}: {cfr_models[i].source}')
     # plot YYG's forecast
     plot_yyg(ax, last_forecast)
@@ -214,7 +215,7 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
-    ax.legend(fontsize='xx-small', bbox_to_anchor=(1, -0.31), frameon=False)
+    ax.legend(fontsize='xx-small', bbox_to_anchor=(1, -0.31), frameon=False, handlelength=5)
     fig.savefig('forecast_deaths.png', bbox_inches='tight')
 
 def main():
