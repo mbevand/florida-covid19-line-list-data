@@ -19,7 +19,7 @@ csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9
 csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
-o2d = 17.7
+o2d = 17.8
 
 # Number of days to calculate the centered moving average of the chart curves
 cma_days = 7
@@ -103,15 +103,15 @@ cfr_models = [
         CFRModel(
             '5',
             'Our CFR calculated on the Florida line list (age_stratified_cfr.py)',
-            1.244 / 100, {
-                (0, 29):  0.042 / 100,
-                (30, 39): 0.156 / 100,
-                (40, 49): 0.215 / 100,
-                (50, 59): 0.568 / 100,
-                (60, 69): 1.948 / 100,
-                (70, 79): 6.250 / 100,
-                (80, 89): 16.000 / 100,
-                (90, 199): 27.221 / 100,
+            1.286 / 100, {
+                (0, 29):  0.035 / 100,
+                (30, 39): 0.142 / 100,
+                (40, 49): 0.174 / 100,
+                (50, 59): 0.528 / 100,
+                (60, 69): 1.884 / 100,
+                (70, 79): 6.294 / 100,
+                (80, 89): 15.091 / 100,
+                (90, 199): 27.584 / 100,
                 }
             ),
         ]
@@ -179,16 +179,16 @@ def plot_yyg(ax, last_forecast):
     df = pd.read_csv(fname)
     df = df[df['date'] <= str(last_forecast)]
     dates = [parse_date(x) for x in df['date']]
-    styles = {'linewidth': 1.0, 'linestyle': ':', 'color': (0, .6, .6), 'alpha': 0.7}
+    styles = {'linewidth': 1.0, 'linestyle': (0, (1, 3)), 'color': (0, .6, .6), 'alpha': 0.7}
     ax.plot(dates, df['projected'], **styles,
-            label=f'For comparison only: YYG forecast as of {fnamedate} (3 dashed lines show '
+            label=f'For comparison only: YYG forecast as of {fnamedate} (3 dotted lines show '
             'projected deaths, lower bound, upper bound)\nhttps://covid19-projections.com/us-fl')
     ax.plot(dates, df['lower'], **styles, label='_nolegend_')
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
 def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     lstyles = ('solid', 'dashed', 'dashdot', 'dotted')
-    # plot forecast
+    # plot forecasts
     for (i, d) in enumerate(deaths):
         d = cma(d)
         if i == 0:

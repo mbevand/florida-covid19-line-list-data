@@ -72,13 +72,13 @@ important that we feed it CFR estimates, not IFR estimates. Infection Fatality
 Ratios take into account *undetected* cases and thus would not be consistent
 with line list data.
 
-Then the script assumes death occurs on average 17.7 days after infection,
+Then the script assumes death occurs on average 17.8 days after infection,
 which is the mean onset-to-death time calculated by `gamma.py`.
 
 Finally, it charts the forecast (`forecast_deaths.png`). The curves are all
 smoothed with a 7-day centered moving average.
 
-The end result is a simple tool that can not only predict deaths up to ~17.7
+The end result is a simple tool that can not only predict deaths up to ~17.8
 days ahead of time, but can also estimate *past* deaths accurately: notice how
 the colored curves in the generated chart follow closely the black curve
 (actual deaths.)
@@ -196,64 +196,68 @@ Parsing data_fdoh/2020-07-19-10-12-32.csv
 Parsing data_fdoh/2020-07-20-08-30-29.csv
 Parsing data_fdoh/2020-07-21-09-22-37.csv
 Parsing data_fdoh/2020-07-22-08-26-38.csv
+Parsing data_fdoh/2020-07-23-09-44-13.csv
+Parsing data_fdoh/2020-07-24-09-32-33.csv
+Parsing data_fdoh/2020-07-25-07-38-52.csv
+Parsing data_fdoh/2020-07-26-08-01-29.csv
 
 Ages 0-29:
-Number of deaths: 20
+Number of deaths: 24
 Gamma distribution params:
-mean = 12.3
-shape = 2.99
+mean = 12.2
+shape = 3.21
 
 Ages 30-39:
-Number of deaths: 43
+Number of deaths: 51
 Gamma distribution params:
-mean = 16.8
-shape = 1.33
+mean = 17.4
+shape = 1.42
 
 Ages 40-49:
-Number of deaths: 73
+Number of deaths: 87
 Gamma distribution params:
-mean = 21.9
-shape = 1.64
+mean = 22.1
+shape = 1.80
 
 Ages 50-59:
-Number of deaths: 152
+Number of deaths: 189
 Gamma distribution params:
-mean = 20.2
-shape = 1.67
+mean = 20.6
+shape = 1.86
 
 Ages 60-69:
-Number of deaths: 306
+Number of deaths: 402
 Gamma distribution params:
-mean = 18.4
-shape = 1.87
+mean = 18.6
+shape = 2.01
 
 Ages 70-79:
-Number of deaths: 526
+Number of deaths: 678
 Gamma distribution params:
-mean = 18.5
-shape = 1.72
+mean = 18.4
+shape = 1.89
 
 Ages 80-89:
-Number of deaths: 615
+Number of deaths: 773
 Gamma distribution params:
-mean = 17.0
-shape = 1.95
+mean = 17.2
+shape = 1.91
 
 Ages 90+:
-Number of deaths: 363
+Number of deaths: 456
 Gamma distribution params:
-mean = 15.7
-shape = 1.73
+mean = 15.8
+shape = 1.84
 
 All ages:
-Number of deaths: 2098
+Number of deaths: 2660
 Gamma distribution params:
-mean = 17.7
-shape = 1.77
+mean = 17.8
+shape = 1.87
 ```
 
-The overall (all ages) mean of 17.7 days is comparable to other published estimates, however our
-distribution is wider (ie. smaller shape parameter of 1.77) because many deaths
+The overall (all ages) mean of 17.8 days is comparable to other published estimates, however our
+distribution is wider (ie. smaller shape parameter of 1.87) because many deaths
 occur in the long tail:
 * mean 17.8 days, shape 4.94 = 0.45<sup>-2</sup>, based on sample of 24 deaths: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][verity]
 * mean 15.1 days, shape 5.1, based on sample of 3 deaths: [Estimating case fatality ratio of COVID-19 from observed cases outside China][althaus]
