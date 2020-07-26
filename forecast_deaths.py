@@ -157,7 +157,7 @@ def init_chart(date_of_data):
     ax.yaxis.set_major_locator(ticker.MultipleLocator(base=20))
     ax.spines['top'].set_visible(False)
     fig.autofmt_xdate()
-    ax.tick_params(axis='x', which='both', labelsize='small')
+    ax.tick_params(axis='x', which='both', labelsize='x-small')
     ax.grid(True, which='major', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='both', linewidth=0.1)
     ax.text(
