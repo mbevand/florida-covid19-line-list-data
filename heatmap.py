@@ -238,7 +238,7 @@ def main():
             comment='number of cases reported')
     gen_heatmap(share_positive, 'heatmap_age_share', cm='viridis', clabel='Percentage of cases',
             title=' (Percentage)', comment='percentage of cases in the age bracket\namong all cases in the time period')
-    gen_heatmap(cases_per_capita, 'heatmap_per_capita', sqrt=True, cm='jet', clabel='Number of cases per 1000 residents',
+    gen_heatmap(cases_per_capita, 'heatmap_per_capita', sqrt=True, cm='cividis', clabel='Number of cases per 1000 residents',
             title=' (Per Capita)', comment='number of cases reported per capita')
 
 if __name__ == "__main__":
