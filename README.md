@@ -330,6 +330,12 @@ and sorts the rows. This is helpful to compare 2 CSV files published on 2
 different days, because the `ObjectId` value and the order of rows are not
 stable from one file to another.
 
+## Other COVID-19 line lists
+
+* [Ohio](https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards/overview) (click *Download the summary data (CSV)*)
+* [Virginia](https://www.vdh.virginia.gov/coronavirus/)
+* [Tokyo](https://twitter.com/sugi2000/status/1285325952981983232)
+
 [dataset]: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
 [def]: https://justthenews.com/sites/default/files/2020-07/Data_Definitions_05182020-2.pdf
 [f1]: https://twitter.com/zorinaq/status/1279934357323386880
