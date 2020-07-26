@@ -57,13 +57,14 @@ The script multiplies the numbers of cases in specific age brackets by the
 corresponding age-stratified CFR. The age-stratified CFR estimates are issued
 from 5 independent models:
 
-* Model 1: [The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020][m1] (table 1, Case fatality rate)
 * Model 2: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][m2] (table 1, CFR, Adjusted for censoring, demography, and under-ascertainment)
 * Model 4: [Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020][m4] (table 2, Latest estimate)
 * Model 5: CFR calculated on the Florida line list by the script `age_stratified_cfr.py`
 
-Model 3 was removed on 2020-07-26 as it did not prove to be as reliable as the others:
+Model 1 was removed on 2020-07-26 as it is based on the same case data as model 2 but without adjustments for censoring and under-ascertainment:
+* Model 1: [The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020][m1] (table 1, Case fatality rate)
 
+Model 3 was removed on 2020-07-26 as it did not prove to be as reliable as the others:
 * Model 3: [https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf][m3] (table 1, Casi totali, % Letalità)
 
 Since the forecast is based on line list case data, ie. *detected* cases, it is

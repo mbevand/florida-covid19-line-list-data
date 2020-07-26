@@ -36,23 +36,23 @@ class CFRModel():
         self.cfr_by_age = cfr_by_age
 
 cfr_models = [
-        CFRModel(
-            '1',
-            'The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020\n'
-            'http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032',
-            # from table 1, Case fatality rate
-            2.3 / 100, {
-                (0, 9):   0 / 100,
-                (10, 19): 0.2 / 100,
-                (20, 29): 0.2 / 100,
-                (30, 39): 0.2 / 100,
-                (40, 49): 0.4 / 100,
-                (50, 59): 1.3 / 100,
-                (60, 69): 3.6 / 100,
-                (70, 79): 8.0 / 100,
-                (80, 199): 14.8 / 100,
-                }
-            ),
+        #CFRModel(
+        #    '1',
+        #    'The Epidemiological Characteristics of an Outbreak of 2019 Novel Coronavirus Diseases (COVID-19) — China, 2020\n'
+        #    'http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032',
+        #    # from table 1, Case fatality rate
+        #    2.3 / 100, {
+        #        (0, 9):   0 / 100,
+        #        (10, 19): 0.2 / 100,
+        #        (20, 29): 0.2 / 100,
+        #        (30, 39): 0.2 / 100,
+        #        (40, 49): 0.4 / 100,
+        #        (50, 59): 1.3 / 100,
+        #        (60, 69): 3.6 / 100,
+        #        (70, 79): 8.0 / 100,
+        #        (80, 199): 14.8 / 100,
+        #        }
+        #    ),
         CFRModel(
             '2',
             'Estimates of the severity of coronavirus disease 2019: a model-based analysis\n'
