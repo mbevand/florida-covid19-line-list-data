@@ -21,8 +21,8 @@ csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
 o2d = 17.8
 
-# Number of days to calculate the centered moving average of the chart curves
-cma_days = 7
+# Number of days to calculate the simple moving average of the chart curves
+avg_days = 7
 
 datadir = 'data_fdoh'
 opts = {}
@@ -134,15 +134,13 @@ def forecast_deaths(model, ages):
     # Given a list of patient ages, return the expected number of deaths.
     return sum([cfr_for_age(model, a) for a in ages])
 
-def cma(arr, n=cma_days):
-    # Calculate n-day Centered Moving Average on array:
-    #   [(date1, value1), (date2, value2), ...]
-    assert n % 2 == 1
-    half = int(n / 2)
+def sma(arr, avg_days=avg_days):
+    # Calculate N-day Simple Moving Average on array:
+    #   [('2020-01-01', 1), ('2020-01-02', 2)]
     arr2 = []
-    i = half
-    while i < len(arr) - half:
-        vals = [x[1] for x in arr[i - half:i + half + 1]]
+    i = avg_days - 1
+    while i < len(arr):
+        vals = [x[1] for x in arr[i - avg_days + 1:i + 1]]
         arr2.append((arr[i][0], np.mean(vals)))
         i += 1
     return arr2
@@ -190,7 +188,6 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     lstyles = ('solid', 'dashed', 'dashdot', 'dotted')
     # plot forecasts
     for (i, d) in enumerate(deaths):
-        d = cma(d)
         if i == 0:
             last_forecast = d[-1][0]
         ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0, ls=lstyles[i % len(lstyles)],
@@ -198,9 +195,10 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
     # plot YYG's forecast
     plot_yyg(ax, last_forecast)
     # plot actual deaths
-    d = cma(deaths_actual)
+    d = deaths_actual
     if 'redline' in opts:
-        truncate = date_of_data - datetime.timedelta(days=round(cma_days / 2))
+        # when line list is published on date_of_data, actual deaths are known up to 1 day prior
+        truncate = date_of_data - datetime.timedelta(days=1)
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
         d = d[:split + 1]
@@ -210,7 +208,7 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
                 labels=['Actual deaths that occurred\nafter forecast was made'])
         fig.gca().add_artist(first_legend)
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0, 0, 0, 0.7),
-            label=f'Actual deaths ({cma_days}-day centered moving average)')
+            label=f'Actual deaths ({avg_days}-day simple moving average)')
     ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.15))
     # chart
     ax.set_ylim(bottom=0)
@@ -258,6 +256,8 @@ def main():
         for (i, model) in enumerate(cfr_models):
             deaths[i].append((future_day, forecast_deaths(model, ages)))
         day += datetime.timedelta(days=1)
+    for i in range(len(deaths)):
+        deaths[i] = sma(deaths[i])
     # get actual deaths
     deaths_actual = []
     print(f'Opening {csv_actual_deaths}')
@@ -272,6 +272,7 @@ def main():
         deaths_actual.append((row['date'].date() - datetime.timedelta(days=1),
             row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
+    deaths_actual = sma(deaths_actual)
     # generate chart
     gen_chart(date_of_data, fig, ax, deaths, deaths_actual)
 

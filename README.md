@@ -76,7 +76,7 @@ Then the script assumes death occurs on average 17.8 days after infection,
 which is the mean onset-to-death time calculated by `gamma.py`.
 
 Finally, it charts the forecast (`forecast_deaths.png`). The curves are all
-smoothed with a 7-day centered moving average.
+smoothed with a 7-day simple moving average.
 
 The end result is a simple tool that can not only predict deaths up to ~17.8
 days ahead of time, but can also estimate *past* deaths accurately: notice how
