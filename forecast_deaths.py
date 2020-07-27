@@ -159,9 +159,8 @@ def init_chart(date_of_data):
     ax.grid(True, which='major', axis='both', linewidth=0.3)
     ax.grid(True, which='minor', axis='both', linewidth=0.1)
     ax.text(
-        -0.025, -0.19,
-        'Forecast based on the age of every individual COVID-19 case reported by the Florida Department of\n'
-        f'Health combined with {len(cfr_models)} models of age-stratified Case Fatality Ratios.\n'
+        -0.050, -0.19,
+        'Forecast based on the age of every individual COVID-19 case reported by the Florida Department of Health\n'
         'Source: https://github.com/mbevand/florida-covid19-line-list-data    '
         'Created by: Marc Bevand — @zorinaq',
         transform=ax.transAxes, fontsize='x-small', verticalalignment='top',
@@ -177,15 +176,19 @@ def plot_yyg(ax, last_forecast):
     df = pd.read_csv(fname)
     df = df[df['date'] <= str(last_forecast)]
     dates = [parse_date(x) for x in df['date']]
-    styles = {'linewidth': 1.0, 'linestyle': (0, (1, 3)), 'color': (0, .6, .6), 'alpha': 0.7}
+    styles = {'linewidth': 1.0, 'linestyle': (0, (1, 3)), 'color': 'tab:pink', 'alpha': 1.0}
     ax.plot(dates, df['projected'], **styles,
-            label=f'For comparison only: YYG forecast as of {fnamedate} (3 dotted lines show '
+            label=f'For comparison only: YYG forecast as of {fnamedate} (3 lines show '
             'projected deaths, lower bound, upper bound)\nhttps://covid19-projections.com/us-fl')
     ax.plot(dates, df['lower'], **styles, label='_nolegend_')
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
-def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
-    lstyles = ('solid', 'dashed', 'dashdot', 'dotted')
+def gen_chart(date_of_data, fig, ax, deaths, deaths_actual, deaths_best_guess):
+    lstyles = ('dashed', 'dashdot', (0, (1, 0.7)))
+    # plot best guess
+    d = deaths_best_guess
+    ax.fill_between([x[0] for x in d], [x[1] for x in d], [x[2] for x in d],
+            color='black', alpha=0.10, hatch='\\' * 5, label=f'Best guess forecast of daily deaths')
     # plot forecasts
     for (i, d) in enumerate(deaths):
         if i == 0:
@@ -202,19 +205,57 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual):
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
         d = d[:split + 1]
-        hndl, = ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=2.0, color=(1, 0, 0, 1.0))
+        hndl, = ax.plot([x[0] for x in d2], [x[1] for x in d2], linewidth=1.5, color=(1, 0, 0, 1.0))
         ax.fill_between([x[0] for x in d2], [x[1] for x in d2], color=(1, 0, 0, 0.15))
         first_legend = ax.legend(handles=[hndl], loc='center', fontsize='small',
-                labels=['Actual deaths that occurred\nafter forecast was made'])
+                labels=['Observed deaths that occurred\nafter forecast was made'])
         fig.gca().add_artist(first_legend)
-    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=2.0, color=(0, 0, 0, 0.7),
-            label=f'Actual deaths ({avg_days}-day simple moving average)')
-    ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.15))
+    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.5, color=(0, 0, 0, 0.7),
+            label=f'Observed deaths ({avg_days}-day simple moving average)')
+    ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.10))
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
-    ax.legend(fontsize='xx-small', bbox_to_anchor=(1, -0.31), frameon=False, handlelength=5)
+    # make "best guess" and "observed deaths" the first 2 legend entries
+    handles, labels = fig.gca().get_legend_handles_labels()
+    order = list(range(len(handles)))
+    order = [order[-1], order[-2]] + order[:-2]
+    ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order],
+        fontsize='xx-small', bbox_to_anchor=(1, -0.25), frameon=False, handlelength=5)
     fig.savefig('forecast_deaths.png', bbox_inches='tight')
+
+def best_guess(date_of_data, deaths_forecasts, deaths_actual):
+    # when line list is published on date_of_data, actual deaths are known up to 1 day prior
+    date_of_data -= datetime.timedelta(days=1)
+    # find deaths observed on date_of_data
+    for date, deaths in deaths_actual:
+        if date == date_of_data:
+            deaths_actual_deaths = deaths
+            break
+    # find model 5 (our model) in deaths_forecasts:
+    for (i, _) in enumerate(cfr_models):
+        if cfr_models[i].model_no == '5':
+            model_5 = deaths_forecasts[i]
+    # find model 5 prediction for the last day on which deaths were observed
+    for date, deaths in model_5:
+        if date == date_of_data:
+            model_5_deaths = deaths
+            break
+    assert model_5_deaths
+    epsilon = .005
+    adj_factor_min = adj_factor_max = deaths_actual_deaths / model_5_deaths
+    # our best guess will be model 5 multiplied by adj_factor_{min,max}
+    best_guess = []
+    for date, deaths in model_5:
+        if date >= date_of_data:
+            best_guess.append((date, deaths * adj_factor_min, deaths * adj_factor_max))
+            if date == date_of_data:
+                adj_factor_min *= 0.95
+                adj_factor_max *= 1.05
+            else:
+                adj_factor_min *= 1 - epsilon
+                adj_factor_max *= 1 + epsilon
+    return best_guess
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == '-redline':
@@ -278,8 +319,10 @@ def main():
             row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
     deaths_actual = sma(deaths_actual)
+    # calculate best guess forecast
+    deaths_best_guess = best_guess(date_of_data, deaths, deaths_actual)
     # generate chart
-    gen_chart(date_of_data, fig, ax, deaths, deaths_actual)
+    gen_chart(date_of_data, fig, ax, deaths, deaths_actual, deaths_best_guess)
 
 if __name__ == '__main__':
     main()

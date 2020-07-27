@@ -67,6 +67,20 @@ Model 1 was removed on 2020-07-26 as it is based on the same case data as model 
 Model 3 was removed on 2020-07-26 as it did not prove to be as reliable as the others:
 * Model 3: [https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf][m3] (table 1, Casi totali, % Letalità)
 
+Experimentally, we have observed that deaths fall somewhere in the range of
+estimates produced by these CFR models (eg. model 4 tends to overestimate, and
+model 5 tends to underestimate.) To refine our estimates, since 2020-07-26
+we also produce a *best guess forecast*:
+
+* We assume the rate of increase/decrease of daily deaths is most closely
+  forecast by model 5
+* We calculate a factor `adj_factor` by which model 5 estimates can be multiplied
+  to produce a perfect estimate for the present day
+* For our best guess upper bound: the next day, `adj_factor` is multiplied by 1.05
+  (5% error margin), for every subsequent day `adj_factor` is multiplied by 1.005
+  (accumulates 0.5% daily error margin)
+* For our best guess lower bound: same, but with 0.95, and 0.995
+
 Since the forecast is based on line list case data, ie. *detected* cases, it is
 important that we feed it CFR estimates, not IFR estimates. Infection Fatality
 Ratios take into account *undetected* cases and thus would not be consistent
