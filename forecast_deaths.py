@@ -241,8 +241,7 @@ def main():
             # after the whitespace to ignore the time.
             df['EventDate'].apply(lambda x: x.split(' ')[0]), format='%Y/%m/%d'
     )
-    # ignore the last day ([-2] instead of [-1]) because case data from the last day may be incomplete
-    last_day = sorted(set(df['date_parsed']))[-2].date()
+    last_day = sorted(set(df['date_parsed']))[-1].date()
     first_day = sorted(set(df['date_parsed']))[0].date()
     # assume the filename starts with YYYY-MM-DD
     date_of_data = parse_date(os.path.basename(fname)[:10])
@@ -254,7 +253,13 @@ def main():
         ages = list(df[df['date_parsed'] == pd.Timestamp(day)]['Age'])
         future_day = day + datetime.timedelta(days=np.round(o2d))
         for (i, model) in enumerate(cfr_models):
-            deaths[i].append((future_day, forecast_deaths(model, ages)))
+            f = forecast_deaths(model, ages)
+            if day == last_day:
+                # line list data is almost always incomplete for the last day (FDOH doesn't
+                # refresh the file at midnight), so heuristically the forecast deaths for
+                # the last day are forced to be at least equal to the day prior
+                f = max(f, deaths[i][-1][1])
+            deaths[i].append((future_day, f))
         day += datetime.timedelta(days=1)
     for i in range(len(deaths)):
         deaths[i] = sma(deaths[i])
