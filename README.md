@@ -277,7 +277,7 @@ occur in the long tail:
 * mean 15.1 days, shape 5.1, based on sample of 3 deaths: [Estimating case fatality ratio of COVID-19 from observed cases outside China][althaus]
 
 We believe our distribution parameters are more accurate because
-they are based on a much larger sample of 2098 deaths. The long tail
+they are based on a much larger sample of 2660 deaths. The long tail
 may be the result of improved treatments that can maintain patients
 alive for a longer time.
 
