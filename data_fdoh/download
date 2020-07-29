@@ -9,6 +9,11 @@ prev=$(ls *.csv | tail -1)
 yyyymmdd=$(date +%F)
 new=${yyyymmdd}-$(date +%H-%M-%S).csv
 wget --quiet --compression=auto -O "$new" https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv
+if [ $(size "$new") -lt 10000 ]; then
+    echo "Too short (content being updated?)"
+    rm "$new"
+    exit 1
+fi
 if [ $(size "$prev") -eq $(size "$new") ]; then
     echo "No new CSV"
     rm "$new"
