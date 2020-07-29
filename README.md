@@ -26,7 +26,7 @@ The line list is in CSV format and the columns are self-explanatory: `Age`,
 `Gender`, `County`, boolean `Died`, etc. The columns are documented on page 12 of this
 [FDOH document][def]. Two important columns:
 
-`ChartDate` is the date used to create the bar chart in the FDOH dashboard.
+`ChartDate` is the date used to create the bar chart in the FDOH [dashboard][dashboard].
 
 `EventDate` is the date when symptoms started, or if that date is unknown, the
 date lab results were reported to the FDOH. One of our sources claim more
