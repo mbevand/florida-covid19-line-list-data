@@ -1,0 +1,1004 @@
+{
+  "objectIdFieldName" : "ObjectId", 
+  "uniqueIdField" : 
+  {
+    "name" : "ObjectId", 
+    "isSystemMaintained" : true
+  }, 
+  "globalIdFieldName" : "", 
+  "fields" : [
+    {
+      "name" : "Date", 
+      "type" : "esriFieldTypeDate", 
+      "alias" : "Date", 
+      "sqlType" : "sqlTypeTimestamp2", 
+      "length" : 8, 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "Deaths", 
+      "type" : "esriFieldTypeInteger", 
+      "alias" : "Deaths", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }, 
+    {
+      "name" : "ObjectId", 
+      "type" : "esriFieldTypeOID", 
+      "alias" : "ObjectId", 
+      "sqlType" : "sqlTypeInteger", 
+      "domain" : null, 
+      "defaultValue" : null
+    }
+  ], 
+  "features" : [
+    {
+      "attributes" : {
+        "Date" : 1583384400000, 
+        "Deaths" : 1, 
+        "ObjectId" : 8781
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1583470800000, 
+        "Deaths" : 1, 
+        "ObjectId" : 8782
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1583816400000, 
+        "Deaths" : 1, 
+        "ObjectId" : 8783
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584162000000, 
+        "Deaths" : 2, 
+        "ObjectId" : 8784
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584248400000, 
+        "Deaths" : 1, 
+        "ObjectId" : 8785
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584421200000, 
+        "Deaths" : 3, 
+        "ObjectId" : 8786
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584507600000, 
+        "Deaths" : 1, 
+        "ObjectId" : 8787
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584594000000, 
+        "Deaths" : 2, 
+        "ObjectId" : 8788
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584680400000, 
+        "Deaths" : 2, 
+        "ObjectId" : 8789
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584766800000, 
+        "Deaths" : 7, 
+        "ObjectId" : 8790
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584853200000, 
+        "Deaths" : 3, 
+        "ObjectId" : 8791
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1584939600000, 
+        "Deaths" : 5, 
+        "ObjectId" : 8792
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585026000000, 
+        "Deaths" : 14, 
+        "ObjectId" : 8793
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585112400000, 
+        "Deaths" : 20, 
+        "ObjectId" : 8794
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585198800000, 
+        "Deaths" : 13, 
+        "ObjectId" : 8795
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585285200000, 
+        "Deaths" : 18, 
+        "ObjectId" : 8796
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585371600000, 
+        "Deaths" : 12, 
+        "ObjectId" : 8797
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585458000000, 
+        "Deaths" : 19, 
+        "ObjectId" : 8798
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585544400000, 
+        "Deaths" : 22, 
+        "ObjectId" : 8799
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585630800000, 
+        "Deaths" : 31, 
+        "ObjectId" : 8800
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585717200000, 
+        "Deaths" : 31, 
+        "ObjectId" : 8801
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585803600000, 
+        "Deaths" : 35, 
+        "ObjectId" : 8802
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585890000000, 
+        "Deaths" : 30, 
+        "ObjectId" : 8803
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1585976400000, 
+        "Deaths" : 35, 
+        "ObjectId" : 8804
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586062800000, 
+        "Deaths" : 43, 
+        "ObjectId" : 8805
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586149200000, 
+        "Deaths" : 44, 
+        "ObjectId" : 8806
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586235600000, 
+        "Deaths" : 45, 
+        "ObjectId" : 8807
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586322000000, 
+        "Deaths" : 43, 
+        "ObjectId" : 8808
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586408400000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8809
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586494800000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8810
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586581200000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8811
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586667600000, 
+        "Deaths" : 36, 
+        "ObjectId" : 8812
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586754000000, 
+        "Deaths" : 45, 
+        "ObjectId" : 8813
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586840400000, 
+        "Deaths" : 49, 
+        "ObjectId" : 8814
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1586926800000, 
+        "Deaths" : 42, 
+        "ObjectId" : 8815
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587013200000, 
+        "Deaths" : 43, 
+        "ObjectId" : 8816
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587099600000, 
+        "Deaths" : 56, 
+        "ObjectId" : 8817
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587186000000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8818
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587272400000, 
+        "Deaths" : 51, 
+        "ObjectId" : 8819
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587358800000, 
+        "Deaths" : 50, 
+        "ObjectId" : 8820
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587445200000, 
+        "Deaths" : 47, 
+        "ObjectId" : 8821
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587531600000, 
+        "Deaths" : 44, 
+        "ObjectId" : 8822
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587618000000, 
+        "Deaths" : 52, 
+        "ObjectId" : 8823
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587704400000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8824
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587790800000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8825
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587877200000, 
+        "Deaths" : 50, 
+        "ObjectId" : 8826
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1587963600000, 
+        "Deaths" : 42, 
+        "ObjectId" : 8827
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588050000000, 
+        "Deaths" : 54, 
+        "ObjectId" : 8828
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588136400000, 
+        "Deaths" : 45, 
+        "ObjectId" : 8829
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588222800000, 
+        "Deaths" : 51, 
+        "ObjectId" : 8830
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588309200000, 
+        "Deaths" : 51, 
+        "ObjectId" : 8831
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588395600000, 
+        "Deaths" : 29, 
+        "ObjectId" : 8832
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588482000000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8833
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588568400000, 
+        "Deaths" : 62, 
+        "ObjectId" : 8834
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588654800000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8835
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588741200000, 
+        "Deaths" : 50, 
+        "ObjectId" : 8836
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588827600000, 
+        "Deaths" : 43, 
+        "ObjectId" : 8837
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1588914000000, 
+        "Deaths" : 34, 
+        "ObjectId" : 8838
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589000400000, 
+        "Deaths" : 33, 
+        "ObjectId" : 8839
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589086800000, 
+        "Deaths" : 37, 
+        "ObjectId" : 8840
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589173200000, 
+        "Deaths" : 46, 
+        "ObjectId" : 8841
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589259600000, 
+        "Deaths" : 43, 
+        "ObjectId" : 8842
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589346000000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8843
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589432400000, 
+        "Deaths" : 46, 
+        "ObjectId" : 8844
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589518800000, 
+        "Deaths" : 35, 
+        "ObjectId" : 8845
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589605200000, 
+        "Deaths" : 37, 
+        "ObjectId" : 8846
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589691600000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8847
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589778000000, 
+        "Deaths" : 23, 
+        "ObjectId" : 8848
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589864400000, 
+        "Deaths" : 37, 
+        "ObjectId" : 8849
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1589950800000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8850
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590037200000, 
+        "Deaths" : 38, 
+        "ObjectId" : 8851
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590123600000, 
+        "Deaths" : 35, 
+        "ObjectId" : 8852
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590210000000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8853
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590296400000, 
+        "Deaths" : 36, 
+        "ObjectId" : 8854
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590382800000, 
+        "Deaths" : 36, 
+        "ObjectId" : 8855
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590469200000, 
+        "Deaths" : 24, 
+        "ObjectId" : 8856
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590555600000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8857
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590642000000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8858
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590728400000, 
+        "Deaths" : 26, 
+        "ObjectId" : 8859
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590814800000, 
+        "Deaths" : 37, 
+        "ObjectId" : 8860
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590901200000, 
+        "Deaths" : 35, 
+        "ObjectId" : 8861
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1590987600000, 
+        "Deaths" : 31, 
+        "ObjectId" : 8862
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591074000000, 
+        "Deaths" : 41, 
+        "ObjectId" : 8863
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591160400000, 
+        "Deaths" : 39, 
+        "ObjectId" : 8864
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591246800000, 
+        "Deaths" : 26, 
+        "ObjectId" : 8865
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591333200000, 
+        "Deaths" : 33, 
+        "ObjectId" : 8866
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591419600000, 
+        "Deaths" : 32, 
+        "ObjectId" : 8867
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591506000000, 
+        "Deaths" : 30, 
+        "ObjectId" : 8868
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591592400000, 
+        "Deaths" : 25, 
+        "ObjectId" : 8869
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591678800000, 
+        "Deaths" : 33, 
+        "ObjectId" : 8870
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591765200000, 
+        "Deaths" : 27, 
+        "ObjectId" : 8871
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591851600000, 
+        "Deaths" : 30, 
+        "ObjectId" : 8872
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1591938000000, 
+        "Deaths" : 37, 
+        "ObjectId" : 8873
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592024400000, 
+        "Deaths" : 26, 
+        "ObjectId" : 8874
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592110800000, 
+        "Deaths" : 34, 
+        "ObjectId" : 8875
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592197200000, 
+        "Deaths" : 29, 
+        "ObjectId" : 8876
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592283600000, 
+        "Deaths" : 45, 
+        "ObjectId" : 8877
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592370000000, 
+        "Deaths" : 32, 
+        "ObjectId" : 8878
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592456400000, 
+        "Deaths" : 31, 
+        "ObjectId" : 8879
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592542800000, 
+        "Deaths" : 27, 
+        "ObjectId" : 8880
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592629200000, 
+        "Deaths" : 38, 
+        "ObjectId" : 8881
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592715600000, 
+        "Deaths" : 36, 
+        "ObjectId" : 8882
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592802000000, 
+        "Deaths" : 51, 
+        "ObjectId" : 8883
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592888400000, 
+        "Deaths" : 59, 
+        "ObjectId" : 8884
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1592974800000, 
+        "Deaths" : 40, 
+        "ObjectId" : 8885
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593061200000, 
+        "Deaths" : 54, 
+        "ObjectId" : 8886
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593147600000, 
+        "Deaths" : 45, 
+        "ObjectId" : 8887
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593234000000, 
+        "Deaths" : 52, 
+        "ObjectId" : 8888
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593320400000, 
+        "Deaths" : 50, 
+        "ObjectId" : 8889
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593406800000, 
+        "Deaths" : 47, 
+        "ObjectId" : 8890
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593493200000, 
+        "Deaths" : 53, 
+        "ObjectId" : 8891
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593579600000, 
+        "Deaths" : 68, 
+        "ObjectId" : 8892
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593666000000, 
+        "Deaths" : 74, 
+        "ObjectId" : 8893
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593752400000, 
+        "Deaths" : 69, 
+        "ObjectId" : 8894
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593838800000, 
+        "Deaths" : 81, 
+        "ObjectId" : 8895
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1593925200000, 
+        "Deaths" : 71, 
+        "ObjectId" : 8896
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594011600000, 
+        "Deaths" : 93, 
+        "ObjectId" : 8897
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594098000000, 
+        "Deaths" : 96, 
+        "ObjectId" : 8898
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594184400000, 
+        "Deaths" : 115, 
+        "ObjectId" : 8899
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594270800000, 
+        "Deaths" : 103, 
+        "ObjectId" : 8900
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594357200000, 
+        "Deaths" : 89, 
+        "ObjectId" : 8901
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594443600000, 
+        "Deaths" : 103, 
+        "ObjectId" : 8902
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594530000000, 
+        "Deaths" : 117, 
+        "ObjectId" : 8903
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594616400000, 
+        "Deaths" : 117, 
+        "ObjectId" : 8904
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594702800000, 
+        "Deaths" : 110, 
+        "ObjectId" : 8905
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594789200000, 
+        "Deaths" : 115, 
+        "ObjectId" : 8906
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594875600000, 
+        "Deaths" : 116, 
+        "ObjectId" : 8907
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1594962000000, 
+        "Deaths" : 110, 
+        "ObjectId" : 8908
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595048400000, 
+        "Deaths" : 88, 
+        "ObjectId" : 8909
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595134800000, 
+        "Deaths" : 86, 
+        "ObjectId" : 8910
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595221200000, 
+        "Deaths" : 103, 
+        "ObjectId" : 8911
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595307600000, 
+        "Deaths" : 91, 
+        "ObjectId" : 8912
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595394000000, 
+        "Deaths" : 74, 
+        "ObjectId" : 8913
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595480400000, 
+        "Deaths" : 67, 
+        "ObjectId" : 8914
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595566800000, 
+        "Deaths" : 50, 
+        "ObjectId" : 8915
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595653200000, 
+        "Deaths" : 53, 
+        "ObjectId" : 8916
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595739600000, 
+        "Deaths" : 29, 
+        "ObjectId" : 8917
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1595826000000, 
+        "Deaths" : 20, 
+        "ObjectId" : 8918
+      }
+    }
+  ]
+}
