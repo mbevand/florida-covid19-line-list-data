@@ -2,7 +2,7 @@
 #
 # Forecasts Florida COVID-19 deaths from line list case data and CFR stratified by age.
 
-import sys, os, math, datetime
+import sys, os, math, datetime, json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,6 +17,12 @@ csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9
 
 # Observed deaths, by date reported
 csv_deaths_reported = 'data_deaths/fl_resident_deaths.csv'
+
+# Observed deaths, by date death occurred
+csv_deaths_occurred = 'data_deaths/deaths_by_date_of_death.csv'
+
+# Do not chart last 10 days of deaths by date of death (data is incomplete)
+deaths_occurred_ignore_days = 10
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
 o2d = 17.8
@@ -183,18 +189,18 @@ def plot_yyg(ax, last_forecast):
     ax.plot(dates, df['lower'], **styles, label='_nolegend_')
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
-def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_best_guess):
+def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_occurred, deaths_occurred_adj, deaths_best_guess):
     lstyles = ('dashed', 'dashdot', (0, (1, 0.7)))
     # plot best guess
     d = deaths_best_guess
     ax.fill_between([x[0] for x in d], [x[1] for x in d], [x[2] for x in d],
-            color='black', alpha=0.10, hatch='\\' * 5, label=f'Best guess forecast of daily deaths')
+            color='black', alpha=0.10, hatch='\\' * 5, label=f'Forecast of deaths by date reported (best guess)')
     # plot forecasts
     for (i, d) in enumerate(deaths):
         if i == 0:
             last_forecast = d[-1][0]
         ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0, ls=lstyles[i % len(lstyles)],
-                label=f'Model {cfr_models[i].model_no}: {cfr_models[i].source}')
+                label=f'Forecast model {cfr_models[i].model_no}: {cfr_models[i].source}')
     # plot YYG's forecast
     plot_yyg(ax, last_forecast)
     # plot observed deaths, by date reported
@@ -211,8 +217,16 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_best_guess)
                 labels=['Observed deaths that occurred\nafter forecast was made'])
         fig.gca().add_artist(first_legend)
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.5, color=(0, 0, 0, 0.7),
-            label=f'Observed deaths ({avg_days}-day simple moving average)')
+            label=f'Observed deaths by date reported on COVID-19 dashboard ({avg_days}-day SMA)')
     ax.fill_between([x[0] for x in d], [x[1] for x in d], color=(0, 0, 0, 0.10))
+    # plot observed deaths, by date death occurred
+    d = deaths_occurred
+    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=.75, color=(0, 0, 0, 0.7),
+            label=f'Observed deaths by exact date of death ("Deaths by Day", {avg_days}-day SMA); '
+            f'last {deaths_occurred_ignore_days} days not charted due to incomplete data')
+    d = deaths_occurred_adj
+    ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=.75, color=(0, 0, 0, 0.7), ls=(0, (12, 2)),
+            label=f'Observed deaths by exact date of death, adjusted for incomplete data')
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
@@ -256,6 +270,30 @@ def best_guess(date_of_data, deaths_forecasts, deaths_reported):
                 adj_factor_min *= 1 - epsilon
                 adj_factor_max *= 1 + epsilon
     return best_guess
+
+def occurred():
+    print(f'Opening {csv_deaths_occurred}')
+    result = []
+    for feature in json.load(open(csv_deaths_occurred))['features']:
+        attrs = feature['attributes']
+        date = datetime.datetime.utcfromtimestamp(attrs['Date'] / 1e3).date()
+        deaths = attrs['Deaths']
+        # occasionally we see bogus rows with dates from years ago. ignore them
+        if date >= datetime.date(2020, 1, 1):
+            result.append((date, deaths))
+    result = sma(result)
+    adj_last = 30 # adjust starting this many days prior to the present day
+    assert len(result) > adj_last
+    deaths_occurred = result[:-deaths_occurred_ignore_days]
+    deaths_occurred_adj = []
+    for date, deaths in result[-adj_last:-deaths_occurred_ignore_days]:
+        x = (result[-1][0] - date).days
+        # 1 - e^(-0.1864*x) gives the approximate fraction of total deaths
+        # that are reported x days after the death, see:
+        # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
+        frac_reported = 1 - math.e**(-0.1864*x)
+        deaths_occurred_adj.append((date, deaths / frac_reported))
+    return deaths_occurred, deaths_occurred_adj
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == '-redline':
@@ -317,10 +355,12 @@ def main():
             row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
     deaths_reported = sma(deaths_reported)
+    # get observed deaths, by date death occurred
+    deaths_occurred, deaths_occurred_adj = occurred()
     # calculate best guess forecast
     deaths_best_guess = best_guess(date_of_data, deaths, deaths_reported)
     # generate chart
-    gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_best_guess)
+    gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_occurred, deaths_occurred_adj, deaths_best_guess)
 
 if __name__ == '__main__':
     main()
