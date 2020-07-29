@@ -15,8 +15,8 @@ from matplotlib import rcParams
 # (click Download → Spreadsheet)
 csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
 
-# Actual deaths
-csv_actual_deaths = 'data_deaths/fl_resident_deaths.csv'
+# Observed deaths, by date reported
+csv_deaths_reported = 'data_deaths/fl_resident_deaths.csv'
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
 o2d = 17.8
@@ -183,7 +183,7 @@ def plot_yyg(ax, last_forecast):
     ax.plot(dates, df['lower'], **styles, label='_nolegend_')
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
-def gen_chart(date_of_data, fig, ax, deaths, deaths_actual, deaths_best_guess):
+def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_best_guess):
     lstyles = ('dashed', 'dashdot', (0, (1, 0.7)))
     # plot best guess
     d = deaths_best_guess
@@ -197,10 +197,10 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual, deaths_best_guess):
                 label=f'Model {cfr_models[i].model_no}: {cfr_models[i].source}')
     # plot YYG's forecast
     plot_yyg(ax, last_forecast)
-    # plot actual deaths
-    d = deaths_actual
+    # plot observed deaths, by date reported
+    d = deaths_reported
     if 'redline' in opts:
-        # when line list is published on date_of_data, actual deaths are known up to 1 day prior
+        # when line list is published on date_of_data, observed deaths are known up to 1 day prior
         truncate = date_of_data - datetime.timedelta(days=1)
         split = list(filter(lambda x: x[1][0] == truncate, enumerate(d)))[0][0]
         d2 = d[split:]
@@ -224,13 +224,13 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_actual, deaths_best_guess):
         fontsize='xx-small', bbox_to_anchor=(1, -0.25), frameon=False, handlelength=5)
     fig.savefig('forecast_deaths.png', bbox_inches='tight')
 
-def best_guess(date_of_data, deaths_forecasts, deaths_actual):
-    # when line list is published on date_of_data, actual deaths are known up to 1 day prior
+def best_guess(date_of_data, deaths_forecasts, deaths_reported):
+    # when line list is published on date_of_data, observed deaths are known up to 1 day prior
     date_of_data -= datetime.timedelta(days=1)
     # find deaths observed on date_of_data
-    for date, deaths in deaths_actual:
+    for date, deaths in deaths_reported:
         if date == date_of_data:
-            deaths_actual_deaths = deaths
+            deaths_target = deaths
             break
     # find model 5 (our model) in deaths_forecasts:
     for (i, _) in enumerate(cfr_models):
@@ -243,7 +243,7 @@ def best_guess(date_of_data, deaths_forecasts, deaths_actual):
             break
     assert model_5_deaths
     epsilon = .005
-    adj_factor_min = adj_factor_max = deaths_actual_deaths / model_5_deaths
+    adj_factor_min = adj_factor_max = deaths_target / model_5_deaths
     # our best guess will be model 5 multiplied by adj_factor_{min,max}
     best_guess = []
     for date, deaths in model_5:
@@ -304,25 +304,23 @@ def main():
         day += datetime.timedelta(days=1)
     for i in range(len(deaths)):
         deaths[i] = sma(deaths[i])
-    # get actual deaths
-    deaths_actual = []
-    print(f'Opening {csv_actual_deaths}')
-    df = pd.read_csv(csv_actual_deaths)
+    # get observed deaths, by date reported
+    deaths_reported = []
+    print(f'Opening {csv_deaths_reported}')
+    df = pd.read_csv(csv_deaths_reported)
     df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
     cumulative_deaths = 0
     for (_, row) in df[df['state'] == 'Florida'].iterrows():
-        # gamma.py assumes that the line list CSV file (updated every morning Eastern time)
-        # contains data for the day prior: new deaths detected in the file actually
-        # occured the day before the CSV file was updated. It is the same thing for
-        # the NYT CSV file, so in order to be perfectly consistent, we subtract 1 day here.
-        deaths_actual.append((row['date'].date() - datetime.timedelta(days=1),
+        # deaths in this CSV file (whose data source is updated every morning Eastern time)
+        # contains data for the day prior, so we subtract 1 day
+        deaths_reported.append((row['date'].date() - datetime.timedelta(days=1),
             row['deaths'] - cumulative_deaths))
         cumulative_deaths = row['deaths']
-    deaths_actual = sma(deaths_actual)
+    deaths_reported = sma(deaths_reported)
     # calculate best guess forecast
-    deaths_best_guess = best_guess(date_of_data, deaths, deaths_actual)
+    deaths_best_guess = best_guess(date_of_data, deaths, deaths_reported)
     # generate chart
-    gen_chart(date_of_data, fig, ax, deaths, deaths_actual, deaths_best_guess)
+    gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_best_guess)
 
 if __name__ == '__main__':
     main()
