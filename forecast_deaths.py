@@ -190,19 +190,6 @@ def plot_yyg(ax, last_forecast):
     ax.plot(dates, df['upper'], **styles, label='_nolegend_')
 
 def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_occurred, deaths_occurred_adj, deaths_best_guess):
-    lstyles = ('dashed', 'dashdot', (0, (1, 0.7)))
-    # plot best guess
-    d = deaths_best_guess
-    ax.fill_between([x[0] for x in d], [x[1] for x in d], [x[2] for x in d],
-            color='black', alpha=0.10, hatch='\\' * 5, label=f'Forecast of deaths by date reported (best guess)')
-    # plot forecasts
-    for (i, d) in enumerate(deaths):
-        if i == 0:
-            last_forecast = d[-1][0]
-        ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0, ls=lstyles[i % len(lstyles)],
-                label=f'Forecast model {cfr_models[i].model_no}: {cfr_models[i].source}')
-    # plot YYG's forecast
-    plot_yyg(ax, last_forecast)
     # plot observed deaths, by date reported
     d = deaths_reported
     if 'redline' in opts:
@@ -227,13 +214,26 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_occurred, d
     d = deaths_occurred_adj
     ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=.75, color=(0, 0, 0, 0.7), ls=(0, (12, 2)),
             label=f'Observed deaths by exact date of death, adjusted for incomplete data')
+    # plot best guess
+    d = deaths_best_guess
+    ax.fill_between([x[0] for x in d], [x[1] for x in d], [x[2] for x in d],
+            color='black', alpha=0.10, hatch='\\' * 5, label=f'Forecast of deaths by date reported (best guess)')
+    # plot forecasts
+    lstyles = ('dashed', 'dashdot', (0, (1, 0.7)))
+    for (i, d) in enumerate(deaths):
+        if i == 0:
+            last_forecast = d[-1][0]
+        ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0, ls=lstyles[i % len(lstyles)],
+                label=f'Forecast model {cfr_models[i].model_no}: {cfr_models[i].source}')
+    # plot YYG's forecast
+    plot_yyg(ax, last_forecast)
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
-    # make "best guess" and "observed deaths" the first 2 legend entries
+    # make "best guess" the first legend entry
     handles, labels = fig.gca().get_legend_handles_labels()
     order = list(range(len(handles)))
-    order = [order[-1], order[-2]] + order[:-2]
+    order = [order[-1]] + order[:-1]
     ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order],
         fontsize='xx-small', bbox_to_anchor=(1, -0.25), frameon=False, handlelength=5)
     fig.savefig('forecast_deaths.png', bbox_inches='tight')
