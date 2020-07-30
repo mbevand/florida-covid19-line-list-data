@@ -11,9 +11,8 @@ import matplotlib.ticker as ticker
 from matplotlib import rcParams
 
 # Florida COVID-19 line list data. CSV found at:
-# https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
-# (click Download → Spreadsheet)
-csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
+# https://www.arcgis.com/home/item.html?id=4cc62b3a510949c7a8167f6baa3e069d
+csv_url = 'https://www.arcgis.com/sharing/rest/content/items/4cc62b3a510949c7a8167f6baa3e069d/data'
 
 # Observed deaths, by date reported
 csv_deaths_reported = 'data_deaths/fl_resident_deaths.csv'

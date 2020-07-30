@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 #
-# Sort Florida line list data available at (click Download → Spreadsheet):
-# https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
-#
-# Direct link: https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv
+# Sort Florida line list data.
 
 import sys, csv
 

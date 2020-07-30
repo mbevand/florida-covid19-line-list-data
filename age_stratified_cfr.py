@@ -12,9 +12,8 @@ import matplotlib.ticker as ticker
 from matplotlib import rcParams
 
 # Florida COVID-19 line list data. CSV found at:
-# https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
-# (click Download → Spreadsheet)
-csv_url = 'https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv'
+# https://www.arcgis.com/home/item.html?id=4cc62b3a510949c7a8167f6baa3e069d
+csv_url = 'https://www.arcgis.com/sharing/rest/content/items/4cc62b3a510949c7a8167f6baa3e069d/data'
 # Calculate the CFR on these age brackets
 age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, math.inf))
 # Averaging period to calculate the raw and short-term adjusted CFR
