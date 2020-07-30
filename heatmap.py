@@ -188,11 +188,19 @@ def main():
     print(f'Opening {fname}')
     df = pd.read_csv(fname)
     # We show cases by date reported (ChartDate)
-    # The timestamp is formatted as "2020/06/28 05:00:00+00". We truncate
-    # after the whitespace to ignore the time.
-    df["date_parsed"] = pd.to_datetime(
-            df["ChartDate"].apply(lambda x: x.split(' ')[0]), format="%Y/%m/%d"
-    )
+    # The timestamp can follow one of 3 formats:
+    # "2020/06/28 05:00:00+00", or
+    # "2020/06/28 05:00:00", or
+    # "07/18/2020 5:00"
+    # We truncate after the whitespace to ignore the time and try to parse YYYY/MM/DD or MM/DD/YYYY
+    try:
+        df["date_parsed"] = pd.to_datetime(
+                df["ChartDate"].apply(lambda x: x.split(' ')[0]), format="%Y/%m/%d"
+        )
+    except ValueError:
+        df["date_parsed"] = pd.to_datetime(
+                df["ChartDate"].apply(lambda x: x.split(' ')[0]), format="%m/%d/%Y"
+        )
     # Pick a reference point in time to align the time periods. The date one day past the
     # last date in the dataset is the best choice because it aligns the last period so it
     # ends on, and includes, the last date in the dataset.
