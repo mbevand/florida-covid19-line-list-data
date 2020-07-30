@@ -15,6 +15,14 @@ age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 
 def parse_date(s, fmt='%Y-%m-%d'):
     return datetime.datetime.strptime(s, fmt).date()
 
+def normalize_date(s):
+    for fmt in ('%Y-%m-%d', '%Y/%m/%d', '%m/%d/%Y'):
+        try:
+            return str(parse_date(s, fmt=fmt))
+        except ValueError:
+            pass
+    raise Exception(f'Could not parse date "{s}"')
+
 def bracket2str(bracket):
     if bracket == (0, np.inf):
         return 'All ages'
@@ -31,16 +39,22 @@ def parse(fname):
     for _, row in df.iterrows():
         if row['Died'] != 'Yes':
             continue
+        # Dates follow one of these formats:
+        # "2020/06/28 05:00:00+00", or
+        # "2020/06/28 05:00:00", or
+        # "2020-04-18 00:00:00", or
+        # "07/18/2020 5:00"
+        # We truncate after the whitespace to ignore the time, and normalize the date to YYYY-MM-DD
+        chartdate = normalize_date(row['ChartDate'].split(' ')[0]) # Date the case was counted
+        eventdate = normalize_date(row['EventDate'].split(' ')[0]) # Date of onset
         characteristics = (
                 # Age MUST be first becuase main() accesses it at a fixed index
                 row['Age'],
                 row['County'],
                 row['Gender'],
                 row['Jurisdiction'],
-                # Dates are sometimes formatted with a timezone ("2020/04/21 05:00:00+00"),
-                # sometimes not ("2020/04/21 05:00:00"), so strip it for consistency
-                row['ChartDate'].split('+')[0], # Date the case was counted
-                row['EventDate'].split('+')[0], # Date of onset
+                chartdate,
+                eventdate,
                 # EventDate MUST be last because calc_o2d() accesses it at a fixed index
                 )
         if characteristics not in counters:
@@ -59,7 +73,7 @@ def calc_o2d(fname, characteristics):
     # FDOH line list was downloaded, and contains data for the day prior
     death_reported = parse_date(os.path.basename(fname)[:10]) - datetime.timedelta(days=1)
     # Parse EventDate (last element of the characteristics tuple)
-    onset = parse_date(characteristics[-1][:10], fmt='%Y/%m/%d')
+    onset = parse_date(characteristics[-1])
     # Calculate onset-to-death
     o2d = (death_reported - onset).days
     assert o2d >= 0
