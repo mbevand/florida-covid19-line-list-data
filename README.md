@@ -1,6 +1,6 @@
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 26 July 2020*
+*Updated: 30 July 2020*
 
 Authors: Marc Bevand
 
@@ -19,7 +19,7 @@ repository provides tools to analyze the data:
 ## FDOH line list
 
 To download the FDOH line list, browse the [data page][dataset] and click
-`Download → Spreadsheet`. However we already made daily archives of the line
+`Download` in the top right corner. However we already made daily archives of the line
 list in directory [data_fdoh](data_fdoh) so there is no need to download it.
 
 The line list is in CSV format and the columns are self-explanatory: `Age`,
@@ -358,7 +358,7 @@ stable from one file to another.
 * [Virginia](https://www.vdh.virginia.gov/coronavirus/)
 * [Tokyo](https://twitter.com/sugi2000/status/1285325952981983232)
 
-[dataset]: https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data
+[dataset]: https://www.arcgis.com/home/item.html?id=4cc62b3a510949c7a8167f6baa3e069d
 [def]: https://justthenews.com/sites/default/files/2020-07/Data_Definitions_05182020-2.pdf
 [f1]: https://twitter.com/zorinaq/status/1279934357323386880
 [m1]: http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032
