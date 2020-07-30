@@ -40,11 +40,21 @@ Most recent forecast:
 
 ![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
 
-Previous forecasts: see [historical](historical) directory. They
-have been accurate, for example our first forecast [published on
-2020-07-05][f1] accurately predicted the increase of deaths in July:
+[Previous forecasts](historical):
+
+* [2020-07-05 forecast](historical/forecast_deaths_2020-07-05.png), first published [here](https://twitter.com/zorinaq/status/1279934357323386880)
+* [2020-07-11 forecast](historical/forecast_deaths_2020-07-11.png), first published [here](https://twitter.com/zorinaq/status/1282184250163224576)
+* [2020-07-14 forecast](historical/forecast_deaths_2020-07-14.png), first published [here](https://twitter.com/zorinaq/status/1283195508777824256)
+* [2020-07-18 forecast](historical/forecast_deaths_2020-07-18.png), first published [here](https://twitter.com/zorinaq/status/1284544737110683648)
+* [2020-07-22 forecast](historical/forecast_deaths_2020-07-22.png), first published [here](https://twitter.com/zorinaq/status/1286054539003482114)
+* [2020-07-26 forecast](historical/forecast_deaths_2020-07-26.png), first published [here](https://twitter.com/zorinaq/status/1287652904824782854)
+
+Our previous forecasts have been accurate, for example our first forecasts
+accurately predicted the increase of deaths in July:
 
 ![Forecast of daily COVID-19 deaths in Florida](historical/forecast_deaths_2020-07-05.png)
+
+![Forecast of daily COVID-19 deaths in Florida](historical/forecast_deaths_2020-07-11.png)
 
 `forecast_deaths.py` does not rely on death data, but relies *solely* on case
 ages, date of onset of symptoms, and various estimates of the age-stratified CFR.
@@ -364,7 +374,6 @@ stable from one file to another.
 
 [dataset]: https://www.arcgis.com/home/item.html?id=4cc62b3a510949c7a8167f6baa3e069d
 [def]: https://justthenews.com/sites/default/files/2020-07/Data_Definitions_05182020-2.pdf
-[f1]: https://twitter.com/zorinaq/status/1279934357323386880
 [m1]: http://weekly.chinacdc.cn/en/article/doi/10.46234/ccdcw2020.032
 [m2]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
 [m3]: https://www.epicentro.iss.it/coronavirus/bollettino/Bollettino-sorveglianza-integrata-COVID-19_26-marzo%202020.pdf
