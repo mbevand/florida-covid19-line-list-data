@@ -217,7 +217,7 @@ def main():
         data[date][b].deaths += 1 if died else 0
         data[date][b].cases += 1
     # Parameters of the Gamma distribution of onset-to-death, calculated by gamma.py
-    mean, shape = 18.5, 1.93
+    mean, shape = 19.2, 1.95
     calc_cfr(data, mean, shape)
     #print_stats(data)
     gen_chart(data, mean, shape)
