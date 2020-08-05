@@ -287,10 +287,11 @@ def occurred():
     deaths_occurred_adj = []
     for date, deaths in result[-adj_last:-deaths_occurred_ignore_days]:
         x = (result[-1][0] - date).days
-        # 1 - e^(-0.1864*x) gives the approximate fraction of total deaths
-        # that are reported x days after the death, see:
+        # The CDF of death reporting (1 - e^(-lamba*x)) gives the approximate fraction
+        # of total deaths that are reported x days after the death, see:
         # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
-        frac_reported = 1 - math.e**(-0.1864*x)
+        lamda = 0.1728
+        frac_reported = 1 - math.e**(-lamda * x)
         deaths_occurred_adj.append((date, deaths / frac_reported))
     return deaths_occurred, deaths_occurred_adj
 
