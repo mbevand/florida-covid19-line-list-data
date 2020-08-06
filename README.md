@@ -67,7 +67,7 @@ date of onset of symptoms (`EventDate` CSV column.)
 
 The script multiplies the numbers of cases in specific age brackets by the
 corresponding age-stratified CFR. The age-stratified CFR estimates are issued
-from 5 independent models:
+from multiple independent models:
 
 * Model 2: [Estimates of the severity of coronavirus disease 2019: a model-based analysis][m2] (table 1, CFR, Adjusted for censoring, demography, and under-ascertainment)
 * Model 4: [Case fatality risk by age from COVID-19 in a high testing setting in Latin America: Chile, March-May, 2020][m4] (table 2, Latest estimate)
@@ -106,10 +106,9 @@ smoothed with a 7-day simple moving average.
 
 The end result is a simple tool that can not only predict deaths up to ~19.2
 days ahead of time, but can also estimate *past* deaths accurately: notice how
-the colored curves in the generated chart follow closely the black curve
-(actual deaths.)
+the colored curves in the generated chart follow closely the observed deaths.
 
-Historical data for actual deaths was fetched from the [New York Times Covid-19
+Historical data for observed deaths was fetched from the [New York Times Covid-19
 data repository][nyt] and was saved in the file [data_deaths/fl_resident_deaths.csv](data_deaths/fl_resident_deaths.csv).
 Death data is only used to draw the black curve. It is *not* used in the
 forecasts based on CFR models #1 through #4. Actual deaths are only used
