@@ -207,7 +207,8 @@ def main():
     data = {}
     for _, row in df.iterrows():
         age = row['Age']
-        if math.isnan(age):
+        # on 2020-08-07 a case was added with Age=-1.0
+        if math.isnan(age) or age < 0:
             continue
         date = row['date_parsed'].date()
         died = row['Died'] == 'Yes'
