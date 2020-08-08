@@ -126,7 +126,7 @@ def parse_date(s):
 
 def cfr_for_age(model, age):
     # Given a patient age, return the Case Fatality Ratio for their age
-    if math.isnan(age):
+    if math.isnan(age) or age < 0:
         # For patients whose age is unknown (less than 1% of all cases),
         # assume the average CFR
         return model.cfr_average
