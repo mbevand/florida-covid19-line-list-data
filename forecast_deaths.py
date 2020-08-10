@@ -292,6 +292,7 @@ def occurred():
         # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
         lamda = 0.1728
         frac_reported = 1 - math.e**(-lamda * x)
+        #print(f'{date} ({x}d lag): fraction_reported={frac_reported:.2f}, adjusting {deaths:.0f} to {deaths / frac_reported:.0f}')
         deaths_occurred_adj.append((date, deaths / frac_reported))
     return deaths_occurred, deaths_occurred_adj
 
