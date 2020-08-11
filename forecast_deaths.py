@@ -287,7 +287,11 @@ def occurred():
     deaths_occurred = result[:-deaths_occurred_ignore_days]
     deaths_occurred_adj = []
     for date, deaths in result[-adj_last:-deaths_occurred_ignore_days]:
-        x = (result[-1][0] - date).days
+        # "+ 1" because when csv_deaths_occurred is published, the last day for which it
+        # contains data (result[-1][0]) is usually 1 day prior to when the data is published.
+        # Ideally we should keep track of when csv_deaths_occurred was published instead of
+        # making this assumption.
+        x = (result[-1][0] - date).days + 1
         # The CDF of death reporting (1 - e^(-lamba*x)) gives the approximate fraction
         # of total deaths that are reported x days after the death, see:
         # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
