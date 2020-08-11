@@ -282,7 +282,7 @@ def occurred():
             result.append((date, deaths))
     # result is usually already sorted in csv_deaths_occurred, but sort it to guarantee it
     result = sorted(result)
-    adj_last = 30 # adjust starting this many days prior to the present day
+    adj_last = 60 # adjust starting this many days prior to the present day
     assert len(result) > adj_last
     deaths_occurred = result[:-deaths_occurred_ignore_days]
     deaths_occurred_adj = []
