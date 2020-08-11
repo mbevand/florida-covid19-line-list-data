@@ -280,7 +280,8 @@ def occurred():
         # occasionally we see bogus rows with dates from years ago. ignore them
         if date >= datetime.date(2020, 1, 1):
             result.append((date, deaths))
-    result = sma(result)
+    # result is usually already sorted in csv_deaths_occurred, but sort it to guarantee it
+    result = sorted(result)
     adj_last = 30 # adjust starting this many days prior to the present day
     assert len(result) > adj_last
     deaths_occurred = result[:-deaths_occurred_ignore_days]
@@ -292,9 +293,8 @@ def occurred():
         # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
         lamda = 0.1728
         frac_reported = 1 - math.e**(-lamda * x)
-        #print(f'{date} ({x}d lag): fraction_reported={frac_reported:.2f}, adjusting {deaths:.0f} to {deaths / frac_reported:.0f}')
         deaths_occurred_adj.append((date, deaths / frac_reported))
-    return deaths_occurred, deaths_occurred_adj
+    return sma(deaths_occurred), sma(deaths_occurred_adj)
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == '-redline':
