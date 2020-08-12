@@ -93,7 +93,7 @@ def gen_chart(o2d, bracket, shape, loc, scale):
     ax.set_ylabel('Number of deaths')
     ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.xaxis.set_major_locator(ticker.MultipleLocator(base=10))
-    ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=1))
+    #ax.yaxis.set_minor_locator(ticker.MultipleLocator(base=1))
     ax.set_xlim(left=-1, right=right)
     fig.suptitle('Onset-to-death distribution of Florida COVID-19 deaths\n'
             f'{bracket2str(bracket)} (N = {len(o2d)})')
