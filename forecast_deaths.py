@@ -292,10 +292,10 @@ def occurred():
         # Ideally we should keep track of when csv_deaths_occurred was published instead of
         # making this assumption.
         x = (result[-1][0] - date).days + 1
-        # The CDF of death reporting (1 - e^(-lamba*x)) gives the approximate fraction
+        # The CDF of death reporting (1 - e^(-lamda*x)) gives the approximate fraction
         # of total deaths that are reported x days after the death, see:
         # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
-        lamda = 0.1689
+        lamda = 0.1583
         frac_reported = 1 - math.e**(-lamda * x)
         deaths_occurred_adj.append((date, deaths / frac_reported))
     return sma(deaths_occurred), sma(deaths_occurred_adj)
