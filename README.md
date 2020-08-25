@@ -1,6 +1,6 @@
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 21 August 2020*
+*Updated: 25 August 2020*
 
 Author: Marc Bevand
 
