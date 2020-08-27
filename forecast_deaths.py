@@ -24,7 +24,7 @@ csv_deaths_occurred = 'data_deaths/deaths_by_date_of_death.csv'
 deaths_occurred_ignore_days = 10
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
-o2d = 22.2
+o2d = 23.2
 
 # Number of days to calculate the simple moving average of the chart curves
 avg_days = 7
