@@ -34,12 +34,16 @@ def main():
         # The datasets are used to draw 3 plots: yaxis is "y" or "y2" or "y3"
         # y is Deaths per day
         # y2 and y3 are Total deaths and Reproduction number
+        # The 3 projections (lower, upper, projected) have this hovertemplate:
+        # "<i>lower range: %{y:,} (%{text} / 1M)</i>"
+        # "<i>upper range: %{y:,} (%{text} / 1M)</i>"
+        # "<i>%{text}</i>"
         if dataset['yaxis'] == 'y' and 'hovertemplate' in dataset:
             if 'lower range' in dataset['hovertemplate']:
                 store('lower', list(zip(dataset['x'], dataset['y'])))
             if 'upper range' in dataset['hovertemplate']:
                 store('upper', list(zip(dataset['x'], dataset['y'])))
-            if 'projected' in dataset['hovertemplate']:
+            if '<i>%{text}</i>' in dataset['hovertemplate']:
                 store('projected', list(zip(dataset['x'], dataset['y'])))
     for date in data:
         if data[date]['lower']:
