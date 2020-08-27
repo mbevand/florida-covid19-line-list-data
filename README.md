@@ -54,6 +54,7 @@ Most recent forecast:
 * [2020-08-11 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-11.png), first published [here](https://twitter.com/zorinaq/status/1293435528210034690)
 * [2020-08-16 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-16.png), first published [here](https://twitter.com/zorinaq/status/1295235407030829059)
 * [2020-08-21 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-21.png), first published [here](https://twitter.com/zorinaq/status/1296897188136497155)
+* [2020-08-27 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-27.png), first published [here](https://twitter.com/zorinaq/status/1299127359589605376)
 
 Our previous forecasts have been accurate, for example our first forecasts
 accurately predicted the increase of deaths in July:
