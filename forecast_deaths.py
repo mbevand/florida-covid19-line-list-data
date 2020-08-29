@@ -20,8 +20,8 @@ csv_deaths_reported = 'data_deaths/fl_resident_deaths.csv'
 # Observed deaths, by date death occurred
 csv_deaths_occurred = 'data_deaths/deaths_by_date_of_death.csv'
 
-# Do not chart last 10 days of deaths by date of death (data is incomplete)
-deaths_occurred_ignore_days = 10
+# Do not chart last 2 days of deaths by date of death (data is incomplete)
+deaths_occurred_ignore_days = 2
 
 # Mean time (in days) from onset of symptoms to death, calculated by gamma.py
 o2d = 23.2
