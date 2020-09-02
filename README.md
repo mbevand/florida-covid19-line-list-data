@@ -1,6 +1,6 @@
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 27 August 2020*
+*Updated: 01 September 2020*
 
 Author: Marc Bevand
 
@@ -36,11 +36,9 @@ but we are aware this column may have data quality issues.
 
 ## Forecasting deaths
 
-Most recent forecast:
+### Previous forecasts
 
-![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
-
-[Previous forecasts](historical):
+List of our previous forecasts ([directory](historical)):
 
 * [2020-07-05 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-07-05.png), first published [here](https://twitter.com/zorinaq/status/1279934357323386880)
 * [2020-07-11 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-07-11.png), first published [here](https://twitter.com/zorinaq/status/1282184250163224576)
@@ -55,13 +53,16 @@ Most recent forecast:
 * [2020-08-16 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-16.png), first published [here](https://twitter.com/zorinaq/status/1295235407030829059)
 * [2020-08-21 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-21.png), first published [here](https://twitter.com/zorinaq/status/1296897188136497155)
 * [2020-08-27 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-27.png), first published [here](https://twitter.com/zorinaq/status/1299127359589605376)
+* [2020-09-01 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-09-01.png), first published [here](https://twitter.com/zorinaq/status/1300952032023425026)
+
+### Most recent forecast
+
+![Forecast of daily COVID-19 deaths in Florida](forecast_deaths_published.png)
 
 Our previous forecasts have been accurate, for example our first forecasts
 accurately predicted the increase of deaths in July:
 
 ![Forecast of daily COVID-19 deaths in Florida](historical/forecast_deaths_2020-07-05.png)
-
-![Forecast of daily COVID-19 deaths in Florida](historical/forecast_deaths_2020-07-11.png)
 
 `forecast_deaths.py` does not rely on death data, but relies *solely* on case
 ages, date of onset of symptoms, and various estimates of the age-stratified CFR.
