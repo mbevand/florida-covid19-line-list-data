@@ -138,6 +138,7 @@ def main():
         # Fit in a Gamma distribution. Note that we fix the location to 0.
         shape, loc, scale = stats.gamma.fit(o2d, floc=0)
         print(f'Gamma distribution params:\nmean = {shape * scale:.1f}\nshape = {shape:.2f}')
+        print(f'Median: {np.median(o2d):.1f}')
         gen_chart(o2d, bracket, shape, loc, scale)
 
 if __name__ == "__main__":
