@@ -135,11 +135,12 @@ def main():
         o2d = [x[0] for x in list(filter(lambda x: x[1] >= bracket[0] and x[1] <= bracket[1], o2d_all))]
         #print(f'Onset-to-death times (in days): {o2d}')
         print(f'Number of deaths: {len(o2d)}')
-        # Fit in a Gamma distribution. Note that we fix the location to 0.
-        shape, loc, scale = stats.gamma.fit(o2d, floc=0)
-        print(f'Gamma distribution params:\nmean = {shape * scale:.1f}\nshape = {shape:.2f}')
-        print(f'Median: {np.median(o2d):.1f}')
-        gen_chart(o2d, bracket, shape, loc, scale)
+        if len(o2d):
+            # Fit in a Gamma distribution. Note that we fix the location to 0.
+            shape, loc, scale = stats.gamma.fit(o2d, floc=0)
+            print(f'Gamma distribution params:\nmean = {shape * scale:.1f}\nshape = {shape:.2f}')
+            print(f'Median: {np.median(o2d):.1f}')
+            gen_chart(o2d, bracket, shape, loc, scale)
 
 if __name__ == "__main__":
     main()
