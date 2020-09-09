@@ -1,6 +1,6 @@
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
-*Updated: 01 September 2020*
+*Updated: 09 September 2020*
 
 Author: Marc Bevand
 
@@ -54,6 +54,7 @@ List of our previous forecasts ([directory](historical)):
 * [2020-08-21 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-21.png), first published [here](https://twitter.com/zorinaq/status/1296897188136497155)
 * [2020-08-27 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-08-27.png), first published [here](https://twitter.com/zorinaq/status/1299127359589605376)
 * [2020-09-01 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-09-01.png), first published [here](https://twitter.com/zorinaq/status/1300952032023425026)
+* [2020-09-09 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-09-09.png), first published [here](https://twitter.com/zorinaq/status/1303748003027582976)
 
 ### Most recent forecast
 
