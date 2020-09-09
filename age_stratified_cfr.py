@@ -152,7 +152,7 @@ def gen_chart(data, mean, shape):
         ax.plot(dates3, cfrs3, linewidth=1.0, color=t20[col_i], linestyle='-')
         last_day, last_cfr = dates3[-1], cfrs3[-1]
         # label the last long-term adjusted CFR
-        yo = -8 if bracket == OVERALL else 0
+        yo = -5 if bracket == OVERALL else 0
         ax.annotate(f'{bracket2str(bracket)}: {last_cfr:.3f}%', (last_day, last_cfr),
                 xytext=(15, yo), textcoords='offset points',
                 verticalalignment='center', fontsize='x-small', arrowprops={'arrowstyle':'-'},
