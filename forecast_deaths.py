@@ -108,15 +108,15 @@ cfr_models = [
         CFRModel(
             '5',
             'Our CFR calculated on the Florida line list (age_stratified_cfr.py)',
-            1.774 / 100, {
-                (0, 29):  0.058 / 100,
-                (30, 39): 0.076 / 100,
-                (40, 49): 0.127 / 100,
-                (50, 59): 0.794 / 100,
-                (60, 69): 2.177 / 100,
-                (70, 79): 6.172 / 100,
-                (80, 89): 16.427 / 100,
-                (90, 199): 22.006 / 100,
+            2.090 / 100, {
+                (0, 29):  0.083 / 100,
+                (30, 39): 0.114 / 100,
+                (40, 49): 0.226 / 100,
+                (50, 59): 0.755 / 100,
+                (60, 69): 2.295 / 100,
+                (70, 79): 6.959 / 100,
+                (80, 89): 18.329 / 100,
+                (90, 199): 24.497 / 100,
                 }
             ),
         ]
@@ -295,7 +295,7 @@ def occurred():
         # The CDF of death reporting (1 - e^(-lamda*x)) gives the approximate fraction
         # of total deaths that are reported x days after the death, see:
         # https://github.com/mbevand/florida-covid19-deaths-by-day/blob/master/README.md#average-reporting-delay
-        lamda = 0.1492
+        lamda = 0.1428
         frac_reported = 1 - math.e**(-lamda * x)
         deaths_occurred_adj.append((date, deaths / frac_reported))
     return sma(deaths_occurred), sma(deaths_occurred_adj)
