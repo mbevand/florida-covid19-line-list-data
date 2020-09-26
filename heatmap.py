@@ -217,7 +217,8 @@ def main():
     # starting on datetime.date(y, m, d).
     ages = {}
     non_null = df[~df["Age"].isnull()]
-    for period in set(df["Period"]):
+    periods = set(df["Period"])
+    for period in periods:
         cases_per_bracket[period] = {bucket: 0 for bucket in buckets_ages}
         ages[period] = []
         in_period = non_null["Period"] == period
@@ -234,6 +235,13 @@ def main():
         share_positive[period] = {}
         for (bucket, cases) in cases_data.items():
             share_positive[period][bucket] = 100 * cases / total_cases
+    for period in periods:
+        # there were so few cases before this date that the age brackets with the
+        # highest percentages of cases have such high percentages that a few pixels
+        # in the heatmap are going to be very bright, and all the others very dim.
+        # So we ignore time periods earlier than this date:
+        if period < datetime.date(2020, 3, 13):
+            del share_positive[period]
     # calculate cases_per_capita
     cases_per_capita = {}
     for (period, cases_data) in cases_per_bracket.items():
