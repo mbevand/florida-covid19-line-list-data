@@ -173,21 +173,6 @@ def init_chart(date_of_data):
     fig.suptitle(f'Forecast of daily COVID-19 deaths in Florida\n(as of {date_of_data})')
     return (fig, ax)
 
-def plot_yyg(ax, last_forecast):
-    fname = list(filter(lambda x: x.endswith('.csv'), sorted(os.listdir('utils'))))[-1]
-    fnamedate = fname.split('.')[0].split('_')[-1]
-    fname = 'utils' + os.sep + fname
-    print(f'Opening {fname}')
-    df = pd.read_csv(fname)
-    df = df[df['date'] <= str(last_forecast)]
-    dates = [parse_date(x) for x in df['date']]
-    styles = {'linewidth': 1.0, 'linestyle': (0, (1, 3)), 'color': 'tab:pink', 'alpha': 1.0}
-    ax.plot(dates, df['projected'], **styles,
-            label=f'For comparison only: YYG forecast as of {fnamedate} (3 lines show '
-            'projected deaths, lower bound, upper bound)\nhttps://covid19-projections.com/us-fl')
-    ax.plot(dates, df['lower'], **styles, label='_nolegend_')
-    ax.plot(dates, df['upper'], **styles, label='_nolegend_')
-
 def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_occurred, deaths_occurred_adj, deaths_best_guess):
     # plot observed deaths, by date reported
     d = deaths_reported
@@ -224,8 +209,6 @@ def gen_chart(date_of_data, fig, ax, deaths, deaths_reported, deaths_occurred, d
             last_forecast = d[-1][0]
         ax.plot([x[0] for x in d], [x[1] for x in d], linewidth=1.0, ls=lstyles[i % len(lstyles)],
                 label=f'Forecast model {cfr_models[i].model_no}: {cfr_models[i].source}')
-    # plot YYG's forecast
-    plot_yyg(ax, last_forecast)
     # chart
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=datetime.date(2020, 3, 16), right=last_forecast)
