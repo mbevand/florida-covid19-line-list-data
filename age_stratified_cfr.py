@@ -17,9 +17,9 @@ csv_url = 'https://www.arcgis.com/sharing/rest/content/items/4cc62b3a510949c7a81
 # Calculate the CFR on these age brackets
 age_brackets = ((0, 29), (30, 39), (40, 49), (50, 59), (60, 69), (70, 79), (80, 89), (90, math.inf))
 # Averaging period to calculate the raw and short-term adjusted CFR
-avg_days = 7
+avg_days = 2 * 7
 # Averaging period to calculate the long-term adjusted CFR
-avg_days_long = 3 * 7
+avg_days_long = 5 * 7
 # Start the chart on this date
 first_date = datetime.date(2020, 3, 15)
 # "Tableau 20" colors re-ordered so the pastel colors are at the end

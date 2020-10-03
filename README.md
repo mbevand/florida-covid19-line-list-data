@@ -138,22 +138,22 @@ whose `Jurisdiction` is `Not diagnosed/isolated in FL`.
 
 `age_stratified_cfr.py` opens the latest line list CSV file (in directory [data_fdoh](data_fdoh))
 or if no such file exists it downloads it from the [FDOH line list page][dataset].
-It calculates the 7-day moving average of the raw CFR of various age brackets,
+It calculates the 14-day moving average of the raw CFR of various age brackets,
 with cases ordered by date of onset of symptoms.
 
-The script also calculates the 7-day (short-term) and 21-day (long-term) moving
+The script also calculates the 14-day (short-term) and 35-day (long-term) moving
 average of the CFR ajusted for right censoring. The adjustment is performed by
 using the parameters of the Gamma distribution of onset-to-death calculated by
-`gamma.py`. The long-term average is calculated over 21 days shifted by 7 days
-(days D-7 through D-27) because despite best efforts to adjust for censoring,
-the number of deaths in the last 7 days still remains too incomplete to make the
+`gamma.py`. The long-term average is calculated over 35 days shifted by 14 days
+(days D-14 through D-48) because despite best efforts to adjust for censoring,
+the number of deaths in the last 14 days still remains too incomplete to make the
 adjustment accurate (garbage in, garbage out.)
 
 All the moving averages are calculated by assigning equal *weight* to each
 day's CFR value. If they were calculated by summing all cases and deaths across
-the entire 7-day or 21-day period, this would give too much weight to days
+the entire 14-day or 35-day period, this would give too much weight to days
 with more cases and would not be representative of the overall average over
-the entire 7 or 21 days.
+the entire 14 or 35 days.
 
 The results of these CFR calculations are charted in `age_stratified_cfr.png`.
 
