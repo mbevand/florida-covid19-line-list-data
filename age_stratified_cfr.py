@@ -190,7 +190,7 @@ def main():
         fname = sys.argv[1]
     else:
         try:
-            files = list(filter(lambda x: x.endswith('.csv'), sorted(os.listdir(datadir))))
+            files = list(filter(lambda x: x.endswith('.csv') or x.endswith('.csv.gz'), sorted(os.listdir(datadir))))
         except FileNotFoundError:
             files = []
         if files:
