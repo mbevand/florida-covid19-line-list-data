@@ -5,10 +5,12 @@ size() {
     stat -c %s "$1"
 }
 
-prev=$(ls *.csv | tail -1)
+prev=$(ls *.csv.gz | tail -1)
 yyyymmdd=$(date +%F)
 new=${yyyymmdd}-$(date +%H-%M-%S).csv
-wget --quiet --compression=auto -O "$new" https://www.arcgis.com/sharing/rest/content/items/4cc62b3a510949c7a8167f6baa3e069d/data
+wget --quiet --compression=auto -O "$new" https://www.arcgis.com/sharing/rest/content/items/4cc62b3a510949c7a8167f6baa3e069d/data &&
+gzip "$new" &&
+new="${new}.gz"
 if [ $(size "$new") -lt 10000 ]; then
     echo "Too short (content being updated?)"
     rm "$new"
