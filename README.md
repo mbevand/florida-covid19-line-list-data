@@ -56,6 +56,7 @@ List of our previous forecasts ([directory](historical)):
 * [2020-09-01 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-09-01.png), first published [here](https://twitter.com/zorinaq/status/1300952032023425026)
 * [2020-09-09 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-09-09.png), first published [here](https://twitter.com/zorinaq/status/1303748003027582976)
 * [2020-09-19 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-09-19.png), first published [here](https://twitter.com/zorinaq/status/1307548097698914306)
+* [2020-10-03 forecast](https://raw.githubusercontent.com/mbevand/florida-covid19-line-list-data/master/historical/forecast_deaths_2020-10-03.png), first published [here](https://twitter.com/zorinaq/status/1312512597795590144)
 
 ### Most recent forecast
 
