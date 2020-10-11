@@ -38,1477 +38,1491 @@
       "attributes" : {
         "Date" : 1583384400000, 
         "Deaths" : 1, 
-        "ObjectId" : 22051
+        "ObjectId" : 22473
       }
     }, 
     {
       "attributes" : {
         "Date" : 1583470800000, 
         "Deaths" : 1, 
-        "ObjectId" : 22052
+        "ObjectId" : 22474
       }
     }, 
     {
       "attributes" : {
         "Date" : 1583816400000, 
         "Deaths" : 1, 
-        "ObjectId" : 22053
+        "ObjectId" : 22475
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584162000000, 
         "Deaths" : 2, 
-        "ObjectId" : 22054
+        "ObjectId" : 22476
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584248400000, 
         "Deaths" : 1, 
-        "ObjectId" : 22055
+        "ObjectId" : 22477
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584421200000, 
         "Deaths" : 3, 
-        "ObjectId" : 22056
+        "ObjectId" : 22478
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584507600000, 
         "Deaths" : 1, 
-        "ObjectId" : 22057
+        "ObjectId" : 22479
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584594000000, 
         "Deaths" : 2, 
-        "ObjectId" : 22058
+        "ObjectId" : 22480
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584680400000, 
         "Deaths" : 2, 
-        "ObjectId" : 22059
+        "ObjectId" : 22481
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584766800000, 
         "Deaths" : 7, 
-        "ObjectId" : 22060
+        "ObjectId" : 22482
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584853200000, 
         "Deaths" : 3, 
-        "ObjectId" : 22061
+        "ObjectId" : 22483
       }
     }, 
     {
       "attributes" : {
         "Date" : 1584939600000, 
         "Deaths" : 5, 
-        "ObjectId" : 22062
+        "ObjectId" : 22484
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585026000000, 
         "Deaths" : 14, 
-        "ObjectId" : 22063
+        "ObjectId" : 22485
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585112400000, 
         "Deaths" : 20, 
-        "ObjectId" : 22064
+        "ObjectId" : 22486
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585198800000, 
         "Deaths" : 13, 
-        "ObjectId" : 22065
+        "ObjectId" : 22487
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585285200000, 
         "Deaths" : 18, 
-        "ObjectId" : 22066
+        "ObjectId" : 22488
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585371600000, 
         "Deaths" : 12, 
-        "ObjectId" : 22067
+        "ObjectId" : 22489
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585458000000, 
         "Deaths" : 19, 
-        "ObjectId" : 22068
+        "ObjectId" : 22490
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585544400000, 
         "Deaths" : 22, 
-        "ObjectId" : 22069
+        "ObjectId" : 22491
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585630800000, 
         "Deaths" : 31, 
-        "ObjectId" : 22070
+        "ObjectId" : 22492
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585717200000, 
         "Deaths" : 31, 
-        "ObjectId" : 22071
+        "ObjectId" : 22493
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585803600000, 
         "Deaths" : 35, 
-        "ObjectId" : 22072
+        "ObjectId" : 22494
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585890000000, 
         "Deaths" : 30, 
-        "ObjectId" : 22073
+        "ObjectId" : 22495
       }
     }, 
     {
       "attributes" : {
         "Date" : 1585976400000, 
         "Deaths" : 35, 
-        "ObjectId" : 22074
+        "ObjectId" : 22496
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586062800000, 
         "Deaths" : 43, 
-        "ObjectId" : 22075
+        "ObjectId" : 22497
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586149200000, 
         "Deaths" : 44, 
-        "ObjectId" : 22076
+        "ObjectId" : 22498
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586235600000, 
-        "Deaths" : 45, 
-        "ObjectId" : 22077
+        "Deaths" : 44, 
+        "ObjectId" : 22499
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586322000000, 
-        "Deaths" : 43, 
-        "ObjectId" : 22078
+        "Deaths" : 44, 
+        "ObjectId" : 22500
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586408400000, 
         "Deaths" : 39, 
-        "ObjectId" : 22079
+        "ObjectId" : 22501
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586494800000, 
         "Deaths" : 41, 
-        "ObjectId" : 22080
+        "ObjectId" : 22502
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586581200000, 
         "Deaths" : 41, 
-        "ObjectId" : 22081
+        "ObjectId" : 22503
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586667600000, 
         "Deaths" : 36, 
-        "ObjectId" : 22082
+        "ObjectId" : 22504
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586754000000, 
         "Deaths" : 45, 
-        "ObjectId" : 22083
+        "ObjectId" : 22505
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586840400000, 
         "Deaths" : 49, 
-        "ObjectId" : 22084
+        "ObjectId" : 22506
       }
     }, 
     {
       "attributes" : {
         "Date" : 1586926800000, 
         "Deaths" : 42, 
-        "ObjectId" : 22085
+        "ObjectId" : 22507
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587013200000, 
         "Deaths" : 43, 
-        "ObjectId" : 22086
+        "ObjectId" : 22508
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587099600000, 
         "Deaths" : 56, 
-        "ObjectId" : 22087
+        "ObjectId" : 22509
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587186000000, 
         "Deaths" : 39, 
-        "ObjectId" : 22088
+        "ObjectId" : 22510
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587272400000, 
         "Deaths" : 51, 
-        "ObjectId" : 22089
+        "ObjectId" : 22511
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587358800000, 
         "Deaths" : 50, 
-        "ObjectId" : 22090
+        "ObjectId" : 22512
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587445200000, 
         "Deaths" : 47, 
-        "ObjectId" : 22091
+        "ObjectId" : 22513
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587531600000, 
         "Deaths" : 44, 
-        "ObjectId" : 22092
+        "ObjectId" : 22514
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587618000000, 
         "Deaths" : 52, 
-        "ObjectId" : 22093
+        "ObjectId" : 22515
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587704400000, 
         "Deaths" : 39, 
-        "ObjectId" : 22094
+        "ObjectId" : 22516
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587790800000, 
         "Deaths" : 41, 
-        "ObjectId" : 22095
+        "ObjectId" : 22517
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587877200000, 
         "Deaths" : 50, 
-        "ObjectId" : 22096
+        "ObjectId" : 22518
       }
     }, 
     {
       "attributes" : {
         "Date" : 1587963600000, 
         "Deaths" : 42, 
-        "ObjectId" : 22097
+        "ObjectId" : 22519
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588050000000, 
         "Deaths" : 54, 
-        "ObjectId" : 22098
+        "ObjectId" : 22520
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588136400000, 
         "Deaths" : 45, 
-        "ObjectId" : 22099
+        "ObjectId" : 22521
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588222800000, 
         "Deaths" : 51, 
-        "ObjectId" : 22100
+        "ObjectId" : 22522
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588309200000, 
         "Deaths" : 51, 
-        "ObjectId" : 22101
+        "ObjectId" : 22523
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588395600000, 
         "Deaths" : 30, 
-        "ObjectId" : 22102
+        "ObjectId" : 22524
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588482000000, 
         "Deaths" : 41, 
-        "ObjectId" : 22103
+        "ObjectId" : 22525
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588568400000, 
         "Deaths" : 62, 
-        "ObjectId" : 22104
+        "ObjectId" : 22526
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588654800000, 
         "Deaths" : 39, 
-        "ObjectId" : 22105
+        "ObjectId" : 22527
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588741200000, 
         "Deaths" : 49, 
-        "ObjectId" : 22106
+        "ObjectId" : 22528
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588827600000, 
         "Deaths" : 42, 
-        "ObjectId" : 22107
+        "ObjectId" : 22529
       }
     }, 
     {
       "attributes" : {
         "Date" : 1588914000000, 
         "Deaths" : 34, 
-        "ObjectId" : 22108
+        "ObjectId" : 22530
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589000400000, 
         "Deaths" : 32, 
-        "ObjectId" : 22109
+        "ObjectId" : 22531
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589086800000, 
         "Deaths" : 38, 
-        "ObjectId" : 22110
+        "ObjectId" : 22532
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589173200000, 
         "Deaths" : 45, 
-        "ObjectId" : 22111
+        "ObjectId" : 22533
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589259600000, 
         "Deaths" : 43, 
-        "ObjectId" : 22112
+        "ObjectId" : 22534
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589346000000, 
         "Deaths" : 39, 
-        "ObjectId" : 22113
+        "ObjectId" : 22535
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589432400000, 
         "Deaths" : 45, 
-        "ObjectId" : 22114
+        "ObjectId" : 22536
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589518800000, 
         "Deaths" : 34, 
-        "ObjectId" : 22115
+        "ObjectId" : 22537
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589605200000, 
         "Deaths" : 37, 
-        "ObjectId" : 22116
+        "ObjectId" : 22538
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589691600000, 
         "Deaths" : 42, 
-        "ObjectId" : 22117
+        "ObjectId" : 22539
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589778000000, 
         "Deaths" : 23, 
-        "ObjectId" : 22118
+        "ObjectId" : 22540
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589864400000, 
         "Deaths" : 37, 
-        "ObjectId" : 22119
+        "ObjectId" : 22541
       }
     }, 
     {
       "attributes" : {
         "Date" : 1589950800000, 
         "Deaths" : 40, 
-        "ObjectId" : 22120
+        "ObjectId" : 22542
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590037200000, 
         "Deaths" : 38, 
-        "ObjectId" : 22121
+        "ObjectId" : 22543
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590123600000, 
         "Deaths" : 37, 
-        "ObjectId" : 22122
+        "ObjectId" : 22544
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590210000000, 
         "Deaths" : 41, 
-        "ObjectId" : 22123
+        "ObjectId" : 22545
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590296400000, 
         "Deaths" : 37, 
-        "ObjectId" : 22124
+        "ObjectId" : 22546
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590382800000, 
         "Deaths" : 36, 
-        "ObjectId" : 22125
+        "ObjectId" : 22547
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590469200000, 
         "Deaths" : 24, 
-        "ObjectId" : 22126
+        "ObjectId" : 22548
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590555600000, 
-        "Deaths" : 39, 
-        "ObjectId" : 22127
+        "Deaths" : 40, 
+        "ObjectId" : 22549
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590642000000, 
-        "Deaths" : 41, 
-        "ObjectId" : 22128
+        "Deaths" : 40, 
+        "ObjectId" : 22550
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590728400000, 
         "Deaths" : 27, 
-        "ObjectId" : 22129
+        "ObjectId" : 22551
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590814800000, 
         "Deaths" : 37, 
-        "ObjectId" : 22130
+        "ObjectId" : 22552
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590901200000, 
         "Deaths" : 35, 
-        "ObjectId" : 22131
+        "ObjectId" : 22553
       }
     }, 
     {
       "attributes" : {
         "Date" : 1590987600000, 
         "Deaths" : 32, 
-        "ObjectId" : 22132
+        "ObjectId" : 22554
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591074000000, 
         "Deaths" : 41, 
-        "ObjectId" : 22133
+        "ObjectId" : 22555
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591160400000, 
         "Deaths" : 40, 
-        "ObjectId" : 22134
+        "ObjectId" : 22556
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591246800000, 
         "Deaths" : 24, 
-        "ObjectId" : 22135
+        "ObjectId" : 22557
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591333200000, 
         "Deaths" : 30, 
-        "ObjectId" : 22136
+        "ObjectId" : 22558
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591419600000, 
         "Deaths" : 33, 
-        "ObjectId" : 22137
+        "ObjectId" : 22559
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591506000000, 
         "Deaths" : 30, 
-        "ObjectId" : 22138
+        "ObjectId" : 22560
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591592400000, 
         "Deaths" : 25, 
-        "ObjectId" : 22139
+        "ObjectId" : 22561
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591678800000, 
         "Deaths" : 33, 
-        "ObjectId" : 22140
+        "ObjectId" : 22562
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591765200000, 
         "Deaths" : 26, 
-        "ObjectId" : 22141
+        "ObjectId" : 22563
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591851600000, 
         "Deaths" : 30, 
-        "ObjectId" : 22142
+        "ObjectId" : 22564
       }
     }, 
     {
       "attributes" : {
         "Date" : 1591938000000, 
         "Deaths" : 38, 
-        "ObjectId" : 22143
+        "ObjectId" : 22565
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592024400000, 
         "Deaths" : 25, 
-        "ObjectId" : 22144
+        "ObjectId" : 22566
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592110800000, 
         "Deaths" : 32, 
-        "ObjectId" : 22145
+        "ObjectId" : 22567
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592197200000, 
         "Deaths" : 29, 
-        "ObjectId" : 22146
+        "ObjectId" : 22568
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592283600000, 
         "Deaths" : 46, 
-        "ObjectId" : 22147
+        "ObjectId" : 22569
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592370000000, 
         "Deaths" : 32, 
-        "ObjectId" : 22148
+        "ObjectId" : 22570
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592456400000, 
         "Deaths" : 33, 
-        "ObjectId" : 22149
+        "ObjectId" : 22571
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592542800000, 
         "Deaths" : 27, 
-        "ObjectId" : 22150
+        "ObjectId" : 22572
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592629200000, 
         "Deaths" : 40, 
-        "ObjectId" : 22151
+        "ObjectId" : 22573
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592715600000, 
         "Deaths" : 36, 
-        "ObjectId" : 22152
+        "ObjectId" : 22574
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592802000000, 
         "Deaths" : 55, 
-        "ObjectId" : 22153
+        "ObjectId" : 22575
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592888400000, 
         "Deaths" : 58, 
-        "ObjectId" : 22154
+        "ObjectId" : 22576
       }
     }, 
     {
       "attributes" : {
         "Date" : 1592974800000, 
         "Deaths" : 40, 
-        "ObjectId" : 22155
+        "ObjectId" : 22577
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593061200000, 
         "Deaths" : 53, 
-        "ObjectId" : 22156
+        "ObjectId" : 22578
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593147600000, 
         "Deaths" : 46, 
-        "ObjectId" : 22157
+        "ObjectId" : 22579
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593234000000, 
         "Deaths" : 53, 
-        "ObjectId" : 22158
+        "ObjectId" : 22580
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593320400000, 
         "Deaths" : 53, 
-        "ObjectId" : 22159
+        "ObjectId" : 22581
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593406800000, 
         "Deaths" : 51, 
-        "ObjectId" : 22160
+        "ObjectId" : 22582
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593493200000, 
         "Deaths" : 52, 
-        "ObjectId" : 22161
+        "ObjectId" : 22583
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593579600000, 
-        "Deaths" : 71, 
-        "ObjectId" : 22162
+        "Deaths" : 72, 
+        "ObjectId" : 22584
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593666000000, 
         "Deaths" : 79, 
-        "ObjectId" : 22163
+        "ObjectId" : 22585
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593752400000, 
         "Deaths" : 76, 
-        "ObjectId" : 22164
+        "ObjectId" : 22586
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593838800000, 
-        "Deaths" : 87, 
-        "ObjectId" : 22165
+        "Deaths" : 88, 
+        "ObjectId" : 22587
       }
     }, 
     {
       "attributes" : {
         "Date" : 1593925200000, 
         "Deaths" : 79, 
-        "ObjectId" : 22166
+        "ObjectId" : 22588
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594011600000, 
         "Deaths" : 105, 
-        "ObjectId" : 22167
+        "ObjectId" : 22589
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594098000000, 
         "Deaths" : 105, 
-        "ObjectId" : 22168
+        "ObjectId" : 22590
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594184400000, 
         "Deaths" : 137, 
-        "ObjectId" : 22169
+        "ObjectId" : 22591
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594270800000, 
         "Deaths" : 130, 
-        "ObjectId" : 22170
+        "ObjectId" : 22592
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594357200000, 
-        "Deaths" : 120, 
-        "ObjectId" : 22171
+        "Deaths" : 121, 
+        "ObjectId" : 22593
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594443600000, 
         "Deaths" : 147, 
-        "ObjectId" : 22172
+        "ObjectId" : 22594
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594530000000, 
-        "Deaths" : 152, 
-        "ObjectId" : 22173
+        "Deaths" : 151, 
+        "ObjectId" : 22595
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594616400000, 
-        "Deaths" : 170, 
-        "ObjectId" : 22174
+        "Deaths" : 171, 
+        "ObjectId" : 22596
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594702800000, 
-        "Deaths" : 163, 
-        "ObjectId" : 22175
+        "Deaths" : 164, 
+        "ObjectId" : 22597
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594789200000, 
         "Deaths" : 176, 
-        "ObjectId" : 22176
+        "ObjectId" : 22598
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594875600000, 
         "Deaths" : 200, 
-        "ObjectId" : 22177
+        "ObjectId" : 22599
       }
     }, 
     {
       "attributes" : {
         "Date" : 1594962000000, 
-        "Deaths" : 192, 
-        "ObjectId" : 22178
+        "Deaths" : 193, 
+        "ObjectId" : 22600
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595048400000, 
         "Deaths" : 178, 
-        "ObjectId" : 22179
+        "ObjectId" : 22601
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595134800000, 
-        "Deaths" : 204, 
-        "ObjectId" : 22180
+        "Deaths" : 205, 
+        "ObjectId" : 22602
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595221200000, 
         "Deaths" : 202, 
-        "ObjectId" : 22181
+        "ObjectId" : 22603
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595307600000, 
-        "Deaths" : 211, 
-        "ObjectId" : 22182
+        "Deaths" : 212, 
+        "ObjectId" : 22604
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595394000000, 
-        "Deaths" : 200, 
-        "ObjectId" : 22183
+        "Deaths" : 201, 
+        "ObjectId" : 22605
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595480400000, 
-        "Deaths" : 223, 
-        "ObjectId" : 22184
+        "Deaths" : 225, 
+        "ObjectId" : 22606
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595566800000, 
         "Deaths" : 224, 
-        "ObjectId" : 22185
+        "ObjectId" : 22607
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595653200000, 
-        "Deaths" : 218, 
-        "ObjectId" : 22186
+        "Deaths" : 219, 
+        "ObjectId" : 22608
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595739600000, 
-        "Deaths" : 208, 
-        "ObjectId" : 22187
+        "Deaths" : 210, 
+        "ObjectId" : 22609
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595826000000, 
-        "Deaths" : 202, 
-        "ObjectId" : 22188
+        "Deaths" : 203, 
+        "ObjectId" : 22610
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595912400000, 
-        "Deaths" : 217, 
-        "ObjectId" : 22189
+        "Deaths" : 220, 
+        "ObjectId" : 22611
       }
     }, 
     {
       "attributes" : {
         "Date" : 1595998800000, 
-        "Deaths" : 212, 
-        "ObjectId" : 22190
+        "Deaths" : 215, 
+        "ObjectId" : 22612
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596085200000, 
-        "Deaths" : 230, 
-        "ObjectId" : 22191
+        "Deaths" : 231, 
+        "ObjectId" : 22613
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596171600000, 
-        "Deaths" : 227, 
-        "ObjectId" : 22192
+        "Deaths" : 230, 
+        "ObjectId" : 22614
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596258000000, 
-        "Deaths" : 220, 
-        "ObjectId" : 22193
+        "Deaths" : 222, 
+        "ObjectId" : 22615
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596344400000, 
-        "Deaths" : 196, 
-        "ObjectId" : 22194
+        "Deaths" : 198, 
+        "ObjectId" : 22616
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596430800000, 
-        "Deaths" : 216, 
-        "ObjectId" : 22195
+        "Deaths" : 217, 
+        "ObjectId" : 22617
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596517200000, 
-        "Deaths" : 232, 
-        "ObjectId" : 22196
+        "Deaths" : 235, 
+        "ObjectId" : 22618
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596603600000, 
-        "Deaths" : 225, 
-        "ObjectId" : 22197
+        "Deaths" : 226, 
+        "ObjectId" : 22619
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596690000000, 
-        "Deaths" : 206, 
-        "ObjectId" : 22198
+        "Deaths" : 208, 
+        "ObjectId" : 22620
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596776400000, 
-        "Deaths" : 194, 
-        "ObjectId" : 22199
+        "Deaths" : 201, 
+        "ObjectId" : 22621
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596862800000, 
-        "Deaths" : 154, 
-        "ObjectId" : 22200
+        "Deaths" : 157, 
+        "ObjectId" : 22622
       }
     }, 
     {
       "attributes" : {
         "Date" : 1596949200000, 
-        "Deaths" : 164, 
-        "ObjectId" : 22201
+        "Deaths" : 166, 
+        "ObjectId" : 22623
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597035600000, 
-        "Deaths" : 176, 
-        "ObjectId" : 22202
+        "Deaths" : 179, 
+        "ObjectId" : 22624
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597122000000, 
-        "Deaths" : 173, 
-        "ObjectId" : 22203
+        "Deaths" : 176, 
+        "ObjectId" : 22625
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597208400000, 
-        "Deaths" : 176, 
-        "ObjectId" : 22204
+        "Deaths" : 180, 
+        "ObjectId" : 22626
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597294800000, 
-        "Deaths" : 165, 
-        "ObjectId" : 22205
+        "Deaths" : 167, 
+        "ObjectId" : 22627
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597381200000, 
-        "Deaths" : 147, 
-        "ObjectId" : 22206
+        "Deaths" : 149, 
+        "ObjectId" : 22628
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597467600000, 
-        "Deaths" : 150, 
-        "ObjectId" : 22207
+        "Deaths" : 157, 
+        "ObjectId" : 22629
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597554000000, 
-        "Deaths" : 112, 
-        "ObjectId" : 22208
+        "Deaths" : 115, 
+        "ObjectId" : 22630
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597640400000, 
-        "Deaths" : 119, 
-        "ObjectId" : 22209
+        "Deaths" : 122, 
+        "ObjectId" : 22631
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597726800000, 
-        "Deaths" : 123, 
-        "ObjectId" : 22210
+        "Deaths" : 125, 
+        "ObjectId" : 22632
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597813200000, 
-        "Deaths" : 146, 
-        "ObjectId" : 22211
+        "Deaths" : 147, 
+        "ObjectId" : 22633
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597899600000, 
-        "Deaths" : 127, 
-        "ObjectId" : 22212
+        "Deaths" : 128, 
+        "ObjectId" : 22634
       }
     }, 
     {
       "attributes" : {
         "Date" : 1597986000000, 
-        "Deaths" : 125, 
-        "ObjectId" : 22213
+        "Deaths" : 131, 
+        "ObjectId" : 22635
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598072400000, 
-        "Deaths" : 110, 
-        "ObjectId" : 22214
+        "Deaths" : 112, 
+        "ObjectId" : 22636
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598158800000, 
-        "Deaths" : 100, 
-        "ObjectId" : 22215
+        "Deaths" : 101, 
+        "ObjectId" : 22637
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598245200000, 
-        "Deaths" : 85, 
-        "ObjectId" : 22216
+        "Deaths" : 89, 
+        "ObjectId" : 22638
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598331600000, 
-        "Deaths" : 109, 
-        "ObjectId" : 22217
+        "Deaths" : 111, 
+        "ObjectId" : 22639
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598418000000, 
-        "Deaths" : 120, 
-        "ObjectId" : 22218
+        "Deaths" : 122, 
+        "ObjectId" : 22640
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598504400000, 
-        "Deaths" : 88, 
-        "ObjectId" : 22219
+        "Deaths" : 89, 
+        "ObjectId" : 22641
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598590800000, 
-        "Deaths" : 111, 
-        "ObjectId" : 22220
+        "Deaths" : 114, 
+        "ObjectId" : 22642
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598677200000, 
-        "Deaths" : 88, 
-        "ObjectId" : 22221
+        "Deaths" : 90, 
+        "ObjectId" : 22643
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598763600000, 
-        "Deaths" : 74, 
-        "ObjectId" : 22222
+        "Deaths" : 76, 
+        "ObjectId" : 22644
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598850000000, 
-        "Deaths" : 90, 
-        "ObjectId" : 22223
+        "Deaths" : 91, 
+        "ObjectId" : 22645
       }
     }, 
     {
       "attributes" : {
         "Date" : 1598936400000, 
-        "Deaths" : 88, 
-        "ObjectId" : 22224
+        "Deaths" : 90, 
+        "ObjectId" : 22646
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599022800000, 
-        "Deaths" : 82, 
-        "ObjectId" : 22225
+        "Deaths" : 83, 
+        "ObjectId" : 22647
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599109200000, 
-        "Deaths" : 78, 
-        "ObjectId" : 22226
+        "Deaths" : 80, 
+        "ObjectId" : 22648
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599195600000, 
-        "Deaths" : 89, 
-        "ObjectId" : 22227
+        "Deaths" : 91, 
+        "ObjectId" : 22649
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599282000000, 
-        "Deaths" : 79, 
-        "ObjectId" : 22228
+        "Deaths" : 81, 
+        "ObjectId" : 22650
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599368400000, 
-        "Deaths" : 84, 
-        "ObjectId" : 22229
+        "Deaths" : 87, 
+        "ObjectId" : 22651
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599454800000, 
         "Deaths" : 75, 
-        "ObjectId" : 22230
+        "ObjectId" : 22652
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599541200000, 
-        "Deaths" : 62, 
-        "ObjectId" : 22231
+        "Deaths" : 66, 
+        "ObjectId" : 22653
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599627600000, 
-        "Deaths" : 78, 
-        "ObjectId" : 22232
+        "Deaths" : 79, 
+        "ObjectId" : 22654
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599714000000, 
-        "Deaths" : 56, 
-        "ObjectId" : 22233
+        "Deaths" : 60, 
+        "ObjectId" : 22655
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599800400000, 
-        "Deaths" : 57, 
-        "ObjectId" : 22234
+        "Deaths" : 63, 
+        "ObjectId" : 22656
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599886800000, 
-        "Deaths" : 38, 
-        "ObjectId" : 22235
+        "Deaths" : 42, 
+        "ObjectId" : 22657
       }
     }, 
     {
       "attributes" : {
         "Date" : 1599973200000, 
-        "Deaths" : 47, 
-        "ObjectId" : 22236
+        "Deaths" : 52, 
+        "ObjectId" : 22658
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600059600000, 
-        "Deaths" : 56, 
-        "ObjectId" : 22237
+        "Deaths" : 61, 
+        "ObjectId" : 22659
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600146000000, 
-        "Deaths" : 51, 
-        "ObjectId" : 22238
+        "Deaths" : 55, 
+        "ObjectId" : 22660
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600232400000, 
-        "Deaths" : 47, 
-        "ObjectId" : 22239
+        "Deaths" : 50, 
+        "ObjectId" : 22661
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600318800000, 
-        "Deaths" : 43, 
-        "ObjectId" : 22240
+        "Deaths" : 44, 
+        "ObjectId" : 22662
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600405200000, 
-        "Deaths" : 40, 
-        "ObjectId" : 22241
+        "Deaths" : 45, 
+        "ObjectId" : 22663
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600491600000, 
-        "Deaths" : 36, 
-        "ObjectId" : 22242
+        "Deaths" : 42, 
+        "ObjectId" : 22664
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600578000000, 
-        "Deaths" : 32, 
-        "ObjectId" : 22243
+        "Deaths" : 37, 
+        "ObjectId" : 22665
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600664400000, 
-        "Deaths" : 45, 
-        "ObjectId" : 22244
+        "Deaths" : 49, 
+        "ObjectId" : 22666
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600750800000, 
-        "Deaths" : 42, 
-        "ObjectId" : 22245
+        "Deaths" : 51, 
+        "ObjectId" : 22667
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600837200000, 
-        "Deaths" : 40, 
-        "ObjectId" : 22246
+        "Deaths" : 47, 
+        "ObjectId" : 22668
       }
     }, 
     {
       "attributes" : {
         "Date" : 1600923600000, 
-        "Deaths" : 22, 
-        "ObjectId" : 22247
+        "Deaths" : 28, 
+        "ObjectId" : 22669
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601010000000, 
-        "Deaths" : 30, 
-        "ObjectId" : 22248
+        "Deaths" : 38, 
+        "ObjectId" : 22670
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601096400000, 
-        "Deaths" : 25, 
-        "ObjectId" : 22249
+        "Deaths" : 33, 
+        "ObjectId" : 22671
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601182800000, 
-        "Deaths" : 22, 
-        "ObjectId" : 22250
+        "Deaths" : 26, 
+        "ObjectId" : 22672
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601269200000, 
-        "Deaths" : 19, 
-        "ObjectId" : 22251
+        "Deaths" : 25, 
+        "ObjectId" : 22673
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601355600000, 
-        "Deaths" : 20, 
-        "ObjectId" : 22252
+        "Deaths" : 26, 
+        "ObjectId" : 22674
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601442000000, 
-        "Deaths" : 13, 
-        "ObjectId" : 22253
+        "Deaths" : 17, 
+        "ObjectId" : 22675
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601528400000, 
-        "Deaths" : 13, 
-        "ObjectId" : 22254
+        "Deaths" : 16, 
+        "ObjectId" : 22676
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601614800000, 
-        "Deaths" : 13, 
-        "ObjectId" : 22255
+        "Deaths" : 20, 
+        "ObjectId" : 22677
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601701200000, 
-        "Deaths" : 16, 
-        "ObjectId" : 22256
+        "Deaths" : 19, 
+        "ObjectId" : 22678
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601787600000, 
-        "Deaths" : 14, 
-        "ObjectId" : 22257
+        "Deaths" : 20, 
+        "ObjectId" : 22679
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601874000000, 
-        "Deaths" : 12, 
-        "ObjectId" : 22258
+        "Deaths" : 15, 
+        "ObjectId" : 22680
       }
     }, 
     {
       "attributes" : {
         "Date" : 1601960400000, 
-        "Deaths" : 13, 
-        "ObjectId" : 22259
+        "Deaths" : 18, 
+        "ObjectId" : 22681
       }
     }, 
     {
       "attributes" : {
         "Date" : 1602046800000, 
-        "Deaths" : 5, 
-        "ObjectId" : 22260
+        "Deaths" : 21, 
+        "ObjectId" : 22682
       }
     }, 
     {
       "attributes" : {
         "Date" : 1602133200000, 
+        "Deaths" : 14, 
+        "ObjectId" : 22683
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1602219600000, 
+        "Deaths" : 8, 
+        "ObjectId" : 22684
+      }
+    }, 
+    {
+      "attributes" : {
+        "Date" : 1602306000000, 
         "Deaths" : 1, 
-        "ObjectId" : 22261
+        "ObjectId" : 22685
       }
     }
   ]
