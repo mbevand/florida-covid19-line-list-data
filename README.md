@@ -1,3 +1,5 @@
+**This research was also [published on Flashpub](https://outbreak.flashpub.io/pub/method-of-covid-19-mortality-forecasting_81d480c5-ac10-421d-9ccf-8547c7bbcba3)**
+
 # Forecasting deaths and analyzing age trends of COVID-19 cases in Florida
 
 *Updated: 03 Nov 2020*
